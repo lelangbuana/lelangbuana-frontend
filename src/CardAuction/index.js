@@ -15,6 +15,6 @@ const CardAuction = (props) => {
             </Card>
         </div>
     )
-};
+}
 
 export default CardAuction
