@@ -1,43 +1,35 @@
-import React from 'react'
-import { Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap'
+import React, { Component } from 'react'
+import { Collapse, ListGroup, ListGroupItem } from 'reactstrap'
 
-class Categories extends React.Component {
+class Example extends Component {
     constructor(props) {
         super(props)
-
         this.toggle = this.toggle.bind(this)
-        this.state = {
-            dropdownOpen: false
-        }
+        this.state = { collapse: false }
     }
 
     toggle() {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        })
+        this.setState({ collapse: !this.state.collapse })
     }
 
     render() {
         return (
             <div>
-                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle
-                        tag="span"
-                        onClick={this.toggle}
-                        data-toggle="dropdown"
-                        aria-expanded={this.state.dropdownOpen}
-                    >
-                        {this.props.name}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <div onClick={this.toggle}>Smartphone</div>
-                        <div onClick={this.toggle}>PC</div>
-                        <div onClick={this.toggle}>Other</div>
-                    </DropdownMenu>
-                </Dropdown>
+                <ListGroup>
+                    <ListGroupItem onClick={this.toggle} action>{this.props.name}</ListGroupItem>
+                    <Collapse isOpen={this.state.collapse}>
+                        <ListGroup>
+                            <ListGroupItem action>PC</ListGroupItem>
+                            <ListGroupItem action>Laptop</ListGroupItem>
+                            <ListGroupItem action>Tablet</ListGroupItem>
+                            <ListGroupItem action>E-dictionary</ListGroupItem>
+                            <ListGroupItem action>Pad</ListGroupItem>
+                        </ListGroup>
+                    </Collapse>
+                </ListGroup>
             </div>
         )
     }
 }
 
-export default Categories
+export default Example

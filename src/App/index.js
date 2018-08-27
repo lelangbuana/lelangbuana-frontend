@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
-import ButtonModern from '../ButtonModern'
-import NavBar from '../NavBar'
-import Header from '../Header'
-import CardAuction from '../CardAuction'
-import Categories from '../Categories'
-import Footer from '../Footer'
+import ButtonModern from './../ButtonModern'
+import NavBar from './../NavBar'
+import Header from './../Header'
+import CardAuction from './../CardAuction'
+import Categories from './../Categories'
+import Footer from './../Footer'
 
 const initialState ={
     user: {
@@ -22,15 +22,16 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <NavBar/>
                 <div class="container-fluid">
-                    <NavBar/>
                     <div class="row">
                         <div class="col-sm-2">
-                            <Categories name="Electronic"/>
-                            <Categories name="Craft"/>
-                            <Categories name="Furniture"/>
-                            <Categories name="Hobby"/>
-                            <Categories name="Woman's Need"/>
+                            <Categories name="Computers"/>
+                            <Categories name="Electronic, AV & Camera"/>
+                            <Categories name="Music"/>
+                            <Categories name="Book & Magazine"/>
+                            <Categories name="Movies"/>
+
                         </div>
                         <div class="col-sm">
                             <div class="row">
@@ -45,6 +46,9 @@ class App extends Component {
                                 <CardAuction title="Jewelry"/>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <ButtonModern/>
                     </div>
                     <div class="row">
                         <Footer/>
