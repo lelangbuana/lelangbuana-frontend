@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
 
 // import { createStore } from 'redux'
 // import { Provider } from 'react-redux'
@@ -28,6 +28,7 @@ class App extends Component {
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-2">
+                                <NavLink to="/listing">About</NavLink>
                                 <Categories name="Computers"/>
                                 <Categories name="Electronic, AV & Camera"/>
                                 <Categories name="Music"/>
@@ -36,7 +37,9 @@ class App extends Component {
 
                             </div>
                             <div class="col-sm">
-                                <div class="row">
+                                <Route path="/listing" component={ListAuctionCard} />
+
+                                {/* <div class="row">
                                     <CardAuction title="Macbook"/>
                                     <CardAuction title="iPhone"/>
                                     <CardAuction title="PC"/>
@@ -46,7 +49,7 @@ class App extends Component {
                                     <CardAuction title="Clothes"/>
                                     <CardAuction title="Sneaker"/>
                                     <CardAuction title="Jewelry"/>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div class="row">
@@ -57,8 +60,7 @@ class App extends Component {
                         </div>
                     </div>
 
-                    <Route exact path="/" component={App} />
-                    <Route path="/listing" component={ListAuctionCard} />
+                    {/* <Route exact path="/" component={App} /> */}
 
                 </div>
             </Router>
