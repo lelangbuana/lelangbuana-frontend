@@ -50,9 +50,6 @@ class NavBar extends React.Component {
                                         <NavItem>
                                             <NavLink href="/Register">Register</NavLink>
                                         </NavItem>
-                                        <NavItem>
-                                            <NavLink href="/Help">Help</NavLink>
-                                        </NavItem>
                                     </Nav>
                                 </Collapse>
                             </Col>
