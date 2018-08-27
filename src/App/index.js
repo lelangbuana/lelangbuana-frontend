@@ -7,6 +7,7 @@ import ButtonModern from '../ButtonModern'
 import NavBar from '../NavBar'
 import Header from '../Header'
 import CardAuction from '../CardAuction'
+import Categories from '../Categories'
 
 const initialState ={
     user: {
@@ -24,13 +25,17 @@ class App extends Component {
                     <NavBar/>
                     <div class="row">
                         <div class="col-sm-2">
-              Categories
+                            <Categories name="Electronic"/>
+                            <Categories name="Craft"/>
+                            <Categories name="Furniture"/>
+                            <Categories name="Hobby"/>
+                            <Categories name="Woman's Need"/>
                         </div>
                         <div class="col-sm">
                             <div class="row">
-                                <CardAuction/>
-                                <CardAuction/>
-                                <CardAuction/>
+                                <CardAuction title="Macbook"/>
+                                <CardAuction title="iPhone"/>
+                                <CardAuction title="PC"/>
                             </div>
 
                         </div>
@@ -40,7 +45,7 @@ class App extends Component {
                 </div>
             </div>
         )
-  }
+    }
 }
 
 export default App
