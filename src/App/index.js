@@ -8,6 +8,7 @@ import NavBar from '../NavBar'
 import Header from '../Header'
 import CardAuction from '../CardAuction'
 import Categories from '../Categories'
+import Footer from '../Footer'
 
 const initialState ={
     user: {
@@ -36,11 +37,17 @@ class App extends Component {
                                 <CardAuction title="Macbook"/>
                                 <CardAuction title="iPhone"/>
                                 <CardAuction title="PC"/>
+                                <CardAuction title="Car"/>
+                                <CardAuction title="Motorcycle"/>
+                                <CardAuction title="House"/>
+                                <CardAuction title="Clothes"/>
+                                <CardAuction title="Sneaker"/>
+                                <CardAuction title="Jewelry"/>
                             </div>
-
                         </div>
-            
-            
+                    </div>
+                    <div class="row">
+                        <Footer/>
                     </div>
                 </div>
             </div>
