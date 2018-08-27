@@ -5,7 +5,7 @@ class ButtonModern extends React.Component {
     render() {
         return (
             <div>
-                <Button color="primary">+ See More</Button>{' '}
+                <Button color="primary" size="lg">+ See More</Button>{' '}
             </div>
         )
     }

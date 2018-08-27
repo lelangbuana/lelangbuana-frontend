@@ -1,19 +1,16 @@
 import React from 'react'
 import { InputGroup, 
-    InputGroupText, 
     InputGroupAddon, 
     Input,
-    Container,
-    Row,
-    Col 
+    Button
 } from 'reactstrap'
 
 const SearchBar = (props) => {
     return (
         <InputGroup >
             <Input />
-            <InputGroupAddon addonType="append">
-                <InputGroupText><img src={require('./../Assets/search.png')}></img></InputGroupText>
+            <InputGroupAddon addonType="append" >
+                <Button outline color="info"><img src={require('./../Assets/search.png')} alt="search"/></Button>
             </InputGroupAddon>
         </InputGroup>
 

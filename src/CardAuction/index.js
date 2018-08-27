@@ -1,16 +1,10 @@
 import React from 'react'
 import { Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button } from 'reactstrap'
+    CardTitle, CardSubtitle} from 'reactstrap'
 
 class CardAuction extends  React.Component{
-    constructor(props) {
-        super(props)
-
-    }
 
     render() {
-
-  
         return (
             <div class="col-xs-3">
                 <Card>
