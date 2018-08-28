@@ -26,7 +26,7 @@ class NavBar extends React.Component {
             isOpen: !this.state.isOpen
         })
     }
-    render() {
+    render() { 
         return (
             <div>
                 <Navbar color="light" light expand="md">

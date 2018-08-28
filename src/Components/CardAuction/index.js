@@ -11,7 +11,7 @@ class CardAuction extends  React.Component{
                     <CardImg top width="100%" src={this.props.src} alt="Card image cap" />
                     <CardBody>
                         <CardTitle>{this.props.title}</CardTitle>
-                        <CardSubtitle>Description</CardSubtitle>
+                        <CardSubtitle>{this.props.user}</CardSubtitle>
                         <CardText>{this.props.description}</CardText>
                     </CardBody>
                 </Card>
