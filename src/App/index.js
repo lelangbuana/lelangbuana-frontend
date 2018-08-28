@@ -10,6 +10,7 @@ import CardAuction from './../CardAuction'
 import Categories from './../Categories'
 import Footer from './../Footer'
 import ListAuctionCard from '../ListAuctionCard'
+import LoginReg from '../LoginRegister'
 
 // const initialState ={
 //     user: {
@@ -60,7 +61,7 @@ class App extends Component {
                         </div>
                     </div>
 
-                    {/* <Route exact path="/" component={App} /> */}
+                    <LoginReg/>
 
                 </div>
             </Router>
