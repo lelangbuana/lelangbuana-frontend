@@ -12,7 +12,7 @@ class CardAuction extends  React.Component{
                     <CardBody>
                         <CardTitle>{this.props.title}</CardTitle>
                         <CardSubtitle>Description</CardSubtitle>
-                        <CardText>Quick Brown Fox Jump Over The Lazy Dog</CardText>
+                        <CardText>{this.props.description}</CardText>
                     </CardBody>
                 </Card>
             </div>
