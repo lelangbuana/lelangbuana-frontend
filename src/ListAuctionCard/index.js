@@ -13,7 +13,7 @@ class ListAuctionCard extends Component {
     render() {
         return (
             <div class="row">
-                <CardAuction title="lISTING"/>
+                <CardAuction title="LISTING"/>
                 <CardAuction title="iPhone"/>
                 <CardAuction title="PC"/>
                 <CardAuction title="Car"/>

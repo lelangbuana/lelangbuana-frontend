@@ -54,11 +54,6 @@ class NavBar extends React.Component {
                                 </Collapse>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col xs="8">
-                                <SearchBar/>
-                            </Col>
-                        </Row>
                     </Container>
                 </Navbar>
             </div>
