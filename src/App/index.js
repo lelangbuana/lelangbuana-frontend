@@ -1,15 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router,Switch, Route} from 'react-router-dom'
 
-// import { createStore } from 'redux'
-// import { Provider } from 'react-redux'
-// import {
-//     Container,
-//     Row,
-//     Col
-// } from 'reactstrap'
-
-
 import NavBar from '../Components/NavBar'
 import Home from '../Home'
 import Login from '../Login'
