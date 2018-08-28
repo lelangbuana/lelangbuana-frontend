@@ -2,16 +2,40 @@ import React from 'react'
 import { TabContent, TabPane, Nav, NavItem, NavLink, 
     Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
 import classnames from 'classnames'
+import axios from 'axios'
+
+const request = axios.create({
+    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3000',
+    timeout: 5000,
+    headers: { Authorization: '' }
+})
 
 export default class LoginReg extends React.Component {
     constructor(props) {
         super(props)
 
         this.toggle = this.toggle.bind(this)
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
         this.state = {
-            activeTab: '1'
+            activeTab: '1',
+            email:"",
+            password:""
         }
     }
+
+    handleChange = event => {
+        this.setState({ [event.target.name]: event.target.value })
+        // console.log(this.state)  
+      }
+
+      handleSubmit = event => {
+        event.preventDefault()
+        request
+        .post(`/users/login`)
+        console.log(this.state)
+      }
+
 
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -23,7 +47,7 @@ export default class LoginReg extends React.Component {
     render() {
         return (
             <div>
-                <Container>
+                <Container fluid="true">
                     <Row>
                         <Col sm="12" md={{ size: 8, offset: 2 }}>
                             <Nav tabs>
@@ -48,26 +72,48 @@ export default class LoginReg extends React.Component {
                                 <TabPane tabId="1">
                                     <Row>
                                         <Col sm="12">
-                                            <Form sm="2">
-                                                <FormGroup>
+                                            <Form sm="2" onSubmit={this.handleSubmit}>
+                                                <FormGroup >
                                                     <Label for="Username">Username</Label>
-                                                    <Input type="text" name="username" id="username" placeholder="Your Username" />
+                                                    {/* <Input type="email" name="email" id="email" placeholder="Your Email" onChange={this.onChange}/> */}
+                                                    <Input
+                                        onChange={this.handleChange}
+                                        type="username"
+                                        name="username"
+                                        id="username"
+                                        placeholder="Your Username"
+                                    />
                                                 </FormGroup>
                                                 <FormGroup>
                                                     <Label for="Password">Password</Label>
-                                                    <Input type="password" name="password" id="Password" placeholder="Your Password" />
+                                                    {/* <Input type="password" name="password" id="Password" placeholder="Your Password" onChange={this.onChange}/> */}
+                                                    <Input
+                                        onChange={this.handleChange}
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        placeholder="Password"
+                                    />
                                                 </FormGroup>
+                                        <Button type="submit" color="primary">Login</Button>
                                             </Form>
                                         </Col>
-                                        <Button type="submit" color="primary">Login</Button>{' '}
                                     </Row>
                                 </TabPane>
                                 <TabPane tabId="2">
                                     <Row>
+                                        <Form onSubmit={this.onSubmit}>
                                         <Col sm="6">
                                             <FormGroup>
                                                 <Label for="Username">Username</Label>
-                                                <Input type="text" name="username" id="username" placeholder="Your Username" />
+                                                {/* <Input type="text" name="username" id="username" placeholder="Your Username" /> */}
+                                                <Input
+                                        onChange={this.handleChange}
+                                        type="username"
+                                        name="username"
+                                        id="username"
+                                        placeholder="Your Username"
+                                    />
                                             </FormGroup>
                                             <FormGroup>
                                                 <Label for="Password">Password</Label>
@@ -108,7 +154,8 @@ export default class LoginReg extends React.Component {
                                                 <Input type="text" name="image" id="image" placeholder="URL image" />
                                             </FormGroup>
                                         </Col>
-                                        <Button type="submit" color="primary">Submit</Button>{' '}
+                                        <Button type="submit" color="primary">Submit</Button>
+                                        </Form>
                                     </Row>
                                 </TabPane>
                             </TabContent>
