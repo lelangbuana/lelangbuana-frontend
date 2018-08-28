@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import CardAuction from '../Components/CardAuction'
 
 import {
@@ -43,14 +44,18 @@ class Home extends Component {
         }
         this.createAuction=this.createAuction.bind(this)
         this.createCategories=this.createCategories.bind(this)
+        this.routeChange=this.routeChange.bind(this)
     }
 
 
     createAuction (item,index) {
-        return <CardAuction key={item.title+index} user={item.user} title={item.title} src={item.src} description={item.description}/>
+        return <CardAuction onClick={this.routeChange} key={item.title+index} user={item.user} title={item.title} src={item.src} description={item.description}/>
     }
 
-    
+    routeChange(){
+        let path = '/myauction'
+        this.props.history.push(path)
+    }
 
     createCategories (item,index) {
         return <Categories key={item.name+index} name={item.name} categories={item.categories}/>
@@ -82,4 +87,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default withRouter(Home)
