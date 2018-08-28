@@ -7,9 +7,9 @@ import {
     Label
 } from 'reactstrap'
 
-import Footer from '../Component/Footer'
-import Profile from '../Component/Profile'
-import CreateAnAuction1 from '../Component/CreateAnAuction1'
+import Footer from '../Components/Footer'
+import Profile from '../Components/Profile'
+import CreateAnAuction1 from '../Components/CreateAnAuction1'
 
 class MakeAuction extends Component {
     render(){

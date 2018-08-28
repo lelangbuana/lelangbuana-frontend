@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import CardAuction from '../Components/CardAuction'
+import Categories from '../Components/Categories'
+import Footer from '../Components/Footer'
 
 
 import {
@@ -10,8 +12,6 @@ import {
 } from 'reactstrap'
 
 
-import Categories from '../Components/Categories'
-import Footer from '../Components/Footer'
 
 
 
@@ -56,7 +56,7 @@ class Home extends Component {
     }
 
     routeChange(){
-        let path = '/myauction'
+        let path = '/item'
         this.props.history.push(path)
     }
 
