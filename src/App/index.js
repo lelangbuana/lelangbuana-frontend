@@ -10,7 +10,7 @@ import { BrowserRouter as Router,Switch, Route} from 'react-router-dom'
 // } from 'reactstrap'
 
 
-import NavBar from '../NavBar'
+import NavBar from '../Components/NavBar'
 import Home from '../Home'
 import Login from '../Login'
 import Register from '../Register'

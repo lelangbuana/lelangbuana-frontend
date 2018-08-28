@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CardAuction from './../CardAuction'
+import CardAuction from '../Components/CardAuction'
 
 import {
     Container,
@@ -7,8 +7,8 @@ import {
     Col
 } from 'reactstrap'
 
-import Categories from '../Categories'
-import Footer from '../Footer'
+import Categories from '../Components/Categories'
+import Footer from '../Components/Footer'
 
 
 
@@ -59,7 +59,7 @@ class Home extends Component {
         let listCategories = categories.map(this.createCategories)
         return (
             <div>
-                <Container fluid="true">
+                <Container fluid>
                     <Row>
                         <Col sm="2">
                             {listCategories}

@@ -4,28 +4,6 @@ import axios from 'axios'
 
 
 export default class Register extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = { 
-            countriesName : []
-        }
-    }
-
-
-    componentDidMount(){
-        axios.get('https://restcountries.eu/rest/v2/all')
-            .then((res)=>{
-                const countriesName = res.data.map(country => {
-                    return country.name
-                })
-                this.setState({
-                    countriesName
-                })
-                console.log(countriesName)          
-            })
-    }
-
-
 
     render(){
         return(
@@ -77,7 +55,7 @@ export default class Register extends React.Component{
                             </FormGroup>
                             <FormGroup>
                                 <Label for="Country">Country</Label>
-                                <Input type="select" name="country" placeholder="Country"><option></option></Input>
+                                <Input type="text" name="country" placeholder="Country"></Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="Postalcode">Zip/Postal Code</Label>

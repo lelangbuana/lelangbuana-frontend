@@ -3,7 +3,7 @@ import { Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reac
 import axios from 'axios'
 
 const request = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3000',
+    baseURL: "https://lelangbuana.herokuapp.com" || 'http://localhost:3000',
     timeout: 5000,
     headers: { Authorization: '' }
 })
@@ -13,27 +13,33 @@ export default class Login extends React.Component {
         super(props)
         this.handleChange = this.handleChange.bind(this)
         this.state = {
-            email:"",
+            username:"",
             password:""
         }
     }
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
-        // console.log(this.state)  
       }
+      
 
       handleSubmit = event => {
-        event.preventDefault()
+          event.preventDefault()
+        const payload = {
+            username: this.state.username,
+            password: this.state.password
+          }
         request
-        .post(`/users/login`)
-        console.log(this.state)
+        .post('/users/login',payload)
+        .then(response => {console.log(response)})
+        .catch(error=>{console.log(error)})
+        console.log(payload)
       }
 
     render() {
         return (
             <div>
-                <Container fluid="true">
+                <Container fluid>
                     <Row>
                         <Col sm="12">
                             <Form sm="2" onSubmit={this.handleSubmit}>
