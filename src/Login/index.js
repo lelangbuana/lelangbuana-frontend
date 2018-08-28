@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const request = axios.create({
     baseURL: "https://lelangbuana.herokuapp.com" || 'http://localhost:3000',
-    timeout: 5000,
+    timeout: 10000,
     headers: { Authorization: '' }
 })
 
@@ -14,7 +14,8 @@ export default class Login extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.state = {
             username:"",
-            password:""
+            password:"",
+            islogin:"false"
         }
     }
 
@@ -31,7 +32,15 @@ export default class Login extends React.Component {
           }
         request
         .post('/users/login',payload)
-        .then(response => {console.log(response)})
+        .then((response) => {
+            let token = response.data.token
+            this.setState({
+                islogin: true,
+                token:token
+            });
+            localStorage.setItem("token",token)
+            console.log(this.state)
+        })
         .catch(error=>{console.log(error)})
         console.log(payload)
       }
