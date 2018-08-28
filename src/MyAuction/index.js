@@ -1,6 +1,6 @@
 import React from 'react'
 import {Container, ListGroup, Collapse, ListGroupItem,
-    Media} from 'reactstrap'
+    Media, Label, Table} from 'reactstrap'
 
 export default class MyAuction extends React.Component{
     constructor(props) {
@@ -17,38 +17,48 @@ export default class MyAuction extends React.Component{
         return(
             <Container>
                 <ListGroup>
-                    <ListGroupItem>
-                        <Collapse isOpen={this.state.collapse}>
-                            <Media>
-                                <Media left href="">
-                                    <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />
-                                </Media>
-                                <Media body>
-                                    <Media heading>
-          Media heading
-                                    </Media>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                </Media>
+                    <ListGroupItem onClick={this.toggle}>
+                        <Media>
+                            <Media left href="">
+                                <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />
                             </Media>
-                        </Collapse>
-                    </ListGroupItem>
-                
-                   
-                    <ListGroupItem>
-                        <Collapse isOpen={this.state.collapse}>
-                            <Media>
-                                <Media left href="">
-                                    <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />
+                            <Media body>
+                                <Media heading>
+          Hatsune Miku Dakimakura
                                 </Media>
-                                <Media body>
-                                    <Media heading>
-          Media heading
-                                    </Media>
-        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                </Media>
+                                <Media><span>Expected Price : </span></Media>
+                                <Media><span>Current Price : </span></Media>
+                                <Media><span>From : </span></Media>
                             </Media>
-                        </Collapse>
+                        </Media>
                     </ListGroupItem>
+                    <Collapse isOpen={this.state.collapse}>
+                        <Label>My Auction</Label>
+                        <Table hover>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Closed Date</th>
+                                    <th>Closed Time</th>
+                                    <th>User</th>
+                                    <th>Bid Price</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Collapse>
                 </ListGroup>
             </Container>
         )

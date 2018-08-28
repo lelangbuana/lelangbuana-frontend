@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
 import CardAuction from './../CardAuction'
 
 import {
@@ -8,12 +7,10 @@ import {
     Col
 } from 'reactstrap'
 
-
-import NavBar from '../NavBar'
 import Categories from '../Categories'
 import Footer from '../Footer'
-import DetailProductDetailPages from '../DetailProductDetailPages'
-import loginRegister from '../LoginRegister'
+
+
 
 
 const auction = [
@@ -72,6 +69,8 @@ class Home extends Component {
                                 {listAuction}
                             </Row>
                         </Col>
+                    </Row>
+                    <Row>
                     </Row>
                     <Row>
                         <Footer/>

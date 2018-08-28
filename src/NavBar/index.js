@@ -1,16 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import {
-    Container,
-    Row,
-    Col,
     Collapse,
     Navbar,
     NavbarToggler,
     NavbarBrand,
     Nav,
-    NavItem,
-    NavLink
+    NavItem
 } from 'reactstrap'
 
 import LelangLogo from './../Assets/lelangbuana.png'
@@ -42,10 +38,9 @@ class NavBar extends React.Component {
                         <Nav className="ml-auto" navbar>
                             <NavItem>
                                 <Link to="/login">Login</Link>
-                                {/* <NavLink href="/SignIn/">Sign In</NavLink> */}
                             </NavItem>
                             <NavItem >
-                                <Link to="/login">Register</Link>
+                                <Link to="/reg">Register</Link>
                             </NavItem>
                         </Nav>
                     </Collapse>              
