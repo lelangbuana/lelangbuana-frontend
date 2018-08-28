@@ -1,7 +1,32 @@
 import React from 'react'
 import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap'
+import axios from 'axios'
+
 
 export default class Register extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = { 
+            countriesName : []
+        }
+    }
+
+
+    componentDidMount(){
+        axios.get('https://restcountries.eu/rest/v2/all')
+            .then((res)=>{
+                const countriesName = res.data.map(country => {
+                    return country.name
+                })
+                this.setState({
+                    countriesName
+                })
+                console.log(countriesName)          
+            })
+    }
+
+
+
     render(){
         return(
             <div>
@@ -44,11 +69,15 @@ export default class Register extends React.Component{
                             </FormGroup>
                             <FormGroup>
                                 <Label for="City">City</Label>
-                                <Input type="text" name="city" id="city" placeholder="City" />
+                                <Input type="text" name="city" placeholder="City"/>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="State/Province">State/Province</Label>
                                 <Input type="text" name="stateprovince" id="stateprovince" placeholder="State/Province" />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="Country">Country</Label>
+                                <Input type="select" name="country" placeholder="Country"><option></option></Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="Postalcode">Zip/Postal Code</Label>

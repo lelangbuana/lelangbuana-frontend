@@ -31,7 +31,7 @@ class NavBar extends React.Component {
             <div>
                 <Navbar color="light" light expand="md">
                     <NavbarBrand href="/" >
-                        <img src={LelangLogo} class="img-fluid" alt="Lelangbuana"></img>
+                        <img src={LelangLogo} className="img-fluid" alt="Lelangbuana"></img>
                     </NavbarBrand>           
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
