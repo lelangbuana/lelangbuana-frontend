@@ -3,8 +3,8 @@ import { Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reac
 import axios from 'axios'
 
 const request = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3000',
-    timeout: 5000,
+    baseURL: "https://lelangbuana.herokuapp.com" || 'http://localhost:3000',
+    timeout: 10000,
     headers: { Authorization: '' }
 })
 
@@ -12,28 +12,44 @@ export default class Login extends React.Component {
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
         this.state = {
-            email:"",
-            password:""
+            username:"",
+            password:"",
+            islogin:"false"
         }
     }
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
-        // console.log(this.state)  
       }
+      
 
       handleSubmit = event => {
-        event.preventDefault()
+          event.preventDefault()
+        const payload = {
+            username: this.state.username,
+            password: this.state.password
+          }
         request
-        .post(`/users/login`)
-        console.log(this.state)
+        .post('/users/login',payload)
+        .then((response) => {
+            let token = response.data.token
+            this.setState({
+                islogin: true,
+                token:token
+            });
+            localStorage.setItem("token",token)
+            console.log(this.state)
+        })
+        .catch(error=>{console.log(error)})
+        console.log(payload)
       }
 
     render() {
         return (
             <div>
-                <Container fluid="true">
+                <Container fluid>
                     <Row>
                         <Col sm="12">
                             <Form sm="2" onSubmit={this.handleSubmit}>
