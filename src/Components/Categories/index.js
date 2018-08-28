@@ -7,7 +7,7 @@ import { Collapse, ListGroup, ListGroupItem } from 'reactstrap'
 //     </div>
 // )
 
-class Example extends Component {
+class Categories extends Component {
     constructor(props) {
         super(props)
         this.toggle = this.toggle.bind(this)
@@ -21,8 +21,8 @@ class Example extends Component {
         this.setState({ collapse: !this.state.collapse})
     }
 
-    createCategory(item, index){
-        return <ListGroupItem key={index} action>{item}</ListGroupItem>
+    createCategory(item){
+        return <ListGroupItem action>{item}</ListGroupItem>
     }
 
     render() {
@@ -43,4 +43,4 @@ class Example extends Component {
     }
 }
 
-export default Example
+export default Categories

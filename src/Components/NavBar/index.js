@@ -9,7 +9,7 @@ import {
     NavItem
 } from 'reactstrap'
 
-import LelangLogo from './../Assets/lelangbuana.png'
+import LelangLogo from '../Assets/lelangbuana.png'
 
 
 class NavBar extends React.Component {
@@ -26,7 +26,7 @@ class NavBar extends React.Component {
             isOpen: !this.state.isOpen
         })
     }
-    render() { 
+    render() {
         return (
             <div>
                 <Navbar color="light" light expand="md">
@@ -37,16 +37,16 @@ class NavBar extends React.Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <Link class="btn" to="/login">Login</Link>
+                                <Link to="/login">Login</Link>
                             </NavItem>
                             <NavItem >
-                                <Link class="btn" to="/reg">Register</Link>
+                                <Link to="/reg">Register</Link>
                             </NavItem>
                             <NavItem >
-                                <Link class="btn" to="/myauction">My Auction</Link>
+                                <Link to="/item">Item</Link>
                             </NavItem>
                             <NavItem >
-                                <Link class="btn" to="/mybid">My Bid</Link>
+                                <Link to="/create">Create Auction</Link>
                             </NavItem>
                         </Nav>
                     </Collapse>              

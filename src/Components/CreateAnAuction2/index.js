@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap'
 
-export default class CreateAnAuction2 extends React.Component {
+class CreateAnAuction2 extends Component {
     render() {
         return (
             <Form>
@@ -18,3 +18,4 @@ export default class CreateAnAuction2 extends React.Component {
         )
     }
 }
+export default CreateAnAuction2
