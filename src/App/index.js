@@ -9,12 +9,12 @@ import {
     Col
 } from 'reactstrap'
 
-import ButtonModern from './../ButtonModern'
+
 import NavBar from './../NavBar'
-import CardAuction from './../CardAuction'
 import Categories from './../Categories'
 import Footer from './../Footer'
-import ListAuctionCard from '../ListAuctionCard'
+import DetailProductDetailPages from '../DetailProductDetailPages'
+
 
 // const initialState ={
 //     user: {
