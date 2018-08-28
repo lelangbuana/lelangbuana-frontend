@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import {
     Container,
     Row,
@@ -40,10 +41,11 @@ class NavBar extends React.Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="/SignIn/">Sign In</NavLink>
+                                <Link to="/login">Login</Link>
+                                {/* <NavLink href="/SignIn/">Sign In</NavLink> */}
                             </NavItem>
                             <NavItem >
-                                <NavLink href="/Register">Register</NavLink>
+                                <Link to="/login">Register</Link>
                             </NavItem>
                         </Nav>
                     </Collapse>              
