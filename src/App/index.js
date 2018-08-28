@@ -14,7 +14,6 @@ import {
 import NavBar from './../NavBar'
 import Categories from './../Categories'
 import Footer from './../Footer'
-import DetailProductDetailPages from '../DetailProductDetailPages'
 
 
 // const initialState ={
@@ -83,6 +82,9 @@ class App extends Component {
                                     {listAuction}
                                 </Row>
                             </Col>
+                        </Row>
+                        <Row>
+                           
                         </Row>
                         <Row>
                             <Footer/>
