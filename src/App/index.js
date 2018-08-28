@@ -1,30 +1,19 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router,Switch, Route, Link, NavLink } from 'react-router-dom'
-import CardAuction from './../CardAuction'
+import { BrowserRouter as Router,Switch, Route} from 'react-router-dom'
 
 // import { createStore } from 'redux'
 // import { Provider } from 'react-redux'
-import {
-    Container,
-    Row,
-    Col
-} from 'reactstrap'
-
+// import {
+//     Container,
+//     Row,
+//     Col
+// } from 'reactstrap'
 
 
 import NavBar from '../NavBar'
-import loginRegister from '../LoginRegister'
 import Home from '../Home'
-
-import Categories from './../Categories'
-import Footer from './../Footer'
-import MyBid from '../MyBid'
-
-
-
-
-
-
+import Login from '../Login'
+import Register from '../Register'
 
 
 class App extends Component {
@@ -35,7 +24,8 @@ class App extends Component {
                     <div className="App">
                         <NavBar/>
                         <Route exact path="/" component={Home} />
-                        <Route path="/login" component={loginRegister} />
+                        <Route path="/login" component={Login} />
+                        <Route path="/reg" component={Register} />
                     </div> 
                 </Switch>
 
