@@ -14,6 +14,7 @@ import {
 import NavBar from './../NavBar'
 import Categories from './../Categories'
 import Footer from './../Footer'
+import MyBid from '../MyBid'
 
 
 // const initialState ={
@@ -84,7 +85,7 @@ class App extends Component {
                             </Col>
                         </Row>
                         <Row>
-                           
+                            <MyBid/>
                         </Row>
                         <Row>
                             <Footer/>
