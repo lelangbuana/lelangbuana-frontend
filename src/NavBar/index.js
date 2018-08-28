@@ -11,7 +11,8 @@ import {
     NavItem,
     NavLink
 } from 'reactstrap'
-import SearchBar from './../SearchBar/index'
+
+import LelangLogo from './../Assets/lelangbuana.png'
 
 
 class NavBar extends React.Component {
@@ -32,34 +33,20 @@ class NavBar extends React.Component {
         return (
             <div>
                 <Navbar color="light" light expand="md">
-                    <Container>
-                        <Row>
-                            <Col xs="6" sm="4">
-                                <NavbarBrand href="/" >
-                                    <img src={require('./../Assets/lelangbuana.png')} class="img-fluid" alt="Lelangbuana"></img>
-                                </NavbarBrand>
-                            </Col>
-                            
-                            <Col xs="6" >
-                                <NavbarToggler onClick={this.toggle} />
-                                <Collapse isOpen={this.state.isOpen} navbar>
-                                    <Nav className="ml-auto" navbar>
-                                        <NavItem>
-                                            <NavLink href="/SignIn/">Sign In</NavLink>
-                                        </NavItem>
-                                        <NavItem>
-                                            <NavLink href="/Register">Register</NavLink>
-                                        </NavItem>
-                                    </Nav>
-                                </Collapse>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs="8">
-                                <SearchBar/>
-                            </Col>
-                        </Row>
-                    </Container>
+                    <NavbarBrand href="/" >
+                        <img src={LelangLogo} class="img-fluid" alt="Lelangbuana"></img>
+                    </NavbarBrand>           
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink href="/SignIn/">Sign In</NavLink>
+                            </NavItem>
+                            <NavItem >
+                                <NavLink href="/Register">Register</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>              
                 </Navbar>
             </div>
         )

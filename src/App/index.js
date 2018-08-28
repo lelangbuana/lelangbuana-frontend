@@ -4,13 +4,12 @@ import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
 // import { createStore } from 'redux'
 // import { Provider } from 'react-redux'
 
-import ButtonModern from './../ButtonModern'
+
 import NavBar from './../NavBar'
-import CardAuction from './../CardAuction'
 import Categories from './../Categories'
 import Footer from './../Footer'
-import ListAuctionCard from '../ListAuctionCard'
-import LoginReg from '../LoginRegister'
+import DetailProductDetailPages from '../DetailProductDetailPages'
+
 
 // const initialState ={
 //     user: {
@@ -38,7 +37,6 @@ class App extends Component {
 
                             </div>
                             <div class="col-sm">
-                                <Route path="/listing" component={ListAuctionCard} />
 
                                 {/* <div class="row">
                                     <CardAuction title="Macbook"/>
@@ -54,15 +52,13 @@ class App extends Component {
                             </div>
                         </div>
                         <div class="row">
-                            <Link to="/listing"><ButtonModern/></Link>
+                            
                         </div>
                         <div class="row">
                             <Footer/>
                         </div>
+                        <DetailProductDetailPages/>
                     </div>
-
-                    <LoginReg/>
-
                 </div>
             </Router>
         )
