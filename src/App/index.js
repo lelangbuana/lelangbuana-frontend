@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
+import CardAuction from './../CardAuction'
 
 // import { createStore } from 'redux'
 // import { Provider } from 'react-redux'
