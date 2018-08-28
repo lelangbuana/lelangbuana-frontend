@@ -11,9 +11,15 @@ import {
 } from 'reactstrap'
 
 
+
 import NavBar from '../NavBar'
 import loginRegister from '../LoginRegister'
 import Home from '../Home'
+
+import Categories from './../Categories'
+import Footer from './../Footer'
+import MyBid from '../MyBid'
+
 
 
 
@@ -32,6 +38,7 @@ class App extends Component {
                         <Route path="/login" component={loginRegister} />
                     </div> 
                 </Switch>
+
             </Router>
         )
     }

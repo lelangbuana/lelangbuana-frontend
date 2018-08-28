@@ -1,6 +1,6 @@
 import React from 'react'
 import { TabContent, TabPane, Nav, NavItem, NavLink, 
-    Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
+    Button, Container, Row, Col, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap'
 import classnames from 'classnames'
 import axios from 'axios'
 
@@ -150,8 +150,8 @@ export default class LoginReg extends React.Component {
                                                 <Input type="number" name="zip" id="zip" placeholder="Your Username" />
                                             </FormGroup>
                                             <FormGroup>
-                                                <Label for="image">ID image</Label>
-                                                <Input type="text" name="image" id="image" placeholder="URL image" />
+                                                <Label for="exampleCustomFileBrowser">File Browser</Label>
+                                                <CustomInput type="file" id="exampleCustomFileBrowser" name="customFile" />
                                             </FormGroup>
                                         </Col>
                                         <Button type="submit" color="primary">Submit</Button>
