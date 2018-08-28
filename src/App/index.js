@@ -24,8 +24,6 @@ class App extends Component {
                         <Route path="/reg" component={Register} />
                         <Route path="/item" component={ItemDetail} />
                         <Route path="/create" component={MakeAuction}/>
-                        <Route path="/myauction" component={MyAuction} />
-                        <Route path="/mybid" component={MyBid} />
 
                     </div> 
                 </Switch>
