@@ -1,15 +1,16 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Container, Row, Col, Form, 
     FormGroup, Input, Button} from 'reactstrap'
 
-export default class DetailProductBidStatus extends React.Component{
+class DetailProductBidStatus extends Component{
     render(){
         return(
             <Container>
-                <Row>
-                    <Col><span>Current Price</span></Col>
-                    <Col><span>IDR. </span></Col>
-                    <Col><span>(Start from : IDR )</span></Col>
+                <Row> 
+                    <span>Current Price</span>
+                    <span>IDR. </span>
+                    <span>(Start from : IDR )</span>
+                    
                 </Row>
                 <Row>
                     <Col><span>Buyout Price</span></Col>
@@ -41,3 +42,5 @@ export default class DetailProductBidStatus extends React.Component{
         )
     }
 }
+
+export default DetailProductBidStatus

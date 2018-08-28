@@ -9,7 +9,7 @@ import {
     NavItem
 } from 'reactstrap'
 
-import LelangLogo from './../Assets/lelangbuana.png'
+import LelangLogo from '../Assets/lelangbuana.png'
 
 
 class NavBar extends React.Component {
@@ -41,6 +41,9 @@ class NavBar extends React.Component {
                             </NavItem>
                             <NavItem >
                                 <Link to="/reg">Register</Link>
+                            </NavItem>
+                            <NavItem >
+                                <Link to="/item">Item</Link>
                             </NavItem>
                         </Nav>
                     </Collapse>              

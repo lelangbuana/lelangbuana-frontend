@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CardAuction from './../CardAuction'
+import CardAuction from '../Component/CardAuction'
 
 import {
     Container,
@@ -7,8 +7,8 @@ import {
     Col
 } from 'reactstrap'
 
-import Categories from '../Categories'
-import Footer from '../Footer'
+import Categories from '../Component/Categories'
+import Footer from '../Component/Footer'
 
 
 
@@ -45,21 +45,20 @@ class Home extends Component {
         this.createCategories=this.createCategories.bind(this)
     }
 
-
     createAuction (item) {
         return <CardAuction title={item.title} src={item.src} description={item.description}/>
     }
 
-
     createCategories (item) {
         return <Categories name={item.name} categories={item.categories}/>
     }
+
     render() {
         let listAuction = auction.map(this.createAuction)
         let listCategories = categories.map(this.createCategories)
         return (
             <div>
-                <Container fluid="true">
+                <Container fluid>
                     <Row>
                         <Col sm="2">
                             {listCategories}
@@ -69,8 +68,6 @@ class Home extends Component {
                                 {listAuction}
                             </Row>
                         </Col>
-                    </Row>
-                    <Row>
                     </Row>
                     <Row>
                         <Footer/>
