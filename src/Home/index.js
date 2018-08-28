@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import CardAuction from '../Components/CardAuction'
 
+
 import {
     Container,
     Row,
     Col
 } from 'reactstrap'
+
 
 import Categories from '../Components/Categories'
 import Footer from '../Components/Footer'
@@ -48,6 +50,7 @@ class Home extends Component {
     }
 
 
+
     createAuction (item,index) {
         return <CardAuction onClick={this.routeChange} key={item.title+index} user={item.user} title={item.title} src={item.src} description={item.description}/>
     }
@@ -59,7 +62,9 @@ class Home extends Component {
 
     createCategories (item,index) {
         return <Categories key={item.name+index} name={item.name} categories={item.categories}/>
+
     }
+
     render() {
         let listAuction = auction.map(this.createAuction)
         let listCategories = categories.map(this.createCategories)
@@ -75,8 +80,6 @@ class Home extends Component {
                                 {listAuction}
                             </Row>
                         </Col>
-                    </Row>
-                    <Row>
                     </Row>
                     <Row>
                         <Footer/>

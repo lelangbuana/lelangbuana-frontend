@@ -5,8 +5,10 @@ import NavBar from '../Components/NavBar'
 import Home from '../Home'
 import Login from '../Login'
 import Register from '../Register'
+import ItemDetail from '../ItemDetail'
 import MyAuction from '../MyAuction'
 import MyBid from '../MyBid'
+
 
 
 class App extends Component {
@@ -19,8 +21,11 @@ class App extends Component {
                         <Route exact path="/" component={Home} />
                         <Route path="/login" component={Login} />
                         <Route path="/reg" component={Register} />
+                        <Route path="/item" component={ItemDetail} />
+                        <Route path="/create" component={MakeAuction}/>
                         <Route path="/myauction" component={MyAuction} />
                         <Route path="/mybid" component={MyBid} />
+
                     </div> 
                 </Switch>
 
