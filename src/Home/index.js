@@ -46,13 +46,13 @@ class Home extends Component {
     }
 
 
-    createAuction (item) {
-        return <CardAuction title={item.title} src={item.src} description={item.description}/>
+    createAuction (item,index) {
+        return <CardAuction key={item.title+index} title={item.title} src={item.src} description={item.description}/>
     }
 
 
-    createCategories (item) {
-        return <Categories name={item.name} categories={item.categories}/>
+    createCategories (item,index) {
+        return <Categories key={item.name+index} name={item.name} categories={item.categories}/>
     }
     render() {
         let listAuction = auction.map(this.createAuction)

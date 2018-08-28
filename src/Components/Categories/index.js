@@ -21,8 +21,8 @@ class Example extends Component {
         this.setState({ collapse: !this.state.collapse})
     }
 
-    createCategory(item){
-        return <ListGroupItem action>{item}</ListGroupItem>
+    createCategory(item, index){
+        return <ListGroupItem key={index} action>{item}</ListGroupItem>
     }
 
     render() {
