@@ -7,9 +7,9 @@ import {
     Label
 } from 'reactstrap'
 
-import Profile from '../Component/Profile'
-import Footer from '../Component/Footer'
-import CreateAnAuction2 from '../Component/CreateAnAuction2'
+import Profile from '../Components/Profile'
+import Footer from '../Components/Footer'
+import CreateAnAuction2 from '../Components/CreateAnAuction2'
 
 class Submission extends Component {
     constructor(props){

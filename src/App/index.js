@@ -6,6 +6,8 @@ import Home from '../Home'
 import Login from '../Login'
 import Register from '../Register'
 import ItemDetail from '../ItemDetail'
+import MyAuction from '../Components/MyAuction'
+import MyBid from '../Components/MyBid'
 import MakeAuction from '../MakeAuction'
 
 
