@@ -15,6 +15,7 @@ import Home from '../Home'
 import Login from '../Login'
 import Register from '../Register'
 import ItemDetail from '../ItemDetail'
+import MakeAuction from '../MakeAuction'
 
 
 
@@ -29,6 +30,7 @@ class App extends Component {
                         <Route path="/login" component={Login} />
                         <Route path="/reg" component={Register} />
                         <Route path="/item" component={ItemDetail} />
+                        <Route path="/create" component={MakeAuction}/>
                     </div> 
                 </Switch>
 

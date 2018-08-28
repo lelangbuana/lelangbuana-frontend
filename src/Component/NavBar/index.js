@@ -45,6 +45,9 @@ class NavBar extends React.Component {
                             <NavItem >
                                 <Link to="/item">Item</Link>
                             </NavItem>
+                            <NavItem >
+                                <Link to="/create">Create Auction</Link>
+                            </NavItem>
                         </Nav>
                     </Collapse>              
                 </Navbar>
