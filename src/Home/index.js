@@ -50,6 +50,7 @@ class Home extends Component {
         return <CardAuction key={item.title+index} user={item.user} title={item.title} src={item.src} description={item.description}/>
     }
 
+    
 
     createCategories (item,index) {
         return <Categories key={item.name+index} name={item.name} categories={item.categories}/>

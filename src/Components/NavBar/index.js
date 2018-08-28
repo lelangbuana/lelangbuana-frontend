@@ -42,6 +42,12 @@ class NavBar extends React.Component {
                             <NavItem >
                                 <Link class="btn" to="/reg">Register</Link>
                             </NavItem>
+                            <NavItem >
+                                <Link class="btn" to="/myauction">My Auction</Link>
+                            </NavItem>
+                            <NavItem >
+                                <Link class="btn" to="/mybid">My Bid</Link>
+                            </NavItem>
                         </Nav>
                     </Collapse>              
                 </Navbar>
