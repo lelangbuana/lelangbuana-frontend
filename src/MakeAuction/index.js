@@ -14,6 +14,11 @@ const styles ={
     space : {
         marginTop : '2rem',
         marginBottom: '5rem'
+    },
+
+    label: {
+        fontSize: '25px',
+        fontWeight :'bold'
     }
 
 }
@@ -27,8 +32,8 @@ class MakeAuction extends Component {
                         <Col sm="3">    
                             <Profile/>  
                         </Col>
-                        <Col sm="8">
-                            <Label>Create An Auction - Lelangbuana.com</Label>
+                        <Col sm="9">
+                            <Label style={styles.label}>Create An Auction - Lelangbuana.com</Label>
                             <Row>
                                 <Col>
                                     <CreateAnAuction1/>
