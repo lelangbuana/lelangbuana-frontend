@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {Link, withRouter } from 'react-router-dom'
@@ -13,6 +14,11 @@ import {
     Col
 } from 'reactstrap'
 
+const request = axios.create({
+    baseURL: "https://lelangbuana.herokuapp.com" || 'http://localhost:3000',
+    timeout: 10000,
+    headers: { Authorization: '' }
+})
 
 const mapStateToProps = state => {
     return {
@@ -47,10 +53,58 @@ const categories = [
 
 class Home extends Component {
 
+    addItem(item) {
+        this.setState((prevState) => {
+          return { 
+            auctions: prevState.items.concat(item) 
+          }
+        })
+      }
+
+    componentDidMount(){
+        request
+        .get('/auctions')
+        .then((response) => {
+            return response.data.auctions
+            // console.log(response.data.auctions)
+        })
+        .then(data => {
+            data.map(item =>{
+                console.log(item.item_description)
+                this.setState((prevState) => {
+                    return { 
+                      auctions: auctions.push(
+                          {user: item.auction_id,
+                          title: item.title,
+                          src: item.item_photo,
+                          description: item.item_description}
+                    )
+                    }
+                  })
+            })
+            console.log(data)
+            console.log(auctions)
+        })
+        // .then(data => {
+        //     data.forEach(item => {
+        //     this.props.addItem({
+        //     user: item.auction_id,
+        //     title: item.title,
+        //     src: item.item_photo,
+        //     description: item.item_description
+        //   })
+                  
+        //     })
+        // })
+        .catch(error=>{console.log(error)})
+    }
     constructor(props) {
         super(props)
-    
+        // this.addItem=this.this.addItem.bind(this)
         this.createCategories=this.createCategories.bind(this)
+        this.state = { 
+            auctions: []
+          }
     }
     static get propTypes() {
         return {
