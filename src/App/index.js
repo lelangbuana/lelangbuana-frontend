@@ -14,14 +14,21 @@ import MakeAuction from '../MakeAuction'
 
 const initialState = {
     user: {
+        user_id:'',
         username:'',
         email:'',
         password:'',
         register: {},
         mybid: {},
+        auction:{},
         myauction: {},
         login: {},
         token: '',
+        title:'',
+        src:'',
+        description:'',
+        name:'',
+        categories:'',
         islogin:'false'
     }
 }
@@ -45,6 +52,24 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
+    case 'CLICKED': {
+        return {
+            user: {
+                ...state.user,
+                title: action.payload.title,
+                src: action.payload.src,
+                description: action.payload.description,
+            }
+        }
+    }
+    case 'AUCTION': {
+        return {
+            user: {
+                ...state.user,
+                auction: action.payload
+            }
+        }
+    }
     default:
         return state
     }
@@ -64,7 +89,7 @@ class App extends Component {
                             <Route exact path="/" component={Home} />
                             <Route path="/login" component={Login} />
                             <Route path="/reg" component={Register} />
-                            <Route path="/item" component={ItemDetail} />
+                            <Route path="/item/:slug" component={ItemDetail} />
                             <Route path="/create" component={MakeAuction}/>
 
                         </div> 

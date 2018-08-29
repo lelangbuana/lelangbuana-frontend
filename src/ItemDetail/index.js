@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import {
     Container,
@@ -22,17 +24,37 @@ const categories = [
     {name:'Book & Magazine',categories:['Science-Fiction','Non-Fiction']}
 ]
 
+const mapStateToProps = state => {
+    return {
+      title: state.user.title,
+      src: state.user.src,
+      description: state.user.description
+    }
+  }
 
 class ItemDetail extends Component {
-    constructor(props){
-        super(props)
-        this.createCategories=this.createCategories.bind(this)
+    
+    static get propTypes() {
+        return {
+            children: PropTypes.any,
+            dispatch: PropTypes.any,
+            key: PropTypes.string,
+            title: PropTypes.string,
+            src: PropTypes.string,
+            description: PropTypes.string
+        }
+    }
+    state = {
+        title:this.props.title,
+        src:this.props.src,
+        description:this.props.description
     }
 
     createCategories (item,index) {
         return <Categories key={item.name+index} name={item.name} categories={item.categories}/>
     }
     render(){
+        
         let listCategories = categories.map(this.createCategories)
         return(
             <div>
@@ -72,4 +94,4 @@ class ItemDetail extends Component {
         )
     }
 }
-export default ItemDetail
+export default  connect(mapStateToProps )(ItemDetail)
