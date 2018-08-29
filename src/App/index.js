@@ -7,6 +7,8 @@ import Login from '../Login'
 import Register from '../Register'
 import ItemDetail from '../ItemDetail'
 import MakeAuction from '../MakeAuction'
+import MyBid from '../Components/MyBid'
+import MyAuction from '../Components/MyAuction'
 
 
 
@@ -22,7 +24,8 @@ class App extends Component {
                         <Route path="/reg" component={Register} />
                         <Route path="/item" component={ItemDetail} />
                         <Route path="/create" component={MakeAuction}/>
-
+                        <Route path="/mybid" component={MyBid}/>
+                        <Route path="/myauction" component= {MyAuction}/>
                     </div> 
                 </Switch>
 
