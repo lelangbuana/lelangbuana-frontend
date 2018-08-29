@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
 import axios from 'axios'
 
@@ -8,7 +8,15 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-export default class Login extends React.Component {
+const styles ={
+    space : {
+        marginTop : '2rem',
+        marginBottom: '5rem'
+    }
+
+}
+
+class Login extends Component {
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this)
@@ -48,7 +56,7 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={styles.space}>
                 <Container fluid>
                     <Row>
                         <Col sm="12">
@@ -84,3 +92,5 @@ export default class Login extends React.Component {
         )
     }
 }
+
+export default Login

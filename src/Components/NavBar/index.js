@@ -1,61 +1,49 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import {
-    Collapse,
     Navbar,
-    NavbarToggler,
     NavbarBrand,
     Nav,
     NavItem
 } from 'reactstrap'
 
-import LelangLogo from '../Assets/lelangbuana.png'
+import LelangLogo from '../Assets/lelangbuana.svg'
 
+const styles ={
+    navbar : {
+        backgroundColor : '#011D55'
+    }
+
+}
 
 class NavBar extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.toggle = this.toggle.bind(this)
-        this.state = {
-            isOpen: false
-        }
-    }
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    }
     render() {
         return (
             <div>
-                <Navbar color="light" light expand="md">
+                <Navbar style={styles.navbar} expand="md">
                     <NavbarBrand href="/" >
                         <img src={LelangLogo} className="img-fluid" alt="Lelangbuana"></img>
                     </NavbarBrand>           
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <Link to="/login">Login</Link>
-                            </NavItem>
-                            <NavItem >
-                                <Link to="/reg">Register</Link>
-                            </NavItem>
-                            <NavItem >
-                                <Link to="/item">Item</Link>
-                            </NavItem>
-                            <NavItem >
-                                <Link to="/create">Create Auction</Link>
-                            </NavItem>
-                            <NavItem >
-                                <Link to="/myauction">My Auction</Link>
-                            </NavItem>
-                            <NavItem >
-                                <Link to="/mybid">My Bid</Link>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>              
+                    <Nav className="ml-auto" navbar >
+                        <NavItem >
+                            <NavLink className="text-white btn"  to="/login">Login</NavLink>
+                        </NavItem>
+                        <NavItem >
+                            <NavLink className="text-white btn" to="/reg">Register</NavLink>
+                        </NavItem> 
+                        <NavItem >
+                            <NavLink className="text-white btn" to="/item">Item</NavLink>
+                        </NavItem>
+                        <NavItem >
+                            <NavLink className="text-white btn" to="/create">Create Auction</NavLink>
+                        </NavItem>
+                        <NavItem >
+                            <NavLink className="text-white btn" to="/myauction">My Auction</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink className="text-white btn" to="/mybid">My Bid</NavLink>
+                        </NavItem>
+                    </Nav>            
                 </Navbar>
             </div>
         )

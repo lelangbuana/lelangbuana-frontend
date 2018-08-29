@@ -7,20 +7,27 @@ import {
     Label
 } from 'reactstrap'
 
-import Footer from '../Components/Footer'
 import Profile from '../Components/Profile'
 import CreateAnAuction1 from '../Components/CreateAnAuction1'
+
+const styles ={
+    space : {
+        marginTop : '2rem',
+        marginBottom: '5rem'
+    }
+
+}
 
 class MakeAuction extends Component {
     render(){
         return(
-            <div>
+            <div style={styles.space}>
                 <Container fluid>
                     <Row>
-                        <Col sm="2">    
+                        <Col sm="3">    
                             <Profile/>  
                         </Col>
-                        <Col sm="10">
+                        <Col sm="8">
                             <Label>Create An Auction - Lelangbuana.com</Label>
                             <Row>
                                 <Col>
@@ -28,9 +35,6 @@ class MakeAuction extends Component {
                                 </Col>
                             </Row>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Footer/>
                     </Row>
                 </Container>
             </div>

@@ -1,20 +1,24 @@
 import React from 'react'
-import { Container, Row, Col } from 'reactstrap'
+import {Container} from 'reactstrap'
 
-const position ={
-    backgroundColor : 'grey'
+
+const styles = {
+    colors : {
+        backgroundColor : '#344A77',
+        textAlign : 'center'
+    },
+
+    p :{
+        color:'white' 
+    }
 }
 
 class Footer extends React.Component {
     render() {
         return (  
-            <div style={position}>
-                <Container >
-                    <Row>
-                        <Col >
-                            <p> © 2018 Hak Cipta lelangbuana.com </p>
-                        </Col>
-                    </Row>
+            <div >
+                <Container fluid style={styles.colors}>
+                    <span style={styles.p}>© 2018 Hak Cipta lelangbuana.com</span>
                 </Container>
             </div>   
         )

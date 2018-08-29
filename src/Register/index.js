@@ -1,6 +1,15 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap'
 import axios from 'axios'
+
+
+const styles ={
+    space : {
+        marginTop : '2rem',
+        marginBottom: '5rem'
+    }
+
+}
 
 const request = axios.create({
     baseURL: "https://lelangbuana.herokuapp.com" || 'http://localhost:3000',
@@ -8,7 +17,7 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-export default class Register extends React.Component{
+ class Register extends Component{
 
     constructor(props) {
         super(props)
@@ -74,7 +83,7 @@ export default class Register extends React.Component{
 
     render(){
         return(
-            <div>
+            <div style={styles.space}>
                 <Form onSubmit={this.handleSubmit}>
                     <Row>
                         <Col sm="12">
@@ -200,3 +209,5 @@ export default class Register extends React.Component{
         )
     }
 }
+
+export default Register

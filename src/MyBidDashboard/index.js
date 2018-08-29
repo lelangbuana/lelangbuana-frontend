@@ -9,29 +9,35 @@ import {
 
 import Profile from '../Components/Profile'
 import MyBid from '../Components/MyBid'
-import Footer from '../Components/Footer'
+
+const styles ={
+    space : {
+        marginTop : '2rem',
+        marginBottom: '5rem'
+    }
+
+}
 
 class MyBidDashboard extends Component {
     render(){
         return(
-            <Container fluid>
-                <Row>
-                    <Col sm="2">          
-                        <Profile/>
-                    </Col>
-                    <Col sm="10">
-                        <Label>My Bid Dashboard</Label>
-                        <Row>
-                            <Col>
-                                <MyBid/>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-                <Row>
-                    <Footer/>
-                </Row>
-            </Container>
+            <div style={styles.space}>
+                <Container fluid>
+                    <Row>
+                        <Col sm="3">          
+                            <Profile/>
+                        </Col>
+                        <Col sm="8">
+                            <Label>My Bid Dashboard</Label>
+                            <Row>
+                                <Col>
+                                    <MyBid/>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         )
     }
 }

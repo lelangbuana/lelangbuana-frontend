@@ -6,31 +6,46 @@ import Home from '../Home'
 import Login from '../Login'
 import Register from '../Register'
 import ItemDetail from '../ItemDetail'
-import MyAuction from '../Components/MyAuction'
-import MyBid from '../Components/MyBid'
+import MyBidDashboard from '../MyBidDashboard'
 import MakeAuction from '../MakeAuction'
-import MyBid from '../Components/MyBid'
-import MyAuction from '../Components/MyAuction'
+import MyAuctionDashboard from '../MyAuctionDashboard'
+import Footer from '../Components/Footer'
 
+const styles = {
+    body : {
+        display: 'flex',
+        minHeight: '100vh',
+        flexDirection: 'column'
+    },
 
+    main : {
+        flex:'1'
+    }
+}
 
 class App extends Component {
     render() {
         return (
             <Router>
                 <Switch>
-                    <div className="App">
-                        <NavBar/>
-                        <Route exact path="/" component={Home} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/reg" component={Register} />
-                        <Route path="/item" component={ItemDetail} />
-                        <Route path="/create" component={MakeAuction}/>
-                        <Route path="/mybid" component={MyBid}/>
-                        <Route path="/myauction" component= {MyAuction}/>
+                    <div className="App" style={styles.body}>
+                        <div>
+                            <NavBar/>
+                        </div>
+                        <div style={styles.main}>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/login" component={Login} />
+                            <Route path="/reg" component={Register} />
+                            <Route path="/item" component={ItemDetail} />
+                            <Route path="/create" component={MakeAuction}/>
+                            <Route path="/mybid" component={MyBidDashboard}/>
+                            <Route path="/myauction" component= {MyAuctionDashboard}/>
+                        </div>
+                        <div>
+                            <Footer/>
+                        </div>
                     </div> 
                 </Switch>
-
             </Router>
         )
     }
