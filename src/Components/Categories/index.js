@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import { Collapse, ListGroup, ListGroupItem } from 'reactstrap'
 
-// const Home = () => (
-//     <div>
-//         <h2>Home</h2>
-//     </div>
-// )
 
 class Categories extends Component {
     constructor(props) {
@@ -33,7 +28,7 @@ class Categories extends Component {
                 <ListGroup>
                     <ListGroupItem onClick={this.toggle} action>{this.props.name}</ListGroupItem>
                     <Collapse isOpen={this.state.collapse}>
-                        <ListGroup>
+                        <ListGroup action >
                             {listCategories}
                         </ListGroup>
                     </Collapse>

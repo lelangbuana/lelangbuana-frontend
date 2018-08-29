@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
-import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap'
+import {Container, Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap'
 import axios from 'axios'
 
 
 const styles ={
     space : {
-        marginTop : '2rem',
-        marginBottom: '5rem'
+       justifyContent : 'center',
+    //    display : 'flex',
+       marginTop : '2rem',
+       marginBottom :'5rem'
     }
 
 }
@@ -85,8 +87,9 @@ const request = axios.create({
         return(
             <div style={styles.space}>
                 <Form onSubmit={this.handleSubmit}>
-                    <Row>
-                        <Col sm="12">
+                <Container>
+                    <Row inline>
+                        <Col sm="6">
                             <FormGroup>
                                 <Label for="Username">Username</Label>
                                 <Input
@@ -137,10 +140,6 @@ const request = axios.create({
                                     placeholder="Last Name"
                                 />
                             </FormGroup>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm="12">
                             <FormGroup>
                                 <Label for="Address">Address</Label>
                                 <Input
@@ -151,6 +150,8 @@ const request = axios.create({
                                     placeholder="Address"
                                 />
                             </FormGroup>
+                        </Col>
+                        <Col sm="6">
                             <FormGroup>
                                 <Label for="City">City</Label>
                                 <Input
@@ -189,6 +190,7 @@ const request = axios.create({
                                     name="zip_code"
                                     id="zip_code"
                                     placeholder="Postal Code"
+                                    minLength="5"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -199,12 +201,15 @@ const request = axios.create({
                                     name="id_card"
                                     id="ide_card"
                                     placeholder="Your ID Number"
+                                    minLength="5"
+                                    min="1"
                                 />
                             </FormGroup>
+                            <Button type="submit" color="primary">Submit</Button>
                         </Col>
-                        <Button type="submit" color="primary">Submit</Button>
                     </Row>
-                </Form>
+                    </Container>
+                </Form>   
             </div>
         )
     }

@@ -14,7 +14,6 @@ const styles ={
         marginTop : '2rem',
         marginBottom: '5rem'
     }
-
 }
 
 const auction = [
@@ -45,12 +44,12 @@ class Home extends Component {
         this.state = { 
             auction: []
         }
-        this.createAuction=this.createAuction.bind(this)
+        this.cardAuctiontion=this.cardAuctiontion.bind(this)
         this.createCategories=this.createCategories.bind(this)
         this.routeChange=this.routeChange.bind(this)
     }
 
-    createAuction (item,index) {
+    cardAuctiontion (item,index) {
         return <CardAuction onClick={this.routeChange} key={item.title+index} user={item.user} title={item.title} src={item.src} description={item.description}/>
     }
 
@@ -65,7 +64,7 @@ class Home extends Component {
     }
 
     render() {
-        let listAuction = auction.map(this.createAuction)
+        let listAuction = auction.map(this.cardAuctiontion)
         let listCategories = categories.map(this.createCategories)
         return (
             <div style={styles.space}>

@@ -10,8 +10,10 @@ const request = axios.create({
 
 const styles ={
     space : {
-        marginTop : '2rem',
-        marginBottom: '5rem'
+        marginTop:'12rem',
+       justifyContent : 'center',
+       display : 'flex',
+       textAlign : 'center'
     }
 
 }
@@ -56,11 +58,11 @@ class Login extends Component {
 
     render() {
         return (
-            <div style={styles.space}>
-                <Container fluid>
+            <div >
+                <Container style={styles.space}>
                     <Row>
-                        <Col sm="12">
-                            <Form sm="2" onSubmit={this.handleSubmit}>
+                        <Col>
+                            <Form onSubmit={this.handleSubmit}>
                                 <FormGroup >
                                     <Label for="Username">Username</Label>
                                     {/* <Input type="email" name="email" id="email" placeholder="Your Email" onChange={this.onChange}/> */}
