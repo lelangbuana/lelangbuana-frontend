@@ -33,7 +33,6 @@ export default class MyAuction extends React.Component{
                         </Media>
                     </ListGroupItem>
                     <Collapse isOpen={this.state.collapse}>
-                        <Label>My Auction</Label>
                         <Table hover>
                             <thead>
                                 <tr>

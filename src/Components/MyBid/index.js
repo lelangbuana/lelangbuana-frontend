@@ -5,7 +5,6 @@ export default class MyBid extends React.Component {
     render() {
         return (
             <div>
-                <Label>My Bid</Label>
                 <Table hover>
                     <thead>
                         <tr>

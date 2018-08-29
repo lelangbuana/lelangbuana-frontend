@@ -23,10 +23,10 @@ export default class DetailProductDetailPages extends React.Component {
     render() {
         return (
             <div>
-                <Nav tabs>
-                    <NavItem>
+                <Nav tabs >
+                    <NavItem >
                         <NavLink
-                            className={classnames({ active: this.state.activeTab === '1' })}
+                            className={classnames({ active: this.state.activeTab === '1'})}
                             onClick={() => { this.toggle('1') }}
                         >
               Item Info

@@ -1,44 +1,62 @@
 import React, {Component} from 'react'
 import {Container, Row, Col, Form, 
-    FormGroup, Input, Button} from 'reactstrap'
+    Input, Button} from 'reactstrap'
+
+const styles = {
+    text : {
+        textAlign :'center'
+    },
+    title : {
+        fontSize : '18px',
+        fontWeight : 'bold'
+    },
+    button : {
+        width : '250px'
+    },
+    contains : {
+        marginBottom : '10px'
+    }
+    
+}
 
 class DetailProductBidStatus extends Component{
     render(){
         return(
-            <Container>
-                <Row> 
-                    <span>Current Price</span>
-                    <span>IDR. </span>
-                    <span>(Start from : IDR )</span>
-                    
-                </Row>
-                <Row>
-                    <Col><span>Buyout Price</span></Col>
-                    <Col><span>IDR. </span></Col>
-                </Row>
-                <Row>
-                    <Col><span>Time Remaining</span></Col>
-                    <Col><span></span></Col>
-                </Row>
-                <Row>
-                    <Col><span>Seller</span></Col>
-                    <Col><span></span></Col>
-                </Row>
-                <Row>
-                    <Col><Button color="warning"> Win Now for Buyout Price</Button></Col>
-                </Row>
-                <Row>
-                    <Col><span>Bid Increment : IDR. </span></Col>
-                </Row>
-                <Row>
-                    <Form inline>
-                        <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                            <Input type="number" name="bid" id="bid" placeholder="IDR. " min="5000" />
-                        </FormGroup>
-                        <Button>Start Bid</Button>
-                    </Form>
-                </Row>
-            </Container>
+            <div style={styles.text}>
+                <Container >  
+                    <Row><Col style={styles.title}><span>Current Price</span></Col></Row>
+                    <Row><Col><span>IDR. </span></Col></Row>
+                    <Row style={styles.contains}><Col ><span>(Start from: IDR )</span></Col></Row>
+                    <hr/>
+                    <Row><Col style={styles.title}><span>Buyout Price</span></Col></Row>
+                    <Row style={styles.contains}><Col><span>IDR. </span></Col></Row> 
+                    <hr/>
+                    <Row><Col style={styles.title}><span>Time Remaining</span></Col></Row>
+                    <Row style={styles.contains}><Col><span></span></Col></Row>
+                    <hr/>
+                    <Row><Col style={styles.title}><span>Seller</span></Col></Row>
+                    <Row style={styles.contains}><Col><span>AgungHercules</span></Col></Row>
+                    <hr/>
+                    <Row style={styles.contains}>
+                        <Col><span>Bid Increment : IDR. </span></Col>
+                    </Row>
+                    <Row style={styles.contains}>
+                        <Col >
+                            <Form lg="6">
+                                <Input type="number" name="bidprice" id="bidprice" placeholder="IDR. " min="5000"/> 
+                            </Form>
+                        </Col>
+                    </Row>
+                    <Row style={styles.contains}> 
+                        <Col>
+                            <Button style={styles.button} > Bid Now</Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col><Button color="warning" style={styles.button}> Win for Buyout Price </Button></Col>
+                    </Row>
+                </Container>
+            </div>
         )
     }
 }

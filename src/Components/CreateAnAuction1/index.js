@@ -47,16 +47,7 @@ class CreateAnAuction1 extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="bidincrement">Bid Increment (IDR.)</Label>
-                                <Input type="select" name="bidincrement" id="bidincrement">
-                                    <option>5000</option>
-                                    <option>10000</option>
-                                    <option>20000</option>
-                                    <option>50000</option>
-                                    <option>100000</option>
-                                    <option>1000000</option>
-                                    <option>5000000</option>
-                                    <option>10000000</option>
-                                </Input>
+                                <Input type="number" name="bidincrement" id="bidincrement" />
                             </FormGroup>
                             <Button onClick={this.props.submits}>Next</Button>
                         </Form>

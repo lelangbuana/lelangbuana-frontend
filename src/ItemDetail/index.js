@@ -18,6 +18,15 @@ const styles ={
     space : {
         marginTop : '2rem',
         marginBottom: '5rem'
+    },
+
+    label: {
+        fontSize : '25px',
+        fontWeight : 'bold'
+    },
+
+    tabs : {
+        marginTop : '4rem'
     }
 
 }
@@ -50,24 +59,25 @@ class ItemDetail extends Component {
                             <br/>
                             {listCategories}             
                         </Col>
-                        <Col sm="8">
-                            <Label>Hatsune Miku Snow Ver. Dakimakura</Label>
+                        <Col sm="9">
+                            <Label style={styles.label}>Hatsune Miku Snow Ver. Dakimakura</Label>
                             <Row>
-                                <Col xs="5">
+                                <Col xs="4">
                                     <ProductImage/>
                                 </Col>
                                 <Col xs="4">
                                     <DetailProductListProduct/>
                                 </Col>
-                                <Col xs="2">
+                                <Col xs="4">
                                     <DetailProductBidStatus/>
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
-                    <br/>
                     <Row>
-                        <DetailProductDetailPages/>
+                        <Col style={styles.tabs} > 
+                            <DetailProductDetailPages/>
+                        </Col>
                     </Row>
                 </Container>
             </div>

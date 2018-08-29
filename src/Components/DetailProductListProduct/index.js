@@ -1,11 +1,17 @@
-import React from 'react'
-
+import React, {Component} from 'react'
 import { ListGroup, ListGroupItem } from 'reactstrap'
 
-export default class DetailProductListProduct extends React.Component {
+const styles = {
+    text : {
+        fontSize : '14px',
+        textAlign : 'left'
+    }
+}
+
+class DetailProductListProduct extends Component {
     render() {
         return (
-            <ListGroup flush>
+            <ListGroup flush style={styles.text}>
                 <ListGroupItem >Quantity </ListGroupItem>
                 <ListGroupItem >Opening Price</ListGroupItem>
                 <ListGroupItem >Number of Bid</ListGroupItem>
@@ -16,7 +22,10 @@ export default class DetailProductListProduct extends React.Component {
                 <ListGroupItem >Auction ID</ListGroupItem>
                 <ListGroupItem >Item Condition</ListGroupItem>
                 <ListGroupItem >Shipping Paid By</ListGroupItem>
+                <hr/>
             </ListGroup>
         )
     }
 }
+
+export default DetailProductListProduct
