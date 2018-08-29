@@ -7,7 +7,7 @@ class CardAuction extends  React.Component{
     render() {
         return (
             <div class="col-xs-3">
-                <Card onClick={this.props.onClick}>
+                <Card onClick={this.props.onClick} title={this.props.title}>
                     <CardImg top width="100%" src={this.props.src} alt="Card image cap" />
                     <CardBody>
                         <CardTitle>{this.props.title}</CardTitle>

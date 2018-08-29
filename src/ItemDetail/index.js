@@ -29,8 +29,8 @@ class ItemDetail extends Component {
         this.createCategories=this.createCategories.bind(this)
     }
 
-    createCategories (item) {
-        return <Categories name={item.name} categories={item.categories}/>
+    createCategories (item,index) {
+        return <Categories key={item.name+index} name={item.name} categories={item.categories}/>
     }
     render(){
         let listCategories = categories.map(this.createCategories)
@@ -46,7 +46,7 @@ class ItemDetail extends Component {
                             
                         </Col>
                         <Col sm="10">
-                            <Label>Hatsune Miku Snow Ver. Dakimakura</Label>
+                            <Label>{this.props.title}</Label>
                             <Row>
                                 <Col>
                                     <ProductImage/>
