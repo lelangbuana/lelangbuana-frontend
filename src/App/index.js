@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import { BrowserRouter as Router,Switch, Route} from 'react-router-dom'
 
 import NavBar from '../Components/NavBar'
@@ -10,6 +12,7 @@ import MyBidDashboard from '../MyBidDashboard'
 import MakeAuction from '../MakeAuction'
 import MyAuctionDashboard from '../MyAuctionDashboard'
 import Footer from '../Components/Footer'
+
 
 const styles = {
     body : {
@@ -23,9 +26,75 @@ const styles = {
     }
 }
 
+const initialState = {
+    user: {
+        user_id:'',
+        username:'',
+        email:'',
+        password:'',
+        register: {},
+        mybid: {},
+        auction:{},
+        myauction: {},
+        login: {},
+        token: '',
+        title:'',
+        src:'',
+        description:'',
+        name:'',
+        categories:'',
+        islogin:'false'
+    }
+}
+
+const reducer = (state = initialState, action) => {
+    switch(action.type) {
+    case 'LOGIN': {
+        return {
+            user: {
+                ...state.user,
+                login: action.payload.login,
+                token: action.payload.token
+            }
+        }
+    }
+    case 'REGISTER': {
+        return {
+            user: {
+                ...state.user,
+                register: action.payload
+            }
+        }
+    }
+    case 'CLICKED': {
+        return {
+            user: {
+                ...state.user,
+                title: action.payload.title,
+                src: action.payload.src,
+                description: action.payload.description,
+            }
+        }
+    }
+    case 'AUCTION': {
+        return {
+            user: {
+                ...state.user,
+                auction: action.payload
+            }
+        }
+    }
+    default:
+        return state
+    }
+}
+
+const store = createStore(reducer)
+
 class App extends Component {
     render() {
         return (
+          <Provider store={store}>
             <Router>
                 <Switch>
                     <div className="App" style={styles.body}>
@@ -36,7 +105,7 @@ class App extends Component {
                             <Route exact path="/" component={Home} />
                             <Route path="/login" component={Login} />
                             <Route path="/reg" component={Register} />
-                            <Route path="/item" component={ItemDetail} />
+                            <Route path="/item/:slug" component={ItemDetail} />
                             <Route path="/create" component={MakeAuction}/>
                             <Route path="/mybid" component={MyBidDashboard}/>
                             <Route path="/myauction" component= {MyAuctionDashboard}/>
@@ -47,6 +116,8 @@ class App extends Component {
                     </div> 
                 </Switch>
             </Router>
+          </Provider>
+
         )
     }
 }

@@ -16,7 +16,8 @@ const styles ={
 class CardAuction extends  React.Component{
     render() {
         return (
-            <div class="col-xs-3" style={styles.margins}>
+
+            <div class="col-xs-3" style={styles.margins} title={this.props.title}>
                 <Card onClick={this.props.onClick}>
                     <CardImg top style={styles.sizes} src={this.props.src} alt="Card image cap" />
                     <CardBody>

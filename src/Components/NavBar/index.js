@@ -24,6 +24,7 @@ class NavBar extends React.Component {
                     <NavbarBrand href="/" >
                         <img src={LelangLogo} className="img-fluid" alt="Lelangbuana"></img>
                     </NavbarBrand>           
+
                     <Nav className="ml-auto" navbar >
                         <NavItem >
                             <NavLink className="text-white btn"  to="/login">Login</NavLink>
@@ -44,6 +45,7 @@ class NavBar extends React.Component {
                             <NavLink className="text-white btn" to="/mybid">My Bid</NavLink>
                         </NavItem>
                     </Nav>            
+
                 </Navbar>
             </div>
         )

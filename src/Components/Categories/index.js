@@ -1,8 +1,22 @@
 import React, { Component } from 'react'
 import { Collapse, ListGroup, ListGroupItem } from 'reactstrap'
 
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 class Categories extends Component {
+    static get propTypes() {
+        return {
+            children: PropTypes.any,
+            name: PropTypes.string,
+            categories: PropTypes.string
+        }
+    }
+
+    state = {
+        collapse:false
+    }
+
     constructor(props) {
         super(props)
         this.toggle = this.toggle.bind(this)
