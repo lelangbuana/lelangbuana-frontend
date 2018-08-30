@@ -104,10 +104,7 @@ class ItemDetail extends Component {
                         username: response.data.username
                         
                     }
-                    // console.log(response.data)
                 })
-                
-                // console.log(this.state.auction.title)
                 
             })
             .catch(error=>{console.log(error)})
