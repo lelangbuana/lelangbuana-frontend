@@ -71,7 +71,7 @@ class Home extends Component {
         request
         .get('/auctions')
         .then((response) => {
-            return response.data.auctions
+            return response.data
             // console.log(response.data.auctions)
         })
         .then(data => {
