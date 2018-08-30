@@ -20,25 +20,14 @@ const styles ={
     }
 
 }
-
-class Login extends Component {
-    constructor(props) {
-        super(props)
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.state = {
-            username:"",
-            password:"",
-            islogin:"false"
-        }
-      const mapStateToProps = state => {
+const mapStateToProps = state => {
     return {
       login: state.user.login
 
     }
   }
 
-class Login extends React.Component {
+class Login extends Component {
 
     static get propTypes() {
         return {
@@ -53,18 +42,6 @@ class Login extends React.Component {
         email: '',
         password: ''
       }
-
-    // constructor(props) {
-    //     super(props)
-    //     this.handleChange = this.handleChange.bind(this)
-    //     this.handleSubmit = this.handleSubmit.bind(this)
-    //     this.state = {
-    //         username:"",
-    //         password:"",
-    //         islogin:"false"
-    //     }
-    // }
-
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
