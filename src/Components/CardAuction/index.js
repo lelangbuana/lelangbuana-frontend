@@ -16,10 +16,7 @@ class CardAuction extends  React.Component{
 
             <div class="col-xs-3" style={styles.margins} title={this.props.title}>
                 <Card onClick={this.props.onClick}>
-
-            <div class="col-xs-3">
-                <Card onClick={this.props.onClick} title={this.props.title}>
-
+    
                     <CardImg top width="100%" src={this.props.src} alt="Card image cap" />
                     <CardBody>
                         <CardTitle>{this.props.title}</CardTitle>
