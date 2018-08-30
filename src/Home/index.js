@@ -161,7 +161,7 @@ class Home extends Component {
     render() {
 
         let listAuction = auctions.map((item, index) => {
-            return (<Link to={`/${item.slug}`}><CardAuction key={item.title+index} user={item.user} title={item.title} src={item.src} description={item.description}/></Link>  
+            return (<Link to={`/items/${item.slug}`}><CardAuction key={item.title+index} user={item.user} title={item.title} src={item.src} description={item.description}/></Link>  
         )
         })
 

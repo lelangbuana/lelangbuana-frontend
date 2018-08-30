@@ -94,29 +94,29 @@ const store = createStore(reducer)
 class App extends Component {
     render() {
         return (
-          <Provider store={store}>
-            <Router>
-                <Switch>
-                    <div className="App" style={styles.body}>
-                        <div>
-                            <NavBar/>
-                        </div>
-                        <div style={styles.main}>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/login" component={Login} />
-                            <Route path="/reg" component={Register} />
-                            <Route path="/item/:slug" component={ItemDetail} />
-                            <Route path="/create" component={MakeAuction}/>
-                            <Route path="/mybid" component={MyBidDashboard}/>
-                            <Route path="/myauction" component= {MyAuctionDashboard}/>
-                        </div>
-                        <div>
-                            <Footer/>
-                        </div>
-                    </div> 
-                </Switch>
-            </Router>
-          </Provider>
+            <Provider store={store}>
+                <Router>
+                    <Switch>
+                        <div className="App" style={styles.body}>
+                            <div>
+                                <NavBar/>
+                            </div>
+                            <div style={styles.main}>
+                                <Route exact path="/" component={Home} />
+                                <Route path="/login" component={Login} />
+                                <Route path="/reg" component={Register} />
+                                <Route path="/items/:slug" component={ItemDetail} />
+                                <Route path="/create" component={MakeAuction}/>
+                                <Route path="/mybid" component={MyBidDashboard}/>
+                                <Route path="/myauction" component= {MyAuctionDashboard}/>
+                            </div>
+                            <div>
+                                <Footer/>
+                            </div>
+                        </div> 
+                    </Switch>
+                </Router>
+            </Provider>
 
         )
     }
