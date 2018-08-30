@@ -26,16 +26,16 @@ class DetailProductBidStatus extends Component{
                 <Container >  
                     <Row><Col style={styles.title}><span>Current Price</span></Col></Row>
                     <Row><Col><span>IDR. </span></Col></Row>
-                    <Row style={styles.contains}><Col ><span>(Start from: IDR )</span></Col></Row>
+                    <Row style={styles.contains}><Col ><span>{this.props.openingPrice}</span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Buyout Price</span></Col></Row>
-                    <Row style={styles.contains}><Col><span>IDR. </span></Col></Row> 
+                    <Row style={styles.contains}><Col><span>IDR {this.props.buyOutPrice}</span></Col></Row> 
                     <hr/>
                     <Row><Col style={styles.title}><span>Time Remaining</span></Col></Row>
                     <Row style={styles.contains}><Col><span></span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Seller</span></Col></Row>
-                    <Row style={styles.contains}><Col><span>AgungHercules</span></Col></Row>
+                    <Row style={styles.contains}><Col><span>{this.props.seller}</span></Col></Row>
                     <hr/>
                     <Row style={styles.contains}>
                         <Col><span>Bid Increment : IDR. </span></Col>

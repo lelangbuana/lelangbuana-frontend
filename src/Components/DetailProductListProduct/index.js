@@ -12,15 +12,15 @@ class DetailProductListProduct extends Component {
     render() {
         return (
             <ListGroup flush style={styles.text}>
-                <ListGroupItem >Quantity </ListGroupItem>
-                <ListGroupItem >Opening Price</ListGroupItem>
+                <ListGroupItem >Quantity : {this.props.quantity}</ListGroupItem>
+                <ListGroupItem >Opening Price : {this.props.openingPrice}</ListGroupItem>
                 <ListGroupItem >Number of Bid</ListGroupItem>
-                <ListGroupItem >Highest Bidder</ListGroupItem>
-                <ListGroupItem >Opening Time</ListGroupItem>
-                <ListGroupItem >Closing Time</ListGroupItem>
+                <ListGroupItem >Highest Bidder : {this.props.max_bid}</ListGroupItem>
+                <ListGroupItem >Opening Time : {this.props.openingTime}</ListGroupItem>
+                <ListGroupItem >Closing Time : {this.props.endTime}</ListGroupItem>
                 <ListGroupItem >Current Time</ListGroupItem>
                 <ListGroupItem >Auction ID</ListGroupItem>
-                <ListGroupItem >Item Condition</ListGroupItem>
+                <ListGroupItem >Item Condition : {this.props.condition}</ListGroupItem>
                 <ListGroupItem >Shipping Paid By</ListGroupItem>
                 <hr/>
             </ListGroup>

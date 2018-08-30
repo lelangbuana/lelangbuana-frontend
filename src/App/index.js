@@ -44,6 +44,23 @@ const initialState = {
         name:'',
         categories:'',
         islogin:'false'
+    },
+    auction: {
+        auction_id: '',
+        title: '',
+        item_condition: '',
+        item_description: '',
+        quantity: '',
+        start_bid: '',
+        max_bid: '',
+        min_bid:'',
+        bids_multiply: '',
+        start_date: '',
+        end_date: '',
+        item_photo: '',
+        status: '',
+        created_at: '',
+        user_id: ''
     }
 }
 
@@ -84,6 +101,14 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
+    case 'DETAIL': {
+        return {
+            user: {
+                ...state.auction,
+                auction: action.payload
+            }
+        }
+    }
     default:
         return state
     }
@@ -105,7 +130,8 @@ class App extends Component {
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
                                 <Route path="/reg" component={Register} />
-                                <Route path="/items/:slug" component={ItemDetail} />
+                                <Route exact path="/auctions/:id" component={ItemDetail} />                                
+                                <Route exact path="/auctions" component={ItemDetail} />
                                 <Route path="/create" component={MakeAuction}/>
                                 <Route path="/mybid" component={MyBidDashboard}/>
                                 <Route path="/myauction" component= {MyAuctionDashboard}/>
