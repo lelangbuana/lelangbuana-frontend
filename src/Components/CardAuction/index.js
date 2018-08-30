@@ -2,12 +2,24 @@ import React from 'react'
 import { Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle} from 'reactstrap'
 
-class CardAuction extends  React.Component{
+const styles ={  
+    margins : {
+        marginRight: '15px',
+        marginBottom: '25px',
+    
+    }
+}
 
+class CardAuction extends  React.Component{
     render() {
         return (
+
+            <div class="col-xs-3" style={styles.margins} title={this.props.title}>
+                <Card onClick={this.props.onClick}>
+
             <div class="col-xs-3">
                 <Card onClick={this.props.onClick} title={this.props.title}>
+
                     <CardImg top width="100%" src={this.props.src} alt="Card image cap" />
                     <CardBody>
                         <CardTitle>{this.props.title}</CardTitle>

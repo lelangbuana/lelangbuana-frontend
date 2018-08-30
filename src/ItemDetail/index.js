@@ -10,12 +10,28 @@ import {
 } from 'reactstrap'
 
 import Categories from '../Components/Categories'
-import Footer from '../Components/Footer'
 import ProductImage from '../Components/DetailProductCarousel'
 import DetailProductListProduct from '../Components/DetailProductListProduct'
 import DetailProductBidStatus from '../Components/DetailProductBidStatus'
 import DetailProductDetailPages from '../Components/DetailProductDetailPages'
 import Profile from '../Components/Profile'
+
+const styles ={
+    space : {
+        marginTop : '2rem',
+        marginBottom: '5rem'
+    },
+
+    label: {
+        fontSize : '25px',
+        fontWeight : 'bold'
+    },
+
+    tabs : {
+        marginTop : '4rem'
+    }
+
+}
 
 const categories = [
     {name:'Computers',categories:['Laptop','PC','Netbook']},
@@ -57,37 +73,35 @@ class ItemDetail extends Component {
         
         let listCategories = categories.map(this.createCategories)
         return(
-            <div>
+            <div style={styles.space}>
                 <Container fluid>
                     <Row>
-                        <Col sm="2">
-                            
+                        <Col sm="3">            
                             <Profile/>
                             <br/>
-                            {listCategories}
-                            
+                            {listCategories}             
                         </Col>
-                        <Col sm="10">
-                            <Label>{this.props.title}</Label>
+
+                        <Col sm="9">
+                            <Label style={styles.label}>{this.props.title}</Label>
+
                             <Row>
-                                <Col>
+                                <Col xs="4">
                                     <ProductImage/>
                                 </Col>
-                                <Col>
+                                <Col xs="4">
                                     <DetailProductListProduct/>
                                 </Col>
-                                <Col>
+                                <Col xs="4">
                                     <DetailProductBidStatus/>
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
-                    <br/>
                     <Row>
-                        <DetailProductDetailPages/>
-                    </Row>
-                    <Row>
-                        <Footer/>
+                        <Col style={styles.tabs} > 
+                            <DetailProductDetailPages/>
+                        </Col>
                     </Row>
                 </Container>
             </div>

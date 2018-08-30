@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Collapse, ListGroup, ListGroupItem } from 'reactstrap'
+
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -41,7 +42,7 @@ class Categories extends Component {
                 <ListGroup>
                     <ListGroupItem onClick={this.toggle} action>{this.props.name}</ListGroupItem>
                     <Collapse isOpen={this.state.collapse}>
-                        <ListGroup>
+                        <ListGroup action >
                             {listCategories}
                         </ListGroup>
                     </Collapse>

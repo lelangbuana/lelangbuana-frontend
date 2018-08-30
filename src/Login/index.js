@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
 import axios from 'axios'
 import PropTypes from 'prop-types'
@@ -10,9 +10,31 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-const mapStateToProps = state => {
+
+const styles ={
+    space : {
+        marginTop:'12rem',
+       justifyContent : 'center',
+       display : 'flex',
+       textAlign : 'center'
+    }
+
+}
+
+class Login extends Component {
+    constructor(props) {
+        super(props)
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.state = {
+            username:"",
+            password:"",
+            islogin:"false"
+        }
+      const mapStateToProps = state => {
     return {
       login: state.user.login
+
     }
   }
 
@@ -75,11 +97,11 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
-                <Container fluid>
+            <div >
+                <Container style={styles.space}>
                     <Row>
-                        <Col sm="12">
-                            <Form sm="2" onSubmit={this.handleSubmit}>
+                        <Col>
+                            <Form onSubmit={this.handleSubmit}>
                                 <FormGroup >
                                     <Label for="Username">Username</Label>
                                     {/* <Input type="email" name="email" id="email" placeholder="Your Email" onChange={this.onChange}/> */}
@@ -112,4 +134,6 @@ class Login extends React.Component {
     }
 }
 
+
 export default connect(mapStateToProps)(Login)
+

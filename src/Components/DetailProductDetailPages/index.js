@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap'
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap'
 import classnames from 'classnames'
 
 export default class DetailProductDetailPages extends React.Component {
@@ -23,10 +23,10 @@ export default class DetailProductDetailPages extends React.Component {
     render() {
         return (
             <div>
-                <Nav tabs>
-                    <NavItem>
+                <Nav tabs >
+                    <NavItem >
                         <NavLink
-                            className={classnames({ active: this.state.activeTab === '1' })}
+                            className={classnames({ active: this.state.activeTab === '1'})}
                             onClick={() => { this.toggle('1') }}
                         >
               Item Info

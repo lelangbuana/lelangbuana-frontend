@@ -10,15 +10,30 @@ import {
     Label
 } from 'reactstrap'
 
-import Footer from '../Components/Footer'
 import Profile from '../Components/Profile'
 import CreateAnAuction1 from '../Components/CreateAnAuction1'
 
+
+const styles ={
+    space : {
+        marginTop : '2rem',
+        marginBottom: '5rem'
+    },
+
+    label: {
+        fontSize: '25px',
+        fontWeight :'bold'
+    }
+
+}
+ 
+  
 const mapStateToProps = state => {
     return {
         auction: state.user.auction
     }
 }
+
 
 
 class MakeAuction extends Component {
@@ -51,23 +66,20 @@ class MakeAuction extends Component {
 
     render(){
         return(
-            <div>
+            <div style={styles.space}>
                 <Container fluid>
                     <Row>
-                        <Col sm="2">    
+                        <Col sm="3">    
                             <Profile/>  
                         </Col>
-                        <Col sm="10">
-                            <Label>Create An Auction - Lelangbuana.com</Label>
+                        <Col sm="9">
+                            <Label style={styles.label}>Create An Auction - Lelangbuana.com</Label>
                             <Row>
                                 <Col>
                                     <CreateAnAuction1/>
                                 </Col>
                             </Row>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Footer/>
                     </Row>
                 </Container>
             </div>

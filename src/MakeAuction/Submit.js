@@ -8,7 +8,6 @@ import {
 } from 'reactstrap'
 
 import Profile from '../Components/Profile'
-import Footer from '../Components/Footer'
 import CreateAnAuction2 from '../Components/CreateAnAuction2'
 
 class Submission extends Component {
@@ -39,9 +38,6 @@ render(){
                             </Col>
                         </Row>
                     </Col>
-                </Row>
-                <Row>
-                    <Footer/>
                 </Row>
             </Container>
         </div>

@@ -1,8 +1,19 @@
-import React from 'react'
-import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap'
+import React, {Component} from 'react'
+import {Container, Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
+
+const styles ={
+    space : {
+       justifyContent : 'center',
+    //    display : 'flex',
+       marginTop : '2rem',
+       marginBottom :'5rem'
+    }
+
+}
 
 const request = axios.create({
     baseURL: "https://lelangbuana.herokuapp.com" || 'http://localhost:3000',
@@ -10,11 +21,13 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
+
 const mapStateToProps = state => {
     return {
       register: state.user.register
     }
   }
+
 
 class Register extends React.Component{
     static get propTypes() {
@@ -98,10 +111,11 @@ class Register extends React.Component{
 
     render(){
         return(
-            <div>
+            <div style={styles.space}>
                 <Form onSubmit={this.handleSubmit}>
-                    <Row>
-                        <Col sm="12">
+                <Container>
+                    <Row inline>
+                        <Col sm="6">
                             <FormGroup>
                                 <Label for="Username">Username</Label>
                                 <Input
@@ -152,10 +166,6 @@ class Register extends React.Component{
                                     placeholder="Last Name"
                                 />
                             </FormGroup>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm="12">
                             <FormGroup>
                                 <Label for="Address">Address</Label>
                                 <Input
@@ -166,6 +176,8 @@ class Register extends React.Component{
                                     placeholder="Address"
                                 />
                             </FormGroup>
+                        </Col>
+                        <Col sm="6">
                             <FormGroup>
                                 <Label for="City">City</Label>
                                 <Input
@@ -204,6 +216,7 @@ class Register extends React.Component{
                                     name="zip_code"
                                     id="zip_code"
                                     placeholder="Postal Code"
+                                    minLength="5"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -214,15 +227,21 @@ class Register extends React.Component{
                                     name="id_card"
                                     id="ide_card"
                                     placeholder="Your ID Number"
+                                    minLength="5"
+                                    min="1"
                                 />
                             </FormGroup>
+                            <Button type="submit" color="primary">Submit</Button>
                         </Col>
-                        <Button type="submit" color="primary">Submit</Button>
                     </Row>
-                </Form>
+                    </Container>
+                </Form>   
             </div>
         )
     }
 }
 
+
+
 export default connect(mapStateToProps)(Register)
+
