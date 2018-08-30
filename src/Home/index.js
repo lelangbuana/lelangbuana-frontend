@@ -71,10 +71,11 @@ class Home extends Component {
         request
         .get('/auctions')
         .then((response) => {
-            return response.data.auctions
-            // console.log(response.data.auctions)
+            console.log(response.data)
+            return response.data
         })
         .then(data => {
+            console.log(data)
             data.map(item =>{
                 console.log(item.item_description)
                 this.setState((prevState) => {
@@ -88,7 +89,7 @@ class Home extends Component {
                     }
                   })
             })
-            console.log(data)
+            
             console.log(auctions)
         })
         // .then(data => {
