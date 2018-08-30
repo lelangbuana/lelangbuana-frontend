@@ -14,6 +14,11 @@ const styles ={
     space : {
         marginTop : '2rem',
         marginBottom: '5rem'
+    },
+
+    label: {
+        fontSize: '25px',
+        fontWeight :'bold'
     }
 
 }
@@ -28,7 +33,7 @@ class MyBidDashboard extends Component {
                             <Profile/>
                         </Col>
                         <Col sm="8">
-                            <Label>My Bid Dashboard</Label>
+                            <Label style={styles.label}>My Bid Dashboard</Label>
                             <Row>
                                 <Col>
                                     <MyBid/>

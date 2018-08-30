@@ -6,6 +6,12 @@ import { connect } from 'react-redux'
 import { Button, Form, FormGroup, Label, 
     Input, Container, Row, Col } from 'reactstrap'
 
+const styles = {
+    button : {
+        width : '100px'
+    }
+}
+
 const mapStateToProps = state => {
     return {
         auction: state.user.auction
@@ -194,7 +200,7 @@ class CreateAnAuction1 extends Component {
                                 />
 
                             </FormGroup>
-                            <Button onClick={this.props.submits}>Next</Button>
+                            <Button style={styles.button} onClick={this.props.submits}>Next</Button>
                         </Form>
                     </Col>
                 </Row>

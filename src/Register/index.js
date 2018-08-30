@@ -11,8 +11,10 @@ const styles ={
     //    display : 'flex',
        marginTop : '2rem',
        marginBottom :'5rem'
+    },
+    button : {
+        width : '100px'
     }
-
 }
 
 const request = axios.create({
@@ -29,7 +31,7 @@ const mapStateToProps = state => {
   }
 
 
-class Register extends React.Component{
+class Register extends Component{
     static get propTypes() {
         return {
           children: PropTypes.any,
@@ -231,7 +233,7 @@ class Register extends React.Component{
                                     min="1"
                                 />
                             </FormGroup>
-                            <Button type="submit" color="primary">Submit</Button>
+                            <Button style={styles.button} type="submit" color="primary">Submit</Button>
                         </Col>
                     </Row>
                     </Container>

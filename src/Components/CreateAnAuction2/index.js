@@ -1,6 +1,12 @@
 import React, {Component} from 'react'
 import { Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap'
 
+const styles = {
+    button : {
+        width : '100px'
+    }
+}
+
 class CreateAnAuction2 extends Component {
     render() {
         return (
@@ -13,7 +19,7 @@ class CreateAnAuction2 extends Component {
                     <Label for="image">Image</Label>
                     <CustomInput type="file" id="image" name="image" />
                 </FormGroup>
-                <Button type="submit">Submit</Button>
+                <Button style={styles.button} type="submit">Submit</Button>
             </Form>
         )
     }

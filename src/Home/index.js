@@ -76,7 +76,7 @@ class Home extends Component {
         })
         .then(data => {
             console.log(data)
-            data.map(item =>{
+            data.map(item => {
                 console.log(item.item_description)
                 this.setState((prevState) => {
                     return { 

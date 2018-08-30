@@ -17,6 +17,9 @@ const styles ={
        justifyContent : 'center',
        display : 'flex',
        textAlign : 'center'
+    },
+    button : {
+        width : '100px'
     }
 
 }
@@ -100,7 +103,7 @@ class Login extends Component {
                                     placeholder="Password"
                                 />
                                 </FormGroup>
-                        <Button type="submit" color="primary">Login</Button>
+                        <Button style={styles.button} type="submit" color="primary">Login</Button>
                             </Form>
                         </Col>
                     </Row>

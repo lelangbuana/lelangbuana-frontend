@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Collapse, ListGroup, ListGroupItem } from 'reactstrap'
 
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 
 class Categories extends Component {
     static get propTypes() {

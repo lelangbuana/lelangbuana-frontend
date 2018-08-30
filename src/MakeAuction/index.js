@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -33,8 +33,6 @@ const mapStateToProps = state => {
         auction: state.user.auction
     }
 }
-
-
 
 class MakeAuction extends Component {
     static get propTypes() {

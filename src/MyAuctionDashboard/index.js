@@ -14,6 +14,11 @@ const styles ={
     space : {
         marginTop : '2rem',
         marginBottom: '5rem'
+    },
+
+    label: {
+        fontSize: '25px',
+        fontWeight :'bold'
     }
 
 }
@@ -28,7 +33,7 @@ class MyAuctionDashboard extends Component {
                             <Profile/>
                         </Col>
                         <Col sm="9">
-                            <Label>My Auction Dashboard</Label>
+                            <Label style={styles.label}>My Auction Dashboard</Label>
                             <Row>
                                 <Col>
                                     <MyAuction/>
