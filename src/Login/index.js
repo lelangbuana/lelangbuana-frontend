@@ -20,12 +20,15 @@ const styles ={
     }
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 20265f86bd64a047dc2ec4701a37cd03dd3f47b8
 const mapStateToProps = state => {
     return {
       login: state.user.login
-
     }
-  }
+}
 
 class Login extends Component {
 
