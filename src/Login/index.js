@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
 import { Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
 import axios from 'axios'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 const request = axios.create({
     baseURL: "https://lelangbuana.herokuapp.com" || 'http://localhost:3000',
     timeout: 10000,
     headers: { Authorization: '' }
 })
+
 
 const styles ={
     space : {
@@ -28,7 +31,40 @@ class Login extends Component {
             password:"",
             islogin:"false"
         }
+      const mapStateToProps = state => {
+    return {
+      login: state.user.login
+
     }
+  }
+
+class Login extends React.Component {
+
+    static get propTypes() {
+        return {
+          children: PropTypes.any,
+          dispatch: PropTypes.any,
+          login: PropTypes.object,
+          message: PropTypes.string
+        }
+      }
+
+      state = {
+        email: '',
+        password: ''
+      }
+
+    // constructor(props) {
+    //     super(props)
+    //     this.handleChange = this.handleChange.bind(this)
+    //     this.handleSubmit = this.handleSubmit.bind(this)
+    //     this.state = {
+    //         username:"",
+    //         password:"",
+    //         islogin:"false"
+    //     }
+    // }
+
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
@@ -44,13 +80,16 @@ class Login extends Component {
         request
         .post('/users/login',payload)
         .then((response) => {
-            let token = response.data.token
-            this.setState({
-                islogin: true,
-                token:token
-            });
-            localStorage.setItem("token",token)
-            console.log(this.state)
+            this.props.dispatch({
+                type: 'LOGIN',
+                payload: {
+                  login: payload,
+                  token: response.data.token || ''
+                }
+              })
+              localStorage.setItem("token",response.data.token)
+            console.log(this.props)
+            console.log(response.data.token)
         })
         .catch(error=>{console.log(error)})
         console.log(payload)
@@ -95,4 +134,6 @@ class Login extends Component {
     }
 }
 
-export default Login
+
+export default connect(mapStateToProps)(Login)
+

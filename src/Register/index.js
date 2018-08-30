@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Container, Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap'
 import axios from 'axios'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 
 const styles ={
@@ -19,28 +21,38 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
- class Register extends Component{
 
-    constructor(props) {
-        super(props)
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.state = {
-            username:"",
-            password:"",
-            profile_photo:"photo",
-            phone_number:"123",
-            email:"",
-            first_name:"",
-            last_name:"",
-            address:"",
-            city:"",
-            province:"",
-            country:"",
-            zip_code:"",
-            id_card:"",
-            status:"active"
+const mapStateToProps = state => {
+    return {
+      register: state.user.register
+    }
+  }
+
+
+class Register extends React.Component{
+    static get propTypes() {
+        return {
+          children: PropTypes.any,
+          dispatch: PropTypes.any,
+          register: PropTypes.object
         }
+      }
+
+      state = {
+        username:"",
+        password:"",
+        profile_photo:"photo",
+        phone_number:"123",
+        email:"",
+        first_name:"",
+        last_name:"",
+        address:"",
+        city:"",
+        province:"",
+        country:"",
+        zip_code:"",
+        id_card:"",
+        status:"active"
     }
     
     handleChange = event => {
@@ -50,7 +62,7 @@ const request = axios.create({
 
       handleSubmit = event => {
           event.preventDefault()
-        const payload = {
+          const payload = {
             username: this.state.username,
             password: this.state.password,
             profile_photo:"photo",
@@ -66,17 +78,31 @@ const request = axios.create({
             id_card: this.state.id_card,
             status: this.state.status
           }
+          this.props.dispatch({
+            type: 'REGISTER',
+            payload: {
+                username: this.state.username,
+                password: this.state.password,
+                profile_photo:"photo",
+                phone_number:this.state.phone_number,
+                email: this.state.email,
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
+                address: this.state.address,
+                city: this.state.city,
+                province: this.state.province,
+                country: this.state.country,
+                zip_code: this.state.zip_code,
+                id_card: this.state.id_card,
+                status: this.state.status
+            }
+          })
+        
 
 
         request
         .post('/users/register',payload)
         .then((response) => {
-            // let token = response.data.token
-            // this.setState({
-            //     islogin: true,
-            //     token:token
-            // });
-            // localStorage.setItem("token",token)
             console.log(response)
         })
         .catch(error=>{console.log(error)})
@@ -215,4 +241,7 @@ const request = axios.create({
     }
 }
 
-export default Register
+
+
+export default connect(mapStateToProps)(Register)
+
