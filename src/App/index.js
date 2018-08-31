@@ -113,6 +113,9 @@ const reducer = (state = initialState, action) => {
             product: {}
         }
     }
+    case 'DEBUG_STORE': {
+        return state
+    }
     default:
         return state
     }

@@ -1,7 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const Debug = () => {
-    return <p>Debug</p>
+const Debug = ({ state }) => {
+    return (
+        <div>
+            <h1>Debug</h1>
+            <p>{JSON.stringify(state)}</p>
+        </div>
+    )
 }
 
-export default Debug
+const mapStateToProps = state => {
+    return {
+        state
+    }
+}
+
+export default connect(mapStateToProps)(Debug)
