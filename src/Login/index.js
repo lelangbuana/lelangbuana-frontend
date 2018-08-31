@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Component} from 'react'
 import { Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
 import axios from 'axios'
 import PropTypes from 'prop-types'

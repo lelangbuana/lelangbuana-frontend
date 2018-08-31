@@ -228,8 +228,8 @@ class CreateAnAuction1 extends Component {
                             id="image" 
                             name="image" />
                             <Button
-                            onClick={this.uploadImageHandler}
-                            >Upload
+                            onClick={this.uploadImageHandler}>
+                            Upload
                             </Button>
                         </FormGroup>
                             <Button style={styles.button} onClick={this.props.submits}>Submit</Button>
