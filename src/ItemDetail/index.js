@@ -142,7 +142,7 @@ class ItemDetail extends Component {
     }
     render(){
         let title = this.state.username
-        console.log(title)
+        // console.log(title)
         let listCategories = categories.map(this.createCategories)
         return(
             <div style={styles.space}>

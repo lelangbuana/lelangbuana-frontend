@@ -61,6 +61,12 @@ const initialState = {
         status: '',
         created_at: '',
         user_id: ''
+    },
+    bids: {
+        // bid_id: '',
+        // bids_nominal: '',
+        // auction_id: '',
+        // user_id: ''
     }
 }
 
@@ -130,8 +136,8 @@ class App extends Component {
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
                                 <Route path="/reg" component={Register} />
-                                <Route exact path="/auctions/:id" component={ItemDetail} />                                
-                                <Route exact path="/auctions" component={ItemDetail} />
+                                <Route path="/auctions/:id" component={ItemDetail} />                                
+                                {/* <Route exact path="/auctions" component={ItemDetail} /> */}
                                 <Route path="/create" component={MakeAuction}/>
                                 <Route path="/mybid" component={MyBidDashboard}/>
                                 <Route path="/myauction" component= {MyAuctionDashboard}/>
