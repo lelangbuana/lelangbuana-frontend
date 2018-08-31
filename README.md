@@ -1,2 +1,13 @@
-# lelangbuana-frontend
-Front End Repository for Lelangbuana project
+# Lelangbuana Frontend
+
+Frontend Repository for Lelangbuana project.
+
+## Development
+
+```sh
+yarn
+```
+
+```sh
+yarn start
+```

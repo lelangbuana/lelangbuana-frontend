@@ -1,34 +1,48 @@
-import React, {Component} from 'react'
-import {Container, ListGroup, Collapse, ListGroupItem,
-    Media, Table} from 'reactstrap'
+import React from 'react'
+import {
+    Container,
+    ListGroup,
+    Collapse,
+    ListGroupItem,
+    Media,
+    Table
+} from 'reactstrap'
 
-class MyAuction extends Component{
+export default class MyAuction extends React.Component {
     constructor(props) {
         super(props)
         this.toggle = this.toggle.bind(this)
         this.state = { collapse: false }
     }
-    
+
     toggle() {
         this.setState({ collapse: !this.state.collapse })
     }
-    
-    render(){
-        return(
+
+    render() {
+        return (
             <Container>
                 <ListGroup>
                     <ListGroupItem onClick={this.toggle}>
                         <Media>
                             <Media left href="">
-                                <Media object data-src="holder.js/64x64" alt="Generic placeholder image" />
+                                <Media
+                                    object
+                                    data-src="holder.js/64x64"
+                                    alt="Generic placeholder image"
+                                />
                             </Media>
                             <Media body>
-                                <Media heading>
-          Hatsune Miku Dakimakura
+                                <Media heading>Hatsune Miku Dakimakura</Media>
+                                <Media>
+                                    <span>Expected Price : </span>
                                 </Media>
-                                <Media><span>Expected Price : </span></Media>
-                                <Media><span>Current Price : </span></Media>
-                                <Media><span>From : </span></Media>
+                                <Media>
+                                    <span>Current Price : </span>
+                                </Media>
+                                <Media>
+                                    <span>From : </span>
+                                </Media>
                             </Media>
                         </Media>
                     </ListGroupItem>

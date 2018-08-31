@@ -1,5 +1,14 @@
-import React, {Component} from 'react'
-import {Container, Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap'
+import React from 'react'
+import {
+    Container,
+    Row,
+    Col,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Button
+} from 'reactstrap'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -18,57 +27,54 @@ const styles ={
 }
 
 const request = axios.create({
-    baseURL: "https://lelangbuana.herokuapp.com" || 'http://localhost:3000',
+    baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
     timeout: 10000,
     headers: { Authorization: '' }
 })
 
-
 const mapStateToProps = state => {
     return {
-      register: state.user.register
+        register: state.user.register
     }
-  }
-
+}
 
 class Register extends Component{
     static get propTypes() {
         return {
-          children: PropTypes.any,
-          dispatch: PropTypes.any,
-          register: PropTypes.object
+            children: PropTypes.any,
+            dispatch: PropTypes.any,
+            register: PropTypes.object
         }
-      }
-
-      state = {
-        username:"",
-        password:"",
-        profile_photo:"photo",
-        phone_number:"123",
-        email:"",
-        first_name:"",
-        last_name:"",
-        address:"",
-        city:"",
-        province:"",
-        country:"",
-        zip_code:"",
-        id_card:"",
-        status:"active"
     }
-    
+
+    state = {
+        username: '',
+        password: '',
+        profile_photo: 'photo',
+        phone_number: '123',
+        email: '',
+        first_name: '',
+        last_name: '',
+        address: '',
+        city: '',
+        province: '',
+        country: '',
+        zip_code: '',
+        id_card: '',
+        status: 'active'
+    }
+
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
-      }
-      
+    }
 
-      handleSubmit = event => {
-          event.preventDefault()
-          const payload = {
+    handleSubmit = event => {
+        event.preventDefault()
+        const payload = {
             username: this.state.username,
             password: this.state.password,
-            profile_photo:"photo",
-            phone_number:this.state.phone_number,
+            profile_photo: 'photo',
+            phone_number: this.state.phone_number,
             email: this.state.email,
             first_name: this.state.first_name,
             last_name: this.state.last_name,
@@ -79,14 +85,14 @@ class Register extends Component{
             zip_code: this.state.zip_code,
             id_card: this.state.id_card,
             status: this.state.status
-          }
-          this.props.dispatch({
+        }
+        this.props.dispatch({
             type: 'REGISTER',
             payload: {
                 username: this.state.username,
                 password: this.state.password,
-                profile_photo:"photo",
-                phone_number:this.state.phone_number,
+                profile_photo: 'photo',
+                phone_number: this.state.phone_number,
                 email: this.state.email,
                 first_name: this.state.first_name,
                 last_name: this.state.last_name,
@@ -98,21 +104,21 @@ class Register extends Component{
                 id_card: this.state.id_card,
                 status: this.state.status
             }
-          })
-        
-
+        })
 
         request
-        .post('/users/register',payload)
-        .then((response) => {
-            console.log(response)
-        })
-        .catch(error=>{console.log(error)})
+            .post('/users/register', payload)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         console.log(payload)
-      }
+    }
 
-    render(){
-        return(
+    render() {
+        return (
             <div style={styles.space}>
                 <Form onSubmit={this.handleSubmit}>
                 <Container>
@@ -237,13 +243,10 @@ class Register extends Component{
                         </Col>
                     </Row>
                     </Container>
-                </Form>   
+                </Form>
             </div>
         )
     }
 }
 
-
-
 export default connect(mapStateToProps)(Register)
-
