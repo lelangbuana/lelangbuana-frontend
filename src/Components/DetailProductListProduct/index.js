@@ -1,10 +1,11 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { ListGroup, ListGroupItem } from 'reactstrap'
 import axios from 'axios'
+
 const styles = {
-    text : {
-        fontSize : '14px',
-        textAlign : 'left'
+    text: {
+        fontSize: '14px',
+        textAlign: 'left'
     }
 }
 
@@ -15,33 +16,35 @@ const request = axios.create({
 })
 
 class DetailProductListProduct extends Component {
-    componentDidMount(){
-        request
-            .get('/bids')
-            .then((response) => {
-                // console.log(response),
-                
-                this.setState(() => {
-                    return {bids: response.data.bids.length}
-                    
-                })
-                
-                // console.log(this.state.auction.title)
-                
-            })
-            .catch(error=>{console.log(error)})
+    state = {
+        bids: 0
     }
 
-    
-
-    handleClick(){  
+    componentDidMount() {
         request
             .get('/bids')
-            .then((response) => {
+            .then(response => {
+                console.log('typeof...', typeof response.data.bids)
+
+                this.setState(() => {
+                    return { bids: response.data.bids.length }
+                })
+
+                // console.log(this.state.auction.title)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    handleClick() {
+        request
+            .get('/bids')
+            .then(response => {
                 console.log(response)
-                
+
                 // this.setState((prevState) => {
-                //     return { 
+                //     return {
                 //         auction_id: response.data.auction_id,
                 //         title: response.data.title,
                 //         item_condition: response.data.item_condition,
@@ -57,32 +60,44 @@ class DetailProductListProduct extends Component {
                 //         status: response.data.status,
                 //         user_id: response.data.user_id,
                 //         username: response.data.username
-                        
+
                 //     }
                 //     // console.log(response.data)
                 // })
-                
+
                 // console.log(this.state.auction.title)
-                
             })
-            .catch(error=>{console.log(error)})
+            .catch(error => {
+                console.log(error)
+            })
     }
+
     render() {
-        let bids = this.state
-        console.log(bids)
+        const { bids } = this.state
+
         return (
             <ListGroup flush style={styles.text}>
-                <ListGroupItem >Quantity : {this.props.quantity}</ListGroupItem>
-                <ListGroupItem >Opening Price : {this.props.openingPrice}</ListGroupItem>
-                <ListGroupItem >Number of Bid : {bids}</ListGroupItem>
-                <ListGroupItem >Highest Bidder : {this.props.max_bid}</ListGroupItem>
-                <ListGroupItem >Opening Time : {this.props.openingTime}</ListGroupItem>
-                <ListGroupItem >Closing Time : {this.props.endTime}</ListGroupItem>
-                <ListGroupItem >Current Time</ListGroupItem>
-                <ListGroupItem >Auction ID</ListGroupItem>
-                <ListGroupItem >Item Condition : {this.props.condition}</ListGroupItem>
-                <ListGroupItem >Shipping Paid By</ListGroupItem>
-                <hr/>
+                <ListGroupItem>Quantity : {this.props.quantity}</ListGroupItem>
+                <ListGroupItem>
+                    Opening Price : {this.props.openingPrice}
+                </ListGroupItem>
+                <ListGroupItem>Number of Bid : {bids}</ListGroupItem>
+                <ListGroupItem>
+                    Highest Bidder : {this.props.max_bid}
+                </ListGroupItem>
+                <ListGroupItem>
+                    Opening Time : {this.props.openingTime}
+                </ListGroupItem>
+                <ListGroupItem>
+                    Closing Time : {this.props.endTime}
+                </ListGroupItem>
+                <ListGroupItem>Current Time</ListGroupItem>
+                <ListGroupItem>Auction ID</ListGroupItem>
+                <ListGroupItem>
+                    Item Condition : {this.props.condition}
+                </ListGroupItem>
+                <ListGroupItem>Shipping Paid By</ListGroupItem>
+                <hr />
             </ListGroup>
         )
     }
