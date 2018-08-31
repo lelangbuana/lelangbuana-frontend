@@ -4,14 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-
-
-import {
-    Container,
-    Row,
-    Col, 
-    Label
-} from 'reactstrap'
+import { Container, Row, Col, Label } from 'reactstrap'
 
 import Categories from '../Components/Categories'
 import ProductImage from '../Components/DetailProductCarousel'
@@ -26,31 +19,31 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-const styles ={
-    space : {
-        marginTop : '2rem',
+const styles = {
+    space: {
+        marginTop: '2rem',
         marginBottom: '5rem'
     },
 
     label: {
-        fontSize : '25px',
-        fontWeight : 'bold'
+        fontSize: '25px',
+        fontWeight: 'bold'
     },
 
-    tabs : {
-        marginTop : '4rem'
+    tabs: {
+        marginTop: '4rem'
     }
-
 }
 
 const categories = [
-    {name:'Computers',categories:['Laptop','PC','Netbook']},
-    {name:'Electronic, AV & Camera',categories:['DSLR','Mirrorless','Webcam']},
-    {name:'Music',categories:['Music Player','Speaker']},
-    {name:'Book & Magazine',categories:['Science-Fiction','Non-Fiction']}
+    { name: 'Computers', categories: ['Laptop', 'PC', 'Netbook'] },
+    {
+        name: 'Electronic, AV & Camera',
+        categories: ['DSLR', 'Mirrorless', 'Webcam']
+    },
+    { name: 'Music', categories: ['Music Player', 'Speaker'] },
+    { name: 'Book & Magazine', categories: ['Science-Fiction', 'Non-Fiction'] }
 ]
-
-const item = []
 
 const mapStateToProps = state => {
     return {
@@ -74,19 +67,16 @@ const mapStateToProps = state => {
 }
 
 class ItemDetail extends Component {
-    constructor(props) {
-        super(props)
-    }
+    componentDidMount() {
+        const {
+            match: { params }
+        } = this.props
 
-    componentDidMount(){
-        
-        const { match: { params } } = this.props
-        
         request
             .get(`/auctions/${params.id}`)
-            .then((response) => {
-                this.setState((prevState) => {
-                    return { 
+            .then(response => {
+                this.setState(prevState => {
+                    return {
                         auction_id: response.data.auction_id,
                         title: response.data.title,
                         item_condition: response.data.item_condition,
@@ -102,14 +92,14 @@ class ItemDetail extends Component {
                         status: response.data.status,
                         user_id: response.data.user_id,
                         username: response.data.username
-                        
                     }
                 })
-                
             })
-            .catch(error=>{console.log(error)})
+            .catch(error => {
+                console.log(error)
+            })
     }
-    
+
     static get propTypes() {
         return {
             children: PropTypes.any,
@@ -127,52 +117,69 @@ class ItemDetail extends Component {
             item_photo: PropTypes.string,
             status: PropTypes.string,
             user_id: PropTypes.number,
-        username: PropTypes.string}
-
-        
+            username: PropTypes.string
+        }
     }
     state = {
-        title:this.props.title,
-        src:this.props.src,
-        description:this.props.description
+        title: this.props.title,
+        src: this.props.src,
+        description: this.props.description
     }
 
-    createCategories (item,index) {
-        return <Categories key={item.name+index} name={item.name} categories={item.categories}/>
+    createCategories(item, index) {
+        return (
+            <Categories
+                key={item.name + index}
+                name={item.name}
+                categories={item.categories}
+            />
+        )
     }
-    render(){
-        let title = this.state.username
-        // console.log(title)
+    render() {
         let listCategories = categories.map(this.createCategories)
-        return(
+
+        return (
             <div style={styles.space}>
                 <Container fluid>
                     <Row>
-                        <Col sm="3">            
-                            <Profile/>
-                            <br/>
-                            {listCategories}             
+                        <Col sm="3">
+                            <Profile />
+                            <br />
+                            {listCategories}
                         </Col>
 
                         <Col sm="9">
-                            <Label style={styles.label}>{this.state.title}</Label>
+                            <Label style={styles.label}>
+                                {this.state.title}
+                            </Label>
 
                             <Row>
                                 <Col xs="4">
-                                    <ProductImage src={this.state.item_photo}/>
+                                    <ProductImage src={this.state.item_photo} />
                                 </Col>
                                 <Col xs="4">
-                                    <DetailProductListProduct quantity={this.state.quantity} openingPrice={this.state.start_bid} maxBid={this.state.max_bid} openingTime={this.state.start_date} endTime={this.state.end_date} condition={this.state.item_condition}/>
+                                    <DetailProductListProduct
+                                        quantity={this.state.quantity}
+                                        openingPrice={this.state.start_bid}
+                                        maxBid={this.state.max_bid}
+                                        openingTime={this.state.start_date}
+                                        endTime={this.state.end_date}
+                                        condition={this.state.item_condition}
+                                    />
                                 </Col>
                                 <Col xs="4">
-                                    <DetailProductBidStatus openingPrice={this.state.start_bid} buyOutPrice={this.state.max_bid} seller={this.state.user_id}/>
+                                    <DetailProductBidStatus
+                                        openingPrice={this.state.start_bid}
+                                        buyOutPrice={this.state.max_bid}
+                                        seller={this.state.user_id}
+                                    />
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
                     <Row>
-                        <Col style={styles.tabs} > 
-                            <DetailProductDetailPages/>
+                        <Col style={styles.tabs}>
+                            <DetailProductDetailPages />
                         </Col>
                     </Row>
                 </Container>
@@ -180,4 +187,4 @@ class ItemDetail extends Component {
         )
     }
 }
-export default  connect(mapStateToProps )(ItemDetail)
+export default connect(mapStateToProps)(ItemDetail)

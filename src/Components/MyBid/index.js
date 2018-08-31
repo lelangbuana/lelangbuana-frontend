@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Label } from 'reactstrap'
+import { Table } from 'reactstrap'
 
 export default class MyBid extends React.Component {
     render() {
