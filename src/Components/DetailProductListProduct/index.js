@@ -24,8 +24,6 @@ class DetailProductListProduct extends Component {
         request
             .get('/bids')
             .then(response => {
-                console.log('typeof...', typeof response.data.bids)
-
                 this.setState(() => {
                     return { bids: response.data.bids.length }
                 })

@@ -8,7 +8,7 @@ class Categories extends Component {
         return {
             children: PropTypes.any,
             name: PropTypes.string,
-            categories: PropTypes.string
+            categories: PropTypes.array
         }
     }
 
@@ -29,13 +29,18 @@ class Categories extends Component {
         this.setState({ collapse: !this.state.collapse })
     }
 
-    createCategory(item) {
-        return <ListGroupItem action>{item}</ListGroupItem>
+    createCategory(item, index) {
+        return (
+            <ListGroupItem key={index} action>
+                {item}
+            </ListGroupItem>
+        )
     }
 
     render() {
         let itemCategory = this.props.categories
         let listCategories = itemCategory.map(this.createCategory)
+
         return (
             <div>
                 <ListGroup>
@@ -43,7 +48,7 @@ class Categories extends Component {
                         {this.props.name}
                     </ListGroupItem>
                     <Collapse isOpen={this.state.collapse}>
-                        <ListGroup action>{listCategories}</ListGroup>
+                        <ListGroup>{listCategories}</ListGroup>
                     </Collapse>
                 </ListGroup>
             </div>

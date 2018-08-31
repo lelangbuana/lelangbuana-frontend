@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router,Switch, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import NavBar from '../Components/NavBar'
 import Home from '../Home'
@@ -13,54 +13,53 @@ import MakeAuction from '../MakeAuction'
 import MyAuctionDashboard from '../MyAuctionDashboard'
 import Footer from '../Components/Footer'
 
-
 const styles = {
-    body : {
+    body: {
         display: 'flex',
         minHeight: '100vh',
         flexDirection: 'column'
     },
 
-    main : {
-        flex:'1'
+    main: {
+        flex: '1'
     }
 }
 
 const initialState = {
     user: {
-        user_id:'',
-        username:'',
-        email:'',
-        password:'',
+        user_id: '',
+        username: '',
+        email: '',
+        password: '',
         register: {},
         mybid: {},
-        auction:{},
+        auction: {},
         myauction: {},
         login: {},
         token: '',
-        title:'',
-        src:'',
-        description:'',
-        name:'',
-        categories:'',
-        islogin:'false'
+        title: '',
+        src: '',
+        description: '',
+        name: '',
+        categories: [],
+        islogin: 'false'
     },
     auction: {
         auction_id: '',
         title: '',
         item_condition: '',
         item_description: '',
-        quantity: '',
-        start_bid: '',
-        max_bid: '',
-        min_bid:'',
-        bids_multiply: '',
-        start_date: '',
-        end_date: '',
+        quantity: 0,
+        start_bid: 0,
+        max_bid: 0,
+        min_bid: 0,
+        bids_multiply: 0,
+        start_date: null,
+        end_date: null,
         item_photo: '',
         status: '',
         created_at: '',
-        user_id: ''
+        user_id: 0
     },
     bids: {
         // bid_id: '',
@@ -71,7 +70,7 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
     case 'LOGIN': {
         return {
             user: {
@@ -95,7 +94,7 @@ const reducer = (state = initialState, action) => {
                 ...state.user,
                 title: action.payload.title,
                 src: action.payload.src,
-                description: action.payload.description,
+                description: action.payload.description
             }
         }
     }
@@ -130,26 +129,38 @@ class App extends Component {
                     <Switch>
                         <div className="App" style={styles.body}>
                             <div>
-                                <NavBar/>
+                                <NavBar />
                             </div>
                             <div style={styles.main}>
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
                                 <Route path="/reg" component={Register} />
-                                <Route path="/auctions/:id" component={ItemDetail} />                                
-                                {/* <Route exact path="/auctions" component={ItemDetail} /> */}
-                                <Route path="/create" component={MakeAuction}/>
-                                <Route path="/mybid" component={MyBidDashboard}/>
-                                <Route path="/myauction" component= {MyAuctionDashboard}/>
+                                <Route
+                                    path="/auctions/:id"
+                                    component={ItemDetail}
+                                />
+                                <Route
+                                    exact
+                                    path="/auctions"
+                                    component={ItemDetail}
+                                />
+                                <Route path="/create" component={MakeAuction} />
+                                <Route
+                                    path="/mybid"
+                                    component={MyBidDashboard}
+                                />
+                                <Route
+                                    path="/myauction"
+                                    component={MyAuctionDashboard}
+                                />
                             </div>
                             <div>
-                                <Footer/>
+                                <Footer />
                             </div>
-                        </div> 
+                        </div>
                     </Switch>
                 </Router>
             </Provider>
-
         )
     }
 }
