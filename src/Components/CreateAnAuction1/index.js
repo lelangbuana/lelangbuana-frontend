@@ -70,8 +70,9 @@ class CreateAnAuction1 extends Component {
             item_photo: this.state.item_photo,
             status: this.state.status
         }
+
         this.props.dispatch({
-            type: 'AUCTION',
+            type: 'CREATE_AUCTION',
             payload: {
                 user_id: this.state.user_id,
                 title: this.state.title,
@@ -88,6 +89,7 @@ class CreateAnAuction1 extends Component {
                 status: this.state.status
             }
         })
+
         request
             .post('/auctions', payload)
             .then(response => {
@@ -96,9 +98,8 @@ class CreateAnAuction1 extends Component {
             .catch(error => {
                 console.log(error)
             })
-
-        console.log(payload)
     }
+
     render() {
         return (
             <Container>

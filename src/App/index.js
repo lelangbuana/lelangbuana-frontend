@@ -3,7 +3,6 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import NavBar from '../Components/NavBar'
 import Home from '../Home'
 import Login from '../Login'
 import Register from '../Register'
@@ -11,6 +10,9 @@ import ItemDetail from '../ItemDetail'
 import MyBidDashboard from '../MyBidDashboard'
 import MakeAuction from '../MakeAuction'
 import MyAuctionDashboard from '../MyAuctionDashboard'
+import Debug from '../Debug'
+
+import NavBar from '../Components/NavBar'
 import Footer from '../Components/Footer'
 
 const styles = {
@@ -98,7 +100,7 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
-    case 'AUCTION': {
+    case 'CREATE_AUCTION': {
         return {
             user: {
                 ...state.user,
@@ -106,12 +108,9 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
-    case 'DETAIL': {
+    case 'GET_DETAIL': {
         return {
-            user: {
-                ...state.auction,
-                auction: action.payload
-            }
+            product: {}
         }
     }
     default:
@@ -135,6 +134,7 @@ class App extends Component {
                         </div>
                         <div style={styles.main}>
                             <Switch>
+                                <Route exact path="/debug" component={Debug} />
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
                                 <Route path="/reg" component={Register} />
