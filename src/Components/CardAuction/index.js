@@ -16,7 +16,7 @@ class CardAuction extends React.Component {
     render() {
         return (
             <div
-                class="col-xs-3"
+                className="col-xs-3"
                 style={styles.margins}
                 title={this.props.title}
             >

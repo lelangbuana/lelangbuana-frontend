@@ -126,12 +126,12 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <Router>
-                    <Switch>
-                        <div className="App" style={styles.body}>
-                            <div>
-                                <NavBar />
-                            </div>
-                            <div style={styles.main}>
+                    <div className="App" style={styles.body}>
+                        <div>
+                            <NavBar />
+                        </div>
+                        <div style={styles.main}>
+                            <Switch>
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
                                 <Route path="/reg" component={Register} />
@@ -153,12 +153,12 @@ class App extends Component {
                                     path="/myauction"
                                     component={MyAuctionDashboard}
                                 />
-                            </div>
-                            <div>
-                                <Footer />
-                            </div>
+                            </Switch>
                         </div>
-                    </Switch>
+                        <div>
+                            <Footer />
+                        </div>
+                    </div>
                 </Router>
             </Provider>
         )

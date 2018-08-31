@@ -68,12 +68,8 @@ const mapStateToProps = state => {
 
 class ItemDetail extends Component {
     componentDidMount() {
-        const {
-            match: { params }
-        } = this.props
-
         request
-            .get(`/auctions/${params.id}`)
+            .get(`/auctions/${this.props.match.params.id}`)
             .then(response => {
                 this.setState(prevState => {
                     return {
