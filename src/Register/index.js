@@ -178,7 +178,7 @@ class Register extends Component{
                                 <Label for="Address">Address</Label>
                                 <Input
                                     onChange={this.handleChange}
-                                    type="text"
+                                    type="textarea"
                                     name="address"
                                     id="address"
                                     placeholder="Address"
