@@ -214,7 +214,25 @@ class CreateAnAuction1 extends Component {
                                     placeholder="Bid Increment"
                                 />
                             </FormGroup>
-                            <Button style={styles.button} onClick={this.props.submits}>Next</Button>
+                            <FormGroup>
+                                <Label for="itemdesc">Item Description</Label>
+                                <Input type="textarea" name="text" id="exampleText" />
+                            </FormGroup>
+                        <FormGroup>
+                            <Label for="image">
+                            Image
+                            </Label>
+                            <Input 
+                            onChange={this.selectImageHandler}
+                            type="file" 
+                            id="image" 
+                            name="image" />
+                            <Button
+                            onClick={this.uploadImageHandler}
+                            >Upload
+                            </Button>
+                        </FormGroup>
+                            <Button style={styles.button} onClick={this.props.submits}>Submit</Button>
                         </Form>
                     </Col>
                 </Row>
