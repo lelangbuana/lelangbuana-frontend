@@ -28,6 +28,7 @@ const styles = {
 }
 
 const initialState = {
+    message: '',
     user: {
         user_id: '',
         username: '',
@@ -114,7 +115,10 @@ const reducer = (state = initialState, action) => {
         }
     }
     case 'DEBUG_STORE': {
-        return state
+        return {
+            ...state,
+            message: 'Debug store: ' + action.payload.number
+        }
     }
     default:
         return state
