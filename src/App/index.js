@@ -64,12 +64,12 @@ const initialState = {
         created_at: '',
         user_id: 0
     },
-    bids: {
-        // bid_id: '',
-        // bids_nominal: '',
-        // auction_id: '',
-        // user_id: ''
-    }
+    bidData: [{
+        bid_id: 0,
+        bids_nominal: 0,
+        auction_id: 0,
+        user_id: 0
+    }]
 }
 
 const reducer = (state = initialState, action) => {
@@ -103,10 +103,10 @@ const reducer = (state = initialState, action) => {
     }
     case 'CREATE_AUCTION': {
         return {
-            user: {
-                ...state.user,
-                auction: action.payload
-            }
+            
+            ...state,
+            auction: action.payload.auction
+            
         }
     }
     case 'GET_DETAIL': {
@@ -118,6 +118,12 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             message: 'Debug store: ' + action.payload.number
+        }
+    }
+    case 'BID': {
+        return {
+            ...state,
+            bids: action.payload.bids
         }
     }
     default:

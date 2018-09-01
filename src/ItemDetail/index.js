@@ -71,6 +71,7 @@ class ItemDetail extends Component {
         request
             .get(`/auctions/${this.props.match.params.id}`)
             .then(response => {
+                
                 this.setState(prevState => {
                     return {
                         auction_id: response.data.auction_id,
@@ -90,7 +91,18 @@ class ItemDetail extends Component {
                         username: response.data.username
                     }
                 })
-            })
+                const payload = {
+                    auction_id: this.state.auction_id,
+                    user_id: this.state.user_id
+                  }
+                  console.log("STATE: ", this.state);
+                  this.props.dispatch({
+                    type: 'CREATE_AUCTION',
+                    payload: {
+                        auction: payload,
+                        }
+                     })
+                    })
             .catch(error => {
                 console.log(error)
             })
@@ -113,7 +125,8 @@ class ItemDetail extends Component {
             item_photo: PropTypes.string,
             status: PropTypes.string,
             user_id: PropTypes.number,
-            username: PropTypes.string
+            username: PropTypes.string,
+            auction_ID : PropTypes.number
         }
     }
     state = {
@@ -161,6 +174,8 @@ class ItemDetail extends Component {
                                         openingTime={this.state.start_date}
                                         endTime={this.state.end_date}
                                         condition={this.state.item_condition}
+                                        auctionID={this.state.auction_id}
+                                        params={this.props.match.params.id}
                                     />
                                 </Col>
                                 <Col xs="4">

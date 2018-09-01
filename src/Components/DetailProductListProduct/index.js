@@ -1,6 +1,16 @@
 import React, { Component } from 'react'
-import { ListGroup, ListGroupItem } from 'reactstrap'
+
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import axios from 'axios'
+
+import { ListGroup, ListGroupItem } from 'reactstrap'
+
+const mapStateToProps = state => {
+    return {
+        bidData: state.bidData
+    }
+}
 
 const styles = {
     text: {
@@ -17,53 +27,29 @@ const request = axios.create({
 
 class DetailProductListProduct extends Component {
     state = {
-        bids: 0
+        bidData: 0,
+        auction_id: this.props.auctionID
+    }
+
+    static get propTypes() {
+        return {
+            children: PropTypes.any,
+            dispatch: PropTypes.any,
+            bidData: PropTypes.array
+        }
     }
 
     componentDidMount() {
+        
+        console.log(this.props);
+        
         request
-            .get('/bids')
-            .then(response => {
+        .get(`/bids/auction_id/${this.props.params}`)
+        .then(response => {
+            
                 this.setState(() => {
-                    return { bids: response.data.bids.length }
+                    return { bidData: response.data.bidData.length }
                 })
-
-                // console.log(this.state.auction.title)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-
-    handleClick() {
-        request
-            .get('/bids')
-            .then(response => {
-                console.log(response)
-
-                // this.setState((prevState) => {
-                //     return {
-                //         auction_id: response.data.auction_id,
-                //         title: response.data.title,
-                //         item_condition: response.data.item_condition,
-                //         item_description: response.data.item_description,
-                //         quantity: response.data.quantity,
-                //         start_bid: response.data.start_bid,
-                //         max_bid: response.data.max_bid,
-                //         min_bid: response.data.min_bid,
-                //         bids_multiply: response.data.bids_multiply,
-                //         start_date: response.data.start_date,
-                //         end_date: response.data.end_date,
-                //         item_photo: response.data.item_photo,
-                //         status: response.data.status,
-                //         user_id: response.data.user_id,
-                //         username: response.data.username
-
-                //     }
-                //     // console.log(response.data)
-                // })
-
-                // console.log(this.state.auction.title)
             })
             .catch(error => {
                 console.log(error)
@@ -71,7 +57,7 @@ class DetailProductListProduct extends Component {
     }
 
     render() {
-        const { bids } = this.state
+        const { bidData } = this.state
 
         return (
             <ListGroup flush style={styles.text}>
@@ -79,7 +65,7 @@ class DetailProductListProduct extends Component {
                 <ListGroupItem>
                     Opening Price : {this.props.openingPrice}
                 </ListGroupItem>
-                <ListGroupItem>Number of Bid : {bids}</ListGroupItem>
+                <ListGroupItem>Number of Bid : {this.state.bidData}</ListGroupItem>
                 <ListGroupItem>
                     Highest Bidder : {this.props.max_bid}
                 </ListGroupItem>
@@ -90,7 +76,7 @@ class DetailProductListProduct extends Component {
                     Closing Time : {this.props.endTime}
                 </ListGroupItem>
                 <ListGroupItem>Current Time</ListGroupItem>
-                <ListGroupItem>Auction ID</ListGroupItem>
+                <ListGroupItem>Auction ID : {this.props.auctionID}</ListGroupItem>
                 <ListGroupItem>
                     Item Condition : {this.props.condition}
                 </ListGroupItem>
@@ -101,4 +87,4 @@ class DetailProductListProduct extends Component {
     }
 }
 
-export default DetailProductListProduct
+export default connect (mapStateToProps) (DetailProductListProduct)
