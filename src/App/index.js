@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route,withRouter } from 'react-router-dom'
 
 import Home from '../Home'
 import Login from '../Login'
@@ -46,7 +46,7 @@ const initialState = {
         description: '',
         name: '',
         categories: [],
-        islogin: 'false'
+        islogin: false
     },
     auction: {
         auction_id: 0,
@@ -161,6 +161,19 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+const AuthButton = withRouter(({ history }) => (
+    localStorage.getItem('token') ? (
+        <p>
+        Welcome! <button onClick={() => {
+                history.push('/')
+                localStorage.removeItem('token')
+            }}>Sign out</button>
+        </p>
+    ) : (
+        <p>You are not logged in.</p>
+    )
+))
+
 class App extends Component {
     render() {
         return (
@@ -169,6 +182,7 @@ class App extends Component {
                     <div className="App" style={styles.body}>
                         <div>
                             <NavBar />
+                            <AuthButton/>
                         </div>
                         <div style={styles.main}>
                             <Switch>
