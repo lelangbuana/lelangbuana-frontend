@@ -63,14 +63,9 @@ class CreateAnAuction1 extends Component {
         bids_multiply: 0,
         start_date: '09-09-2018',
         end_date: '',
-<<<<<<< HEAD
         item_photo: '',
         status: 'success',
         category_id: 1,
-=======
-        item_photo: 'photo',
-        status: 'active',
->>>>>>> master
         selectedFile : null
     }
     handleChange = event => {
