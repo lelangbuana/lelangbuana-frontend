@@ -30,7 +30,7 @@ const styles = {
 const initialState = {
     message: '',
     user: {
-        user_id: '',
+        user_id: 0,
         username: '',
         email: '',
         password: '',
@@ -48,7 +48,7 @@ const initialState = {
         islogin: 'false'
     },
     auction: {
-        auction_id: '',
+        auction_id: 0,
         title: '',
         item_condition: '',
         item_description: '',
@@ -141,7 +141,13 @@ const reducer = (state = initialState, action) => {
     case 'BID': {
         return {
             ...state,
-            bidData: action.payload.bidData
+            bidData: {
+                ...state.bidData,
+                bid_id:  action.payload.bid_id,
+                bids_nominal: action.payload.bids_nominal,
+                auction_id: action.payload.auction_id,
+                user_id: action.payload.user_id
+            }
         }
     }
     default:
