@@ -32,12 +32,16 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-const basicOptions = {
+const options = {
     accept: 'image/*',
     fromSources: ['local_file_system'],
     maxSize: 640 * 640,
-    maxFiles: 1,
+    maxFiles: 1
   }
+
+const keys = {
+    filestackKey : 'AQulXUyRXS1GqTZvYuubfz'
+}
 
 class CreateAnAuction1 extends Component {
     static get propTypes() {
@@ -48,19 +52,20 @@ class CreateAnAuction1 extends Component {
         }
     }
     state = {
-        user_id: '1',
+        user_id: 1,
         title: '',
         item_condition: '',
-        item_description: 'BNWB',
-        quantity: '',
-        start_bid: '0',
-        max_bid: '',
-        min_bid: '',
-        bids_multiply: '',
-        start_date: '29-08-2018',
+        item_description: 'Yo Yo Yo mamen',
+        quantity: 0,
+        start_bid: 5000,
+        max_bid: 0,
+        min_bid: 0,
+        bids_multiply: 0,
+        start_date: '09-09-2018',
         end_date: '',
-        item_photo: 'photo',
-        status: 'active',
+        item_photo: '',
+        status: 'success',
+        category_id: 1,
         selectedFile : null
     }
     handleChange = event => {
@@ -82,8 +87,9 @@ class CreateAnAuction1 extends Component {
             bids_multiply: this.state.bids_multiply,
             start_date: this.state.start_date,
             end_date: this.state.end_date,
-            item_photo: this.state.item_photo,
-            status: this.state.status
+            item_photo: this.state.url,
+            status: this.state.status,
+            category_id : this.state.category_id
         }
 
         this.props.dispatch({
@@ -100,10 +106,13 @@ class CreateAnAuction1 extends Component {
                 bids_multiply: this.state.bids_multiply,
                 start_date: this.state.start_date,
                 end_date: this.state.end_date,
-                item_photo: this.state.item_photo,
-                status: this.state.status
+                item_photo: this.state.url,
+                status: this.state.status,
+                category_id : this.state.category_id
             }
+            
         })
+        console.log(payload)
 
         request
             .post('/auctions', payload)
@@ -112,18 +121,19 @@ class CreateAnAuction1 extends Component {
             })
             .catch(error => {
                 console.log(error)
-            })  
+            }) 
+                
     }
-    
     onSuccess = (result) => {
         this.setState({
           url: result.filesUploaded[0].url
         })
+        // console.log('result', this.state.url)
       }
       onError = (error) => {
         console.error('error', error);
-      }
-
+    } 
+    
     render() {
         return (
             <Container>
@@ -241,16 +251,15 @@ class CreateAnAuction1 extends Component {
                             Image : 
                             </Label>
                             <ReactFilestack
-                                apikey='AQulXUyRXS1GqTZvYuubfz'
-                                buttonText="Upload Photo"
+                                apikey= {keys.filestackKey}
+                                buttonText="Upload"
                                 buttonClass="ui medium button gray"
-                                options={basicOptions}
-                                mode={'pick'}
+                                options={options}
                                 onSuccess={this.onSuccess}
                                 onError={this.onError}
                                 />
                         </FormGroup>
-                            <Button style={styles.button} onClick={this.props.submits}>Submit</Button>
+                            <Button style={styles.button} onClick={this.props.handleSubmit}>Submit</Button>
                         </Form>
                     </Col>
                 </Row>
