@@ -258,7 +258,6 @@ class CreateAnAuction1 extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
-<<<<<<< HEAD
                                 <Label for="itemdesc">Item Description</Label>
                                 <Input type="textarea" name="text" id="exampleText" />
                             </FormGroup>
@@ -276,30 +275,6 @@ class CreateAnAuction1 extends Component {
                                 />
                         </FormGroup>
                             <Button style={styles.button} onClick={this.props.handleSubmit}>Submit</Button>
-=======
-                                <Label for="itemdesc">
-                                Item Description
-                                </Label>
-                                <Input 
-                                    onChange = {this.handleChange}
-                                    type="textarea"
-                                    name="text" 
-                                    id="exampleText"
-                                    placeholder = "Item Description (Max. 300 Character)" />
-                            </FormGroup>
-                        <FormGroup>
-                            <Label for="image">
-                            Image
-                            </Label>
-                                <Input 
-                                onChange = {this.fileSelectedHandler}
-                                type="file" 
-                                id="image" 
-                                name="image"/>
-                                <Button onClick={this.fileUploadHandler}>Upload</Button>
-                        </FormGroup>
-                            <Button style={styles.button} onClick={this.props.submits}>Submit</Button>
->>>>>>> master
                         </Form>
                     </Col>
                 </Row>
