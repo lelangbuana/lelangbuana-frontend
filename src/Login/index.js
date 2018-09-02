@@ -23,11 +23,7 @@ const styles ={
     }
 
 }
-const mapStateToProps = state => {
-    return {
-      login: state.user.login
-    }
-}
+
 
 class Login extends Component {
 
@@ -36,7 +32,8 @@ class Login extends Component {
           children: PropTypes.any,
           dispatch: PropTypes.any,
           login: PropTypes.object,
-          message: PropTypes.string
+          message: PropTypes.string,
+          user_id: PropTypes.number
         }
       }
 
@@ -70,11 +67,26 @@ class Login extends Component {
               })
               localStorage.setItem("token",response.data.token)
               this.setState({ redirectToReferrer: true })      
-            console.log(this.props)
-            console.log(response.data.token)
+            
+            request
+            .get(`/users/${this.state.username}`)
+            .then((response) => {
+                const action = {
+                    type: 'SET_USER_INFO',
+                    payload: {
+                    user_id: response.data.user.user_id
+                    }
+            }
+                this.props.dispatch(action)
+                console.log(action);
+                console.log("response user_id : ", response.data.user.user_id)
+                console.log(this.props)
+                
+            })
+            .catch(error=>{console.log(error)})
+
         })
         .catch(error=>{console.log(error)})
-        console.log(payload)
       }
 
     render() {
@@ -93,7 +105,7 @@ class Login extends Component {
                                 <FormGroup >
                                     <Label for="Username">Username</Label>
                                     {/* <Input type="email" name="email" id="email" placeholder="Your Email" onChange={this.onChange}/> */}
-                                                    <Input
+                                    <Input
                                         onChange={this.handleChange}
                                         type="username"
                                         name="username"
@@ -119,6 +131,14 @@ class Login extends Component {
                 </Container>
             </div>
         )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+      user_id: state.user.user_id,
+      login: state.user.login,
+      username: state.user.username
     }
 }
 

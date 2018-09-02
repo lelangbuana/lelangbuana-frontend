@@ -35,11 +35,6 @@ class NavBar extends React.Component {
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink className="text-white btn" to="/item">
-                                Item
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
                             <NavLink className="text-white btn" to="/create">
                                 Create Auction
                             </NavLink>

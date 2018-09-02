@@ -66,18 +66,19 @@ const initialState = {
         user_id: 0,
         highest_bid:0
     },
-    bidData: [{
+    bidData: {
         bid_id: 0,
         bids_nominal: 0,
         auction_id: 0,
         user_id: 0
-    }]
+    }
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case 'LOGIN': {
         return {
+            ...state,
             user: {
                 ...state.user,
                 login: action.payload.login,
@@ -85,8 +86,18 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
+    case 'SET_USER_INFO': {
+        return {
+            ...state,
+            user: {
+                ...state.user,
+                user_id: action.payload.user_id
+            }
+        }
+    }
     case 'REGISTER': {
         return {
+            ...state,
             user: {
                 ...state.user,
                 register: action.payload
