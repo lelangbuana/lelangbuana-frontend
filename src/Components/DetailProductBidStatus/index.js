@@ -29,11 +29,11 @@ const request = axios.create({
 
 const mapStateToProps = (state,props) => {
     return {
-        bid_id: state.bid_id,
-        bids_nominal: state.bids_nominal,
-        auction_id: state.auction_id,
-        user_id: state.user_id,
-        max_bid: state.max_bid,
+        bid_id: state.bidData.bid_id,
+        bids_nominal: state.bidData.bids_nominal,
+        auction_id: state.auction.auction_id,
+        user_id: state.auction.user_id,
+        max_bid: state.auction.max_bid,
         highest_bid: state.auction.highest_bid
     }
 }
@@ -52,10 +52,10 @@ class DetailProductBidStatus extends Component{
         event.preventDefault()
         
         const payload = {
-            bids_nominal: this.state.auction,
-            bid_id: this.state.bid_id,
-            auction_id: this.state,
-            user_id: this.state.user_id,
+            bids_nominal: this.state.bid_nominal,
+            bid_id: this.props.bid_id,
+            auction_id: this.props.auction_id,
+            user_id: this.props.user_id,
             max_bid: this.state.max_bid
         }
         request
@@ -63,23 +63,22 @@ class DetailProductBidStatus extends Component{
         
         .get('/bids',payload)
         .then((response) => {
-        console.log("BID STATE", this.state)
           this.props.dispatch({
               type: 'BID',
               payload: {
-                bidData: payload,
+                bids_nominal: this.state.bid_nominal,
+                bid_id: this.props.bid_id,
+                auction_id: this.props.auction_id,
+                user_id: this.props.user_id,
+                max_bid: this.state.max_bid
               }
             })
+            console.log("BID STATE", this.props)
       })
       .catch(error=>{console.log(error)})
     }
 
     render(){
-        const storeState =  JSON.stringify(this.props)
-        console.log("Store State: ",storeState);
-        // console.log("Props in Detail Product: ",this.props);
-        // console.log("Highest Bid in Detail Product: ",this.props);
-        
         return(
             <div style={styles.text}>
                 <Container >  
