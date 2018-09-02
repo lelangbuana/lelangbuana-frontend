@@ -10,6 +10,8 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
+const Public = () => <h3>Public</h3>
+const Protected = () => <h3>Protected</h3>
 
 const styles ={
     space : {

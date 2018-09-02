@@ -11,6 +11,7 @@ import MyBidDashboard from '../MyBidDashboard'
 import MakeAuction from '../MakeAuction'
 import MyAuctionDashboard from '../MyAuctionDashboard'
 import Debug from '../Debug'
+import PrivateRoute from '../PrivateRoute'
 
 import NavBar from '../Components/NavBar'
 import Footer from '../Components/Footer'
@@ -184,15 +185,16 @@ class App extends Component {
                                     path="/auctions"
                                     component={ItemDetail}
                                 />
-                                <Route path="/create" component={MakeAuction} />
-                                <Route
+                                <PrivateRoute path="/create" component={MakeAuction} />
+                                <PrivateRoute
                                     path="/mybid"
                                     component={MyBidDashboard}
                                 />
-                                <Route
+                                <PrivateRoute
                                     path="/myauction"
                                     component={MyAuctionDashboard}
                                 />
+                                {/* <PrivateRoute path='/protected' component={Protected} /> */}
                             </Switch>
                         </div>
                         <div>
