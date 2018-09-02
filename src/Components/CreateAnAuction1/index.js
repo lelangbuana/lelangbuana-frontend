@@ -63,13 +63,28 @@ class CreateAnAuction1 extends Component {
         bids_multiply: 0,
         start_date: '09-09-2018',
         end_date: '',
+<<<<<<< HEAD
         item_photo: '',
         status: 'success',
         category_id: 1,
+=======
+        item_photo: 'photo',
+        status: 'active',
+>>>>>>> master
         selectedFile : null
     }
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
+    }
+
+    fileSelectedHandler = (event) =>{
+        this.setState ({
+            selectedFile : event.target.files[0]
+        })
+    }
+
+    fileUploadHandler = () => {
+        axios.post('')
     }
 
     handleSubmit = event => {
@@ -243,6 +258,7 @@ class CreateAnAuction1 extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
+<<<<<<< HEAD
                                 <Label for="itemdesc">Item Description</Label>
                                 <Input type="textarea" name="text" id="exampleText" />
                             </FormGroup>
@@ -260,6 +276,30 @@ class CreateAnAuction1 extends Component {
                                 />
                         </FormGroup>
                             <Button style={styles.button} onClick={this.props.handleSubmit}>Submit</Button>
+=======
+                                <Label for="itemdesc">
+                                Item Description
+                                </Label>
+                                <Input 
+                                    onChange = {this.handleChange}
+                                    type="textarea"
+                                    name="text" 
+                                    id="exampleText"
+                                    placeholder = "Item Description (Max. 300 Character)" />
+                            </FormGroup>
+                        <FormGroup>
+                            <Label for="image">
+                            Image
+                            </Label>
+                                <Input 
+                                onChange = {this.fileSelectedHandler}
+                                type="file" 
+                                id="image" 
+                                name="image"/>
+                                <Button onClick={this.fileUploadHandler}>Upload</Button>
+                        </FormGroup>
+                            <Button style={styles.button} onClick={this.props.submits}>Submit</Button>
+>>>>>>> master
                         </Form>
                     </Col>
                 </Row>
