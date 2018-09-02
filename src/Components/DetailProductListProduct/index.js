@@ -83,7 +83,6 @@ class DetailProductListProduct extends Component {
     }
 
     render() {
-        console.log("Highest Bid in List Product: ",this.props.highest_bid)
         return (
             <ListGroup flush style={styles.text}>
                 <ListGroupItem>Quantity : {this.props.quantity}</ListGroupItem>
