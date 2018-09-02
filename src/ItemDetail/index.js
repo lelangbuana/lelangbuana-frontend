@@ -47,22 +47,22 @@ const categories = [
 
 const mapStateToProps = state => {
     return {
-        auction_id: state.auction_id,
-        title: state.title,
-        item_condition: state.item_condition,
-        item_description: state.item_description,
-        quantity: state.quantity,
-        start_bid: state.start_bid,
-        max_bid: state.max_bid,
-        min_bid: state.min_bid,
-        bids_multiply: state.bids_multiply,
-        start_date: state.start_date,
-        end_date: state.end_date,
-        item_photo: state.item_photo,
-        status: state.status,
-        created_at: state.created_at,
-        user_id: state.user_id,
-        username: state.username
+        auction_id: state.auction.auction_id,
+        title: state.auction.title,
+        item_condition: state.auction.item_condition,
+        item_description: state.auction.item_description,
+        quantity: state.auction.quantity,
+        start_bid: state.auction.start_bid,
+        max_bid: state.auction.max_bid,
+        min_bid: state.auction.min_bid,
+        bids_multiply: state.auction.bids_multiply,
+        start_date: state.auction.start_date,
+        end_date: state.auction.end_date,
+        item_photo: state.auction.item_photo,
+        status: state.auction.status,
+        created_at: state.auction.created_at,
+        user_id: state.auction.user_id,
+        username: state.user.username
     }
 }
 
@@ -71,7 +71,6 @@ class ItemDetail extends Component {
         request
             .get(`/auctions/${this.props.match.params.id}`)
             .then(response => {
-                
                 this.setState(prevState => {
                     return {
                         auction_id: response.data.auction_id,
@@ -87,22 +86,45 @@ class ItemDetail extends Component {
                         end_date: response.data.end_date,
                         item_photo: response.data.item_photo,
                         status: response.data.status,
-                        user_id: response.data.user_id,
-                        username: response.data.username
+                        user_id: response.data.user_id
                     }
                 })
                   this.props.dispatch({
                     type: 'CREATE_AUCTION',
                     payload: {
                     auction_id: response.data.auction_id,
-                    user_id: this.state.user_id,
-                    max_bid: this.state.max_bid
+                    user_id: response.data.user_id,
+                    max_bid: this.state.max_bid,
+                    username: response.data.username
                         }
                      })
+
+                     request
+                        .get(`/users/id/${this.state.user_id}`)
+                        .then(response => {
+                            
+                            this.setState(prevState => {
+                                return {
+                                    user_id: response.data.user.user_id,
+                                    username: response.data.user.username
+                                }
+                            })
+                            this.props.dispatch({
+                                type: 'CREATE_AUCTION',
+                                payload: {
+                                username: response.data.username,
+                                user_id: response.data.user_id
+                                    }
+                                })
+                                })
+                        .catch(error => {
+                            console.log(error)
+                        })
                     })
             .catch(error => {
                 console.log(error)
             })
+            
     }
 
     static get propTypes() {
@@ -146,7 +168,6 @@ class ItemDetail extends Component {
     }
     render() {
         let listCategories = categories.map(this.createCategories)
-
         return (
             <div style={styles.space}>
                 <Container fluid>
@@ -182,7 +203,7 @@ class ItemDetail extends Component {
                                     <DetailProductBidStatus
                                         openingPrice={this.state.start_bid}
                                         buyOutPrice={this.state.max_bid}
-                                        seller={this.state.user_id}
+                                        seller={this.state.username}
                                         highestBid={this.state.highestBid}
                                     />
                                 </Col>
