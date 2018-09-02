@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import { Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -9,9 +10,6 @@ const request = axios.create({
     timeout: 10000,
     headers: { Authorization: '' }
 })
-
-const Public = () => <h3>Public</h3>
-const Protected = () => <h3>Protected</h3>
 
 const styles ={
     space : {
@@ -44,7 +42,8 @@ class Login extends Component {
 
       state = {
         email: '',
-        password: ''
+        password: '',
+        redirectToReferrer: false
       }
 
     handleChange = event => {
@@ -54,6 +53,7 @@ class Login extends Component {
 
       handleSubmit = event => {
           event.preventDefault()
+              
         const payload = {
             username: this.state.username,
             password: this.state.password
@@ -69,6 +69,7 @@ class Login extends Component {
                 }
               })
               localStorage.setItem("token",response.data.token)
+              this.setState({ redirectToReferrer: true })      
             console.log(this.props)
             console.log(response.data.token)
         })
@@ -77,6 +78,12 @@ class Login extends Component {
       }
 
     render() {
+        const {from} = this.props.location.state || {from: { pathname: '/' }}
+        const  redirectToReferrer  = this.state.redirectToReferrer
+        
+        if (redirectToReferrer === true) {
+            return (<Redirect to = {from} />)
+          }
         return (
             <div >
                 <Container style={styles.space}>
