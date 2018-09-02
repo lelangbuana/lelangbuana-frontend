@@ -62,7 +62,8 @@ const initialState = {
         item_photo: '',
         status: '',
         created_at: '',
-        user_id: 0
+        user_id: 0,
+        highest_bid:0
     },
     bidData: [{
         bid_id: 0,
@@ -103,9 +104,26 @@ const reducer = (state = initialState, action) => {
     }
     case 'CREATE_AUCTION': {
         return {
-            
             ...state,
-            auction: action.payload.auction
+            auction:{
+                ...state.auction,
+                auction_id: action.payload.auction_id,
+                user_id: action.payload.user_id,
+                max_bid: action.payload.max_bid
+            }
+                
+            
+            
+        }
+    }
+    case 'UPDATE_BID_AUCTION': {
+        return {
+            ...state,
+            auction: {
+                
+                ...state.auction,
+                highest_bid: action.payload.highest_bid
+            }
             
         }
     }
@@ -123,7 +141,7 @@ const reducer = (state = initialState, action) => {
     case 'BID': {
         return {
             ...state,
-            bids: action.payload.bids
+            bidData: action.payload.bidData
         }
     }
     default:

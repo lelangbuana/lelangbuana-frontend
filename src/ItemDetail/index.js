@@ -47,22 +47,22 @@ const categories = [
 
 const mapStateToProps = state => {
     return {
-        auction_id: state.auction.auction_id,
-        title: state.auction.title,
-        item_condition: state.auction.item_condition,
-        item_description: state.auction.item_description,
-        quantity: state.auction.quantity,
-        start_bid: state.auction.start_bid,
-        max_bid: state.auction.max_bid,
-        min_bid: state.auction.min_bid,
-        bids_multiply: state.auction.bids_multiply,
-        start_date: state.auction.start_date,
-        end_date: state.auction.end_date,
-        item_photo: state.auction.item_photo,
-        status: state.auction.status,
-        created_at: state.auction.created_at,
-        user_id: state.auction.user_id,
-        username: state.user.username
+        auction_id: state.auction_id,
+        title: state.title,
+        item_condition: state.item_condition,
+        item_description: state.item_description,
+        quantity: state.quantity,
+        start_bid: state.start_bid,
+        max_bid: state.max_bid,
+        min_bid: state.min_bid,
+        bids_multiply: state.bids_multiply,
+        start_date: state.start_date,
+        end_date: state.end_date,
+        item_photo: state.item_photo,
+        status: state.status,
+        created_at: state.created_at,
+        user_id: state.user_id,
+        username: state.username
     }
 }
 
@@ -91,15 +91,12 @@ class ItemDetail extends Component {
                         username: response.data.username
                     }
                 })
-                const payload = {
-                    auction_id: this.state.auction_id,
-                    user_id: this.state.user_id
-                  }
-                  console.log("STATE: ", this.state);
                   this.props.dispatch({
                     type: 'CREATE_AUCTION',
                     payload: {
-                        auction: payload,
+                    auction_id: response.data.auction_id,
+                    user_id: this.state.user_id,
+                    max_bid: this.state.max_bid
                         }
                      })
                     })
@@ -126,13 +123,16 @@ class ItemDetail extends Component {
             status: PropTypes.string,
             user_id: PropTypes.number,
             username: PropTypes.string,
-            auction_ID : PropTypes.number
+            auction_id : PropTypes.number
         }
     }
     state = {
+        auction_id: this.props.auction_id,
         title: this.props.title,
         src: this.props.src,
-        description: this.props.description
+        description: this.props.description,
+        max_bid: this.props.max_bid,
+        highestBid: this.props.highest_bid
     }
 
     createCategories(item, index) {
@@ -183,6 +183,7 @@ class ItemDetail extends Component {
                                         openingPrice={this.state.start_bid}
                                         buyOutPrice={this.state.max_bid}
                                         seller={this.state.user_id}
+                                        highestBid={this.state.highestBid}
                                     />
                                 </Col>
                             </Row>

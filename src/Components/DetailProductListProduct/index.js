@@ -6,9 +6,11 @@ import axios from 'axios'
 
 import { ListGroup, ListGroupItem } from 'reactstrap'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state,props) => {
     return {
-        bidData: state.bidData
+        bidData: state.auction.bidData,
+        max_bid: state.auction.max_bid,
+        highest_bid: state.auction.highest_bid
     }
 }
 
@@ -25,31 +27,55 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
+const bids = []
+let highest_bid = 0
+
 class DetailProductListProduct extends Component {
+
     state = {
         bidData: 0,
-        auction_id: this.props.auctionID
+        auction_id: this.props.auctionID,
+        max_bid : 0,
+        highest_bid: this.props.highest_bid
     }
 
     static get propTypes() {
         return {
             children: PropTypes.any,
             dispatch: PropTypes.any,
-            bidData: PropTypes.array
+            bidData: PropTypes.array,
+            highest_bid: PropTypes.number
         }
     }
 
     componentDidMount() {
-        
-        console.log(this.props);
-        
         request
         .get(`/bids/auction_id/${this.props.params}`)
         .then(response => {
             
+            bids.push(response.data.bidData)
+            response.data.bidData.map((item,index) => {
+                if (item.bids_nominal>=highest_bid) 
+                {
+                    highest_bid = item.bids_nominal
+                }
+                
+                return ( 
+                    highest_bid
+                )
+            })
                 this.setState(() => {
-                    return { bidData: response.data.bidData.length }
+                    return { 
+                        bidData: response.data.bidData.length,
+                        highest_bid: highest_bid
+                    }
                 })
+                this.props.dispatch({
+                    type: 'UPDATE_BID_AUCTION',
+                    payload: {
+                      highest_bid: this.state.highest_bid
+                    }
+                  })
             })
             .catch(error => {
                 console.log(error)
@@ -57,8 +83,7 @@ class DetailProductListProduct extends Component {
     }
 
     render() {
-        const { bidData } = this.state
-
+        console.log("Highest Bid in List Product: ",this.props.highest_bid)
         return (
             <ListGroup flush style={styles.text}>
                 <ListGroupItem>Quantity : {this.props.quantity}</ListGroupItem>
@@ -67,7 +92,7 @@ class DetailProductListProduct extends Component {
                 </ListGroupItem>
                 <ListGroupItem>Number of Bid : {this.state.bidData}</ListGroupItem>
                 <ListGroupItem>
-                    Highest Bidder : {this.props.max_bid}
+                    Highest Bidder : {this.props.highest_bid}
                 </ListGroupItem>
                 <ListGroupItem>
                     Opening Time : {this.props.openingTime}
@@ -88,3 +113,4 @@ class DetailProductListProduct extends Component {
 }
 
 export default connect (mapStateToProps) (DetailProductListProduct)
+ 

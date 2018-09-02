@@ -24,9 +24,9 @@ const request = axios.create({
 const mapStateToProps = state => {
     return {
         user: state.user,
-        title: state.user.title,
-        src: state.user.src,
-        description: state.user.description
+        title: state.title,
+        src: state.src,
+        description: state.description
     }
 }
 

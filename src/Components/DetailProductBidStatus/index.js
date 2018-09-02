@@ -27,23 +27,24 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-const mapStateToProps = state => {
+const mapStateToProps = (state,props) => {
     return {
         bid_id: state.bid_id,
         bids_nominal: state.bids_nominal,
-        auction_id: state.auction.auction_id,
-        user_id: state.auction.user_id
+        auction_id: state.auction_id,
+        user_id: state.user_id,
+        max_bid: state.max_bid,
+        highest_bid: state.auction.highest_bid
     }
 }
 class DetailProductBidStatus extends Component{
-
-    
 
     handleChange = (event,props) => {
         this.setState({ 
             [event.target.name]: event.target.value,
             auction_id: this.props.auction_id,
-            user_id: this.props.user_id
+            user_id: this.props.user_id,
+            max_bid: this.props.max_bid
         })
     }
     
@@ -54,7 +55,8 @@ class DetailProductBidStatus extends Component{
             bids_nominal: this.state.auction,
             bid_id: this.state.bid_id,
             auction_id: this.state,
-            user_id: this.state.user_id
+            user_id: this.state.user_id,
+            max_bid: this.state.max_bid
         }
         request
         
@@ -65,17 +67,19 @@ class DetailProductBidStatus extends Component{
           this.props.dispatch({
               type: 'BID',
               payload: {
-                bids: payload,
+                bidData: payload,
               }
             })
       })
       .catch(error=>{console.log(error)})
-      console.log(payload)
     }
 
     render(){
-                const bid = this.state
-                
+        const storeState =  JSON.stringify(this.props)
+        console.log("Store State: ",storeState);
+        // console.log("Props in Detail Product: ",this.props);
+        // console.log("Highest Bid in Detail Product: ",this.props);
+        
         return(
             <div style={styles.text}>
                 <Container >  
@@ -98,7 +102,6 @@ class DetailProductBidStatus extends Component{
                     <Row style={styles.contains}>
                         <Col >
                             <Form lg="6">
-                                {/* <Input type="number" name="bidprice" id="bidprice" placeholder="IDR. " min="5000"/>  */}
                                 <Input
                                     onChange={this.handleChange}
                                     type="number"
@@ -106,7 +109,7 @@ class DetailProductBidStatus extends Component{
                                     id="bid_nominal"
                                     placeholder="IDR."
                                     step="5000"
-                                    min="0"
+                                    min={this.props.highest_bid}
                                 />
                             </Form>
                         </Col>
