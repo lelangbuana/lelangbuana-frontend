@@ -1,49 +1,80 @@
-import React from 'react'
-import {Row, Col, Form, FormGroup, Label, Input, Button} from 'reactstrap'
+import React, {Component} from 'react'
+import {
+    Container,
+    Row,
+    Col,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Button
+} from 'reactstrap'
 import axios from 'axios'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
+
+const styles ={
+    space : {
+       justifyContent : 'center',
+    //    display : 'flex',
+       marginTop : '2rem',
+       marginBottom :'5rem'
+    },
+    button : {
+        width : '100px'
+    }
+}
 
 const request = axios.create({
-    baseURL: "https://lelangbuana.herokuapp.com" || 'http://localhost:3000',
+    baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
     timeout: 10000,
     headers: { Authorization: '' }
 })
 
-export default class Register extends React.Component{
+const mapStateToProps = state => {
+    return {
+        register: state.user.register
+    }
+}
 
-    constructor(props) {
-        super(props)
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.state = {
-            username:"",
-            password:"",
-            profile_photo:"photo",
-            phone_number:"123",
-            email:"",
-            first_name:"",
-            last_name:"",
-            address:"",
-            city:"",
-            province:"",
-            country:"",
-            zip_code:"",
-            id_card:"",
-            status:"active"
+class Register extends Component{
+    static get propTypes() {
+        return {
+            children: PropTypes.any,
+            dispatch: PropTypes.any,
+            register: PropTypes.object
         }
     }
-    
+
+    state = {
+        username: '',
+        password: '',
+        profile_photo: 'photo',
+        phone_number: '123',
+        email: '',
+        first_name: '',
+        last_name: '',
+        address: '',
+        city: '',
+        province: '',
+        country: '',
+        zip_code: '',
+        id_card: '',
+        status: 'active'
+    }
+
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
-      }
-      
+    }
 
-      handleSubmit = event => {
-          event.preventDefault()
+    handleSubmit = event => {
+        event.preventDefault()
         const payload = {
             username: this.state.username,
             password: this.state.password,
-            profile_photo:"photo",
-            phone_number:this.state.phone_number,
+            profile_photo: 'photo',
+            phone_number: this.state.phone_number,
             email: this.state.email,
             first_name: this.state.first_name,
             last_name: this.state.last_name,
@@ -54,30 +85,45 @@ export default class Register extends React.Component{
             zip_code: this.state.zip_code,
             id_card: this.state.id_card,
             status: this.state.status
-          }
-
+        }
+        this.props.dispatch({
+            type: 'REGISTER',
+            payload: {
+                username: this.state.username,
+                password: this.state.password,
+                profile_photo: 'photo',
+                phone_number: this.state.phone_number,
+                email: this.state.email,
+                first_name: this.state.first_name,
+                last_name: this.state.last_name,
+                address: this.state.address,
+                city: this.state.city,
+                province: this.state.province,
+                country: this.state.country,
+                zip_code: this.state.zip_code,
+                id_card: this.state.id_card,
+                status: this.state.status
+            }
+        })
 
         request
-        .post('/users/register',payload)
-        .then((response) => {
-            // let token = response.data.token
-            // this.setState({
-            //     islogin: true,
-            //     token:token
-            // });
-            // localStorage.setItem("token",token)
-            console.log(response)
-        })
-        .catch(error=>{console.log(error)})
+            .post('/users/register', payload)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
         console.log(payload)
-      }
+    }
 
-    render(){
-        return(
-            <div>
+    render() {
+        return (
+            <div style={styles.space}>
                 <Form onSubmit={this.handleSubmit}>
-                    <Row>
-                        <Col sm="12">
+                <Container>
+                    <Row inline>
+                        <Col sm="6">
                             <FormGroup>
                                 <Label for="Username">Username</Label>
                                 <Input
@@ -128,20 +174,18 @@ export default class Register extends React.Component{
                                     placeholder="Last Name"
                                 />
                             </FormGroup>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm="12">
                             <FormGroup>
                                 <Label for="Address">Address</Label>
                                 <Input
                                     onChange={this.handleChange}
-                                    type="text"
+                                    type="textarea"
                                     name="address"
                                     id="address"
                                     placeholder="Address"
                                 />
                             </FormGroup>
+                        </Col>
+                        <Col sm="6">
                             <FormGroup>
                                 <Label for="City">City</Label>
                                 <Input
@@ -180,6 +224,7 @@ export default class Register extends React.Component{
                                     name="zip_code"
                                     id="zip_code"
                                     placeholder="Postal Code"
+                                    minLength="5"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -190,13 +235,18 @@ export default class Register extends React.Component{
                                     name="id_card"
                                     id="ide_card"
                                     placeholder="Your ID Number"
+                                    minLength="5"
+                                    min="1"
                                 />
                             </FormGroup>
+                            <Button style={styles.button} type="submit" color="primary">Submit</Button>
                         </Col>
-                        <Button type="submit" color="primary">Submit</Button>
                     </Row>
+                    </Container>
                 </Form>
             </div>
         )
     }
 }
+
+export default connect(mapStateToProps)(Register)

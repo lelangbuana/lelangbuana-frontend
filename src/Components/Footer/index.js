@@ -1,22 +1,29 @@
 import React from 'react'
-import { Container, Row, Col } from 'reactstrap'
+import { Container } from 'reactstrap'
+import { Link } from 'react-router-dom'
 
-const position ={
-    backgroundColor : 'grey'
+const styles = {
+    colors: {
+        backgroundColor: '#344A77',
+        textAlign: 'center'
+    },
+
+    p: {
+        color: 'white',
+        fontSize: '0.5em'
+    }
 }
 
 class Footer extends React.Component {
     render() {
-        return (  
-            <div style={position}>
-                <Container >
-                    <Row>
-                        <Col >
-                            <p> © 2018 Hak Cipta lelangbuana.com </p>
-                        </Col>
-                    </Row>
+        return (
+            <div>
+                <Container fluid style={styles.colors}>
+                    <span style={styles.p}>
+                        <Link to="/debug">© 2018 Lelangbuana</Link>
+                    </span>
                 </Container>
-            </div>   
+            </div>
         )
     }
 }

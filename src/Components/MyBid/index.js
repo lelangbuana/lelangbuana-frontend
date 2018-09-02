@@ -1,11 +1,10 @@
-import React from 'react'
-import { Table, Label } from 'reactstrap'
+import React, {Component} from 'react'
+import { Table } from 'reactstrap'
 
-export default class MyBid extends React.Component {
+class MyBid extends Component {
     render() {
         return (
             <div>
-                <Label>My Bid</Label>
                 <Table hover>
                     <thead>
                         <tr>
@@ -32,3 +31,5 @@ export default class MyBid extends React.Component {
         )
     }
 }
+
+export default MyBid
