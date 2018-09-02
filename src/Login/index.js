@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Component} from 'react'
 import { Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
 import axios from 'axios'
 import PropTypes from 'prop-types'
@@ -17,17 +17,19 @@ const styles ={
        justifyContent : 'center',
        display : 'flex',
        textAlign : 'center'
+    },
+    button : {
+        width : '100px'
     }
 
 }
-
 const mapStateToProps = state => {
     return {
       login: state.user.login
     }
 }
 
-class Login extends React.Component {
+class Login extends Component {
 
     static get propTypes() {
         return {
@@ -101,7 +103,7 @@ class Login extends React.Component {
                                     placeholder="Password"
                                 />
                                 </FormGroup>
-                        <Button type="submit" color="primary">Login</Button>
+                        <Button style={styles.button} type="submit" color="primary">Login</Button>
                             </Form>
                         </Col>
                     </Row>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import ReactFilestack from 'filestack-react'
 
 import {
     Button,
@@ -14,6 +15,12 @@ import {
     Col
 } from 'reactstrap'
 
+const styles = {
+    button : {
+        width : '100px'
+    }
+}
+
 const mapStateToProps = state => {
     return {
         auction: state.user.auction
@@ -24,6 +31,13 @@ const request = axios.create({
     timeout: 10000,
     headers: { Authorization: '' }
 })
+
+const basicOptions = {
+    accept: 'image/*',
+    fromSources: ['local_file_system'],
+    maxSize: 640 * 640,
+    maxFiles: 1,
+  }
 
 class CreateAnAuction1 extends Component {
     static get propTypes() {
@@ -46,7 +60,8 @@ class CreateAnAuction1 extends Component {
         start_date: '29-08-2018',
         end_date: '',
         item_photo: 'photo',
-        status: 'active'
+        status: 'active',
+        selectedFile : null
     }
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
@@ -97,8 +112,17 @@ class CreateAnAuction1 extends Component {
             })
             .catch(error => {
                 console.log(error)
-            })
+            })  
     }
+    
+    onSuccess = (result) => {
+        this.setState({
+          url: result.filesUploaded[0].url
+        })
+      }
+      onError = (error) => {
+        console.error('error', error);
+      }
 
     render() {
         return (
@@ -208,7 +232,25 @@ class CreateAnAuction1 extends Component {
                                     placeholder="Bid Increment"
                                 />
                             </FormGroup>
-                            <Button onClick={this.props.submits}>Next</Button>
+                            <FormGroup>
+                                <Label for="itemdesc">Item Description</Label>
+                                <Input type="textarea" name="text" id="exampleText" />
+                            </FormGroup>
+                        <FormGroup>
+                            <Label for="image">
+                            Image : 
+                            </Label>
+                            <ReactFilestack
+                                apikey='AQulXUyRXS1GqTZvYuubfz'
+                                buttonText="Upload Photo"
+                                buttonClass="ui medium button gray"
+                                options={basicOptions}
+                                mode={'pick'}
+                                onSuccess={this.onSuccess}
+                                onError={this.onError}
+                                />
+                        </FormGroup>
+                            <Button style={styles.button} onClick={this.props.submits}>Submit</Button>
                         </Form>
                     </Col>
                 </Row>

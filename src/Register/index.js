@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {
     Container,
     Row,
@@ -13,12 +13,16 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const styles = {
-    space: {
-        justifyContent: 'center',
-        //    display : 'flex',
-        marginTop: '2rem',
-        marginBottom: '5rem'
+
+const styles ={
+    space : {
+       justifyContent : 'center',
+    //    display : 'flex',
+       marginTop : '2rem',
+       marginBottom :'5rem'
+    },
+    button : {
+        width : '100px'
     }
 }
 
@@ -34,7 +38,7 @@ const mapStateToProps = state => {
     }
 }
 
-class Register extends React.Component {
+class Register extends Component{
     static get propTypes() {
         return {
             children: PropTypes.any,
@@ -117,133 +121,127 @@ class Register extends React.Component {
         return (
             <div style={styles.space}>
                 <Form onSubmit={this.handleSubmit}>
-                    <Container>
-                        <Row inline>
-                            <Col sm="6">
-                                <FormGroup>
-                                    <Label for="Username">Username</Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="username"
-                                        name="username"
-                                        id="username"
-                                        placeholder="Your Username"
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="Password">Password</Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        placeholder="Password"
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="Email">Email</Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="email"
-                                        name="email"
-                                        id="email"
-                                        placeholder="Email"
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="FirstName">First Name</Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="text"
-                                        name="first_name"
-                                        id="first_name"
-                                        placeholder="First Name"
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="LastName">Last Name</Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="text"
-                                        name="last_name"
-                                        id="last_name"
-                                        placeholder="Last Name"
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="Address">Address</Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="text"
-                                        name="address"
-                                        id="address"
-                                        placeholder="Address"
-                                    />
-                                </FormGroup>
-                            </Col>
-                            <Col sm="6">
-                                <FormGroup>
-                                    <Label for="City">City</Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="text"
-                                        name="city"
-                                        id="city"
-                                        placeholder="City"
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="State/Province">
-                                        State/Province
-                                    </Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="text"
-                                        name="province"
-                                        id="province"
-                                        placeholder="State/Province"
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="Country">Country</Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="text"
-                                        name="country"
-                                        id="country"
-                                        placeholder="Country"
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="Postalcode">
-                                        Zip/Postal Code
-                                    </Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="number"
-                                        name="zip_code"
-                                        id="zip_code"
-                                        placeholder="Postal Code"
-                                        minLength="5"
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="IDnumber">ID number</Label>
-                                    <Input
-                                        onChange={this.handleChange}
-                                        type="number"
-                                        name="id_card"
-                                        id="ide_card"
-                                        placeholder="Your ID Number"
-                                        minLength="5"
-                                        min="1"
-                                    />
-                                </FormGroup>
-                                <Button type="submit" color="primary">
-                                    Submit
-                                </Button>
-                            </Col>
-                        </Row>
+                <Container>
+                    <Row inline>
+                        <Col sm="6">
+                            <FormGroup>
+                                <Label for="Username">Username</Label>
+                                <Input
+                                onChange={this.handleChange}
+                                    type="username"
+                                    name="username"
+                                    id="username"
+                                    placeholder="Your Username"
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="Password">Password</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    placeholder="Password"
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="Email">Email</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Email"
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="FirstName">First Name</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="text"
+                                    name="first_name"
+                                    id="first_name"
+                                    placeholder="First Name"
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="LastName">Last Name</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="text"
+                                    name="last_name"
+                                    id="last_name"
+                                    placeholder="Last Name"
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="Address">Address</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="textarea"
+                                    name="address"
+                                    id="address"
+                                    placeholder="Address"
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col sm="6">
+                            <FormGroup>
+                                <Label for="City">City</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="text"
+                                    name="city"
+                                    id="city"
+                                    placeholder="City"
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="State/Province">State/Province</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="text"
+                                    name="province"
+                                    id="province"
+                                    placeholder="State/Province"
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="Country">Country</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="text"
+                                    name="country"
+                                    id="country"
+                                    placeholder="Country"
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="Postalcode">Zip/Postal Code</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="number"
+                                    name="zip_code"
+                                    id="zip_code"
+                                    placeholder="Postal Code"
+                                    minLength="5"
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="IDnumber">ID number</Label>
+                                <Input
+                                    onChange={this.handleChange}
+                                    type="number"
+                                    name="id_card"
+                                    id="ide_card"
+                                    placeholder="Your ID Number"
+                                    minLength="5"
+                                    min="1"
+                                />
+                            </FormGroup>
+                            <Button style={styles.button} type="submit" color="primary">Submit</Button>
+                        </Col>
+                    </Row>
                     </Container>
                 </Form>
             </div>

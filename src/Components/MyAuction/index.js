@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {
     Container,
     ListGroup,
@@ -8,7 +8,7 @@ import {
     Table
 } from 'reactstrap'
 
-export default class MyAuction extends React.Component {
+class MyAuction extends Component {
     constructor(props) {
         super(props)
         this.toggle = this.toggle.bind(this)
@@ -77,3 +77,5 @@ export default class MyAuction extends React.Component {
         )
     }
 }
+
+export default MyAuction
