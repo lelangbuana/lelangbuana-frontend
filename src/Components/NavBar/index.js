@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap'
 
 import LelangLogo from '../Assets/lelangbuana.svg'
@@ -10,8 +10,46 @@ const styles = {
     }
 }
 
+// const AuthButton = withRouter(({ history }) => (
+//     localStorage.getItem('token') ? (
+//         <p>
+//         Welcome! <button onClick={() => {
+//                 history.push('/')
+//                 localStorage.removeItem('token')
+//                 localStorage.removeItem('user_id')
+//             }}>Sign out</button>
+//         </p>
+//     ) : (
+//         <p>You are not logged in.</p>
+//     )
+// ))
+
 class NavBar extends React.Component {
     render() {
+        let button,register
+        if (localStorage.getItem('token')) {
+            
+            button = <NavItem>
+                <NavLink className="text-white btn" to="/logout" onClick={() => {
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('user_id')
+                }}>
+            Logout
+                </NavLink>
+            </NavItem>
+        } else {
+            button = <NavItem>
+                <NavLink className="text-white btn" to="/login">
+            Login
+                </NavLink>
+            </NavItem>
+            register = <NavItem>
+                <NavLink className="text-white btn" to="/register">
+                Register
+                </NavLink>
+            </NavItem>
+        }
+      
         return (
             <div>
                 <Navbar style={styles.navbar} expand="md">
@@ -24,16 +62,9 @@ class NavBar extends React.Component {
                     </NavbarBrand>
 
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink className="text-white btn" to="/login">
-                                Login
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="text-white btn" to="/reg">
-                                Register
-                            </NavLink>
-                        </NavItem>
+                        {button}
+                        {register}
+                        
                         <NavItem>
                             <NavLink className="text-white btn" to="/create">
                                 Create Auction
