@@ -55,9 +55,8 @@ class DetailProductBidStatus extends Component{
         
         const payload = {
             bids_nominal: this.state.bid_nominal,
-            bid_id: this.props.bid_id,
             auction_id: this.props.auction_id,
-            user_id: this.props.user_id,
+            user_id: localStorage.getItem('user_id'),
             max_bid: this.state.max_bid
         }
 
@@ -76,21 +75,21 @@ class DetailProductBidStatus extends Component{
                 
         //     })
         //     .catch(error=>{console.log(error)})
-
+        console.log("PAYLOAD",payload);
+        
         request
-        .get('/bids',payload)
+        .post('/bids',payload)
         .then((response) => {
           this.props.dispatch({
               type: 'BID',
               payload: {
                 bids_nominal: this.state.bid_nominal,
-                bid_id: this.state.bid_id,
                 auction_id: this.state.auction_id,
-                user_id: this.state.user_id,
+                user_id: localStorage.getItem('user_id'),
                 max_bid: this.props.max_bid
               }
             })
-            console.log("BID STATE", this.props)
+            console.log("BID STATE", response)
       })
       .catch(error=>{console.log(error)})
     }

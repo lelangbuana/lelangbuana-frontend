@@ -82,7 +82,7 @@ class Login extends Component {
                     this.props.dispatch(action)
                     console.log(action);
                     console.log("user_id : ", response.data.user.user_id)
-                    console.log("props user_id : ", this.props.user_id)
+                    console.log("props login : ", response.data.user)
                     this.setState({redirectToReferrer: true})  
                 
             })

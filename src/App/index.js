@@ -195,6 +195,7 @@ const AuthButton = withRouter(({ history }) => (
         Welcome! <button onClick={() => {
                 history.push('/')
                 localStorage.removeItem('token')
+                localStorage.removeItem('user_id')
             }}>Sign out</button>
         </p>
     ) : (
