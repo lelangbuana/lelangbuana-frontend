@@ -34,7 +34,9 @@ const mapStateToProps = (state,props) => {
         auction_id: state.auction.auction_id,
         user_id: state.user.user_id,
         max_bid: state.auction.max_bid,
-        highest_bid: state.auction.highest_bid
+        highest_bid: state.auction.highest_bid,
+        login: state.user.login,
+        username: state.user.login.username
     }
 }
 class DetailProductBidStatus extends Component{
@@ -58,9 +60,24 @@ class DetailProductBidStatus extends Component{
             user_id: this.props.user_id,
             max_bid: this.state.max_bid
         }
+
+        // request
+        //     .get(`/users/${this.props.username}`)
+        //     .then((response) => {
+        //         const action = {
+        //             type: 'SET_ID',
+        //             payload: {
+        //             user_id: response.data.user.user_id
+        //             }
+        //         }
+        //         this.props.dispatch(action)
+        //         console.log(action);
+        //         console.log("user_id : ", this.props.user_id)
+                
+        //     })
+        //     .catch(error=>{console.log(error)})
+
         request
-        
-        
         .get('/bids',payload)
         .then((response) => {
           this.props.dispatch({

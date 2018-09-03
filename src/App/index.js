@@ -86,7 +86,7 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
-    case 'SET_USER_INFO': {
+    case 'SET_ID': {
         return {
             ...state,
             user: {
@@ -201,7 +201,7 @@ class App extends Component {
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
                                 <Route path="/reg" component={Register} />
-                                <Route
+                                <PrivateRoute
                                     path="/auctions/:id"
                                     component={ItemDetail}
                                 />

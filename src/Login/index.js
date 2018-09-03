@@ -40,6 +40,7 @@ class Login extends Component {
       state = {
         email: '',
         password: '',
+        user_id: 0,
         redirectToReferrer: false
       }
 
@@ -66,27 +67,28 @@ class Login extends Component {
                 }
               })
               localStorage.setItem("token",response.data.token)
-              this.setState({ redirectToReferrer: true })      
-            
-            request
-            .get(`/users/${this.state.username}`)
-            .then((response) => {
-                const action = {
-                    type: 'SET_USER_INFO',
-                    payload: {
-                    user_id: response.data.user.user_id
+              
+              request
+              .get(`/users/${this.state.username}`)
+              .then((response) => {
+                  console.log("state username : ", this.state.username)
+                  const action = {
+                      type: 'SET_ID',
+                      payload: {
+                          user_id: response.data.user.user_id
+                        }
                     }
-            }
-                this.props.dispatch(action)
-                console.log(action);
-                console.log("response user_id : ", response.data.user.user_id)
-                console.log(this.props)
+                    this.props.dispatch(action)
+                    console.log(action);
+                    console.log("user_id : ", response.data.user.user_id)
+                    console.log("props user_id : ", this.props.user_id)
+                    this.setState({redirectToReferrer: true})  
                 
             })
             .catch(error=>{console.log(error)})
-
         })
         .catch(error=>{console.log(error)})
+
       }
 
     render() {
