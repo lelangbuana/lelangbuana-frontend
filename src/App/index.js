@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route,withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 import Home from '../Home'
 import Login from '../Login'
@@ -15,6 +16,14 @@ import PrivateRoute from '../PrivateRoute'
 
 import NavBar from '../Components/NavBar'
 import Footer from '../Components/Footer'
+
+
+
+const request = axios.create({
+    baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
+    timeout: 10000,
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+})
 
 const styles = {
     body: {
@@ -114,7 +123,7 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
-    case 'CREATE_AUCTION': {
+    case 'SET_AUCTION_STATE': {
         return {
             ...state,
             auction:{
@@ -123,11 +132,19 @@ const reducer = (state = initialState, action) => {
                 user_id: action.payload.user_id,
                 max_bid: action.payload.max_bid
             }
-                
-            
-            
         }
     }
+    // case 'CREATE_AUCTION': {
+    //     return {
+    //         ...state,
+    //         auction:{
+    //             ...state.auction,
+    //             auction_id: action.payload.auction_id,
+    //             user_id: action.payload.user_id,
+    //             max_bid: action.payload.max_bid
+    //         }
+    //     }
+    // }
     case 'UPDATE_BID_AUCTION': {
         return {
             ...state,
@@ -187,6 +204,8 @@ const AuthButton = withRouter(({ history }) => (
 
 class App extends Component {
     render() {
+        const token = localStorage.getItem('token')
+        console.log('TOKEN : ', token)
         return (
             <Provider store={store}>
                 <Router>
@@ -201,7 +220,7 @@ class App extends Component {
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
                                 <Route path="/reg" component={Register} />
-                                <PrivateRoute
+                                <Route
                                     path="/auctions/:id"
                                     component={ItemDetail}
                                 />
