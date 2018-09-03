@@ -52,6 +52,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        const auctions = []
         request
             .get('/auctions')
             .then(response => {
@@ -60,8 +61,9 @@ class Home extends Component {
             .then(data => {
                 data.forEach(item => {
                     this.setState(prevState => {
+                        console.log(prevState.auctions)
                         return {
-                            auctions: auctions.push({
+                            auctions: prevState.auctions.concat({
                                 user: item.auction_id,
                                 title: item.title,
                                 src: item.item_photo,
@@ -70,6 +72,7 @@ class Home extends Component {
                         }
                     })
                 })
+                
             })
             .catch(error => {
                 console.log(error)
@@ -110,7 +113,9 @@ class Home extends Component {
     }
 
     render() {
-        let listAuction = auctions.map((item, index) => {
+        console.log("State  : ", this.state.auctions);
+        
+        let listAuction = this.state.auctions.map((item, index) => {
             return (
                 <Link
                     key={index}
