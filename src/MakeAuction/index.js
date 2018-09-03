@@ -25,6 +25,7 @@ const mapStateToProps = state => {
     }
 }
 
+
 class MakeAuction extends Component {
     static get propTypes() {
         return {

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import moment from 'moment'
 
 import { ListGroup, ListGroupItem } from 'reactstrap'
 
@@ -29,6 +30,8 @@ const request = axios.create({
 
 const bids = []
 let highest_bid = 0
+
+const nowDate = moment();
 
 class DetailProductListProduct extends Component {
 
@@ -99,7 +102,7 @@ class DetailProductListProduct extends Component {
                 <ListGroupItem>
                     Closing Time : {this.props.endTime}
                 </ListGroupItem>
-                <ListGroupItem>Current Time</ListGroupItem>
+                <ListGroupItem>Current Time: {nowDate.format()} </ListGroupItem>
                 <ListGroupItem>Auction ID : {this.props.auctionID}</ListGroupItem>
                 <ListGroupItem>
                     Item Condition : {this.props.condition}

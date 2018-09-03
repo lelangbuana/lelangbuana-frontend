@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactFilestack from 'filestack-react'
 
+
 import {
     Button,
     Form,
@@ -20,6 +21,7 @@ const styles = {
         width : '100px'
     }
 }
+
 
 const mapStateToProps = state => {
     return {
