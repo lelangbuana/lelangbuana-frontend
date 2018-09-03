@@ -122,7 +122,7 @@ class Register extends Component{
             <div style={styles.space}>
                 <Form onSubmit={this.handleSubmit}>
                 <Container>
-                    <Row inline>
+                    <Row inline="true">
                         <Col sm="6">
                             <FormGroup>
                                 <Label for="Username">Username</Label>

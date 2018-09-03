@@ -55,17 +55,17 @@ class CreateAnAuction1 extends Component {
         user_id: 1,
         title: '',
         item_condition: '',
-        item_description: 'Yo Yo Yo mamen',
+        item_description: 'BNWB',
         quantity: 0,
         start_bid: 5000,
         max_bid: 0,
         min_bid: 0,
         bids_multiply: 0,
-        start_date: '09-09-2018',
-        end_date: '',
+        start_date: "2018-09-01T03:00:00.000Z",
+        end_date: '2018-09-30T03:00:00.000Z',
         item_photo: '',
-        status: 'success',
-        category_id: 1,
+        status: 'ongoing',
+        category_id: "1",
         selectedFile : null
     }
     handleChange = event => {

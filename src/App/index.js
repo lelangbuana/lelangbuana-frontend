@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route,withRouter } from 'react-router-dom'
 
 import Home from '../Home'
 import Login from '../Login'
@@ -46,7 +46,7 @@ const initialState = {
         description: '',
         name: '',
         categories: [],
-        islogin: 'false'
+        islogin: false
     },
     auction: {
         auction_id: 0,
@@ -66,18 +66,19 @@ const initialState = {
         user_id: 0,
         highest_bid:0
     },
-    bidData: [{
+    bidData: {
         bid_id: 0,
         bids_nominal: 0,
         auction_id: 0,
         user_id: 0
-    }]
+    }
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case 'LOGIN': {
         return {
+            ...state,
             user: {
                 ...state.user,
                 login: action.payload.login,
@@ -85,8 +86,18 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
+    case 'SET_ID': {
+        return {
+            ...state,
+            user: {
+                ...state.user,
+                user_id: action.payload.user_id
+            }
+        }
+    }
     case 'REGISTER': {
         return {
+            ...state,
             user: {
                 ...state.user,
                 register: action.payload
@@ -161,6 +172,19 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+const AuthButton = withRouter(({ history }) => (
+    localStorage.getItem('token') ? (
+        <p>
+        Welcome! <button onClick={() => {
+                history.push('/')
+                localStorage.removeItem('token')
+            }}>Sign out</button>
+        </p>
+    ) : (
+        <p>You are not logged in.</p>
+    )
+))
+
 class App extends Component {
     render() {
         return (
@@ -169,6 +193,7 @@ class App extends Component {
                     <div className="App" style={styles.body}>
                         <div>
                             <NavBar />
+                            <AuthButton/>
                         </div>
                         <div style={styles.main}>
                             <Switch>
@@ -176,7 +201,7 @@ class App extends Component {
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
                                 <Route path="/reg" component={Register} />
-                                <Route
+                                <PrivateRoute
                                     path="/auctions/:id"
                                     component={ItemDetail}
                                 />
