@@ -78,6 +78,7 @@ class Login extends Component {
                           user_id: response.data.user.user_id
                         }
                     }
+                    localStorage.setItem("user_id",response.data.user.user_id)
                     this.props.dispatch(action)
                     console.log(action);
                     console.log("user_id : ", response.data.user.user_id)
