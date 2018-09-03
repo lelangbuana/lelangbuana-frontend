@@ -90,7 +90,7 @@ class ItemDetail extends Component {
                     }
                 })
                   this.props.dispatch({
-                    type: 'CREATE_AUCTION',
+                    type: 'SET_AUCTION_STATE',
                     payload: {
                     auction_id: response.data.auction_id,
                     user_id: response.data.user_id,
