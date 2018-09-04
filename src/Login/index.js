@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import { Button, Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -9,9 +10,6 @@ const request = axios.create({
     timeout: 10000,
     headers: { Authorization: '' }
 })
-
-// const Public = () => <h3>Public</h3>
-// const Protected = () => <h3>Protected</h3>
 
 const styles ={
     space : {
@@ -25,11 +23,7 @@ const styles ={
     }
 
 }
-const mapStateToProps = state => {
-    return {
-      login: state.user.login
-    }
-}
+
 
 class Login extends Component {
 
@@ -38,13 +32,16 @@ class Login extends Component {
           children: PropTypes.any,
           dispatch: PropTypes.any,
           login: PropTypes.object,
-          message: PropTypes.string
+          message: PropTypes.string,
+          user_id: PropTypes.number
         }
       }
 
       state = {
         email: '',
-        password: ''
+        password: '',
+        user_id: 0,
+        redirectToReferrer: false
       }
 
     handleChange = event => {
@@ -54,6 +51,7 @@ class Login extends Component {
 
       handleSubmit = event => {
           event.preventDefault()
+              
         const payload = {
             username: this.state.username,
             password: this.state.password
@@ -69,14 +67,38 @@ class Login extends Component {
                 }
               })
               localStorage.setItem("token",response.data.token)
-            console.log(this.props)
-            console.log(response.data.token)
+              
+              request
+              .get(`/users/${this.state.username}`)
+              .then((response) => {
+                  console.log("state username : ", this.state.username)
+                  const action = {
+                      type: 'SET_ID',
+                      payload: {
+                          user_id: response.data.user.user_id
+                        }
+                    }
+                    localStorage.setItem("user_id",response.data.user.user_id)
+                    this.props.dispatch(action)
+                    console.log(action);
+                    console.log("user_id : ", response.data.user.user_id)
+                    console.log("props login : ", response.data.user)
+                    this.setState({redirectToReferrer: true})  
+                
+            })
+            .catch(error=>{console.log(error)})
         })
         .catch(error=>{console.log(error)})
-        console.log(payload)
+
       }
 
     render() {
+        const {from} = this.props.location.state || {from: { pathname: '/' }}
+        const  redirectToReferrer  = this.state.redirectToReferrer
+        
+        if (redirectToReferrer === true) {
+            return (<Redirect to = {from} />)
+          }
         return (
             <div >
                 <Container style={styles.space}>
@@ -86,7 +108,7 @@ class Login extends Component {
                                 <FormGroup >
                                     <Label for="Username">Username</Label>
                                     {/* <Input type="email" name="email" id="email" placeholder="Your Email" onChange={this.onChange}/> */}
-                                                    <Input
+                                    <Input
                                         onChange={this.handleChange}
                                         type="username"
                                         name="username"
@@ -112,6 +134,14 @@ class Login extends Component {
                 </Container>
             </div>
         )
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+      user_id: state.user.user_id,
+      login: state.user.login,
+      username: state.user.username
     }
 }
 

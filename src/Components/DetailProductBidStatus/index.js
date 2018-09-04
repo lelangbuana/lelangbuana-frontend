@@ -32,9 +32,11 @@ const mapStateToProps = (state,props) => {
         bid_id: state.bidData.bid_id,
         bids_nominal: state.bidData.bids_nominal,
         auction_id: state.auction.auction_id,
-        user_id: state.auction.user_id,
+        user_id: state.user.user_id,
         max_bid: state.auction.max_bid,
-        highest_bid: state.auction.highest_bid
+        highest_bid: state.auction.highest_bid,
+        login: state.user.login,
+        username: state.user.login.username
     }
 }
 class DetailProductBidStatus extends Component{
@@ -53,27 +55,41 @@ class DetailProductBidStatus extends Component{
         
         const payload = {
             bids_nominal: this.state.bid_nominal,
-            bid_id: this.props.bid_id,
             auction_id: this.props.auction_id,
-            user_id: this.props.user_id,
+            user_id: localStorage.getItem('user_id'),
             max_bid: this.state.max_bid
         }
+
+        // request
+        //     .get(`/users/${this.props.username}`)
+        //     .then((response) => {
+        //         const action = {
+        //             type: 'SET_ID',
+        //             payload: {
+        //             user_id: response.data.user.user_id
+        //             }
+        //         }
+        //         this.props.dispatch(action)
+        //         console.log(action);
+        //         console.log("user_id : ", this.props.user_id)
+                
+        //     })
+        //     .catch(error=>{console.log(error)})
+        console.log("PAYLOAD",payload);
+        
         request
-        
-        
-        .get('/bids',payload)
+        .post('/bids',payload)
         .then((response) => {
           this.props.dispatch({
               type: 'BID',
               payload: {
                 bids_nominal: this.state.bid_nominal,
-                bid_id: this.props.bid_id,
-                auction_id: this.props.auction_id,
-                user_id: this.props.user_id,
-                max_bid: this.state.max_bid
+                auction_id: this.state.auction_id,
+                user_id: localStorage.getItem('user_id'),
+                max_bid: this.props.max_bid
               }
             })
-            console.log("BID STATE", this.props)
+            console.log("BID STATE", response)
       })
       .catch(error=>{console.log(error)})
     }
@@ -107,7 +123,7 @@ class DetailProductBidStatus extends Component{
                                     id="bid_nominal"
                                     placeholder="IDR."
                                     step="5000"
-                                    min={this.props.highest_bid}
+                                    min={this.props.highest_bid+5000}
                                 />
                             </Form>
                         </Col>

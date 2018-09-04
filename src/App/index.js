@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route,withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 import Home from '../Home'
 import Login from '../Login'
@@ -15,6 +16,14 @@ import PrivateRoute from '../PrivateRoute'
 
 import NavBar from '../Components/NavBar'
 import Footer from '../Components/Footer'
+
+
+
+const request = axios.create({
+    baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
+    timeout: 10000,
+    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
+})
 
 const styles = {
     body: {
@@ -46,7 +55,7 @@ const initialState = {
         description: '',
         name: '',
         categories: [],
-        islogin: 'false'
+        islogin: false
     },
     auction: {
         auction_id: 0,
@@ -66,18 +75,19 @@ const initialState = {
         user_id: 0,
         highest_bid:0
     },
-    bidData: [{
+    bidData: {
         bid_id: 0,
         bids_nominal: 0,
         auction_id: 0,
         user_id: 0
-    }]
+    }
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
     case 'LOGIN': {
         return {
+            ...state,
             user: {
                 ...state.user,
                 login: action.payload.login,
@@ -85,8 +95,18 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
+    case 'SET_ID': {
+        return {
+            ...state,
+            user: {
+                ...state.user,
+                user_id: action.payload.user_id
+            }
+        }
+    }
     case 'REGISTER': {
         return {
+            ...state,
             user: {
                 ...state.user,
                 register: action.payload
@@ -103,7 +123,7 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
-    case 'CREATE_AUCTION': {
+    case 'SET_AUCTION_STATE': {
         return {
             ...state,
             auction:{
@@ -112,11 +132,19 @@ const reducer = (state = initialState, action) => {
                 user_id: action.payload.user_id,
                 max_bid: action.payload.max_bid
             }
-                
-            
-            
         }
     }
+    // case 'CREATE_AUCTION': {
+    //     return {
+    //         ...state,
+    //         auction:{
+    //             ...state.auction,
+    //             auction_id: action.payload.auction_id,
+    //             user_id: action.payload.user_id,
+    //             max_bid: action.payload.max_bid
+    //         }
+    //     }
+    // }
     case 'UPDATE_BID_AUCTION': {
         return {
             ...state,
@@ -161,21 +189,27 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+
+
 class App extends Component {
     render() {
+        const token = localStorage.getItem('token')
+        console.log('TOKEN : ', token)
         return (
             <Provider store={store}>
                 <Router>
                     <div className="App" style={styles.body}>
                         <div>
                             <NavBar />
+                            {/* <AuthButton/> */}
                         </div>
                         <div style={styles.main}>
                             <Switch>
                                 <Route exact path="/debug" component={Debug} />
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
-                                <Route path="/reg" component={Register} />
+                                <Route path="/logout" component={Login} />
+                                <Route path="/register" component={Register} />
                                 <Route
                                     path="/auctions/:id"
                                     component={ItemDetail}

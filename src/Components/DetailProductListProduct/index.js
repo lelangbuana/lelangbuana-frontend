@@ -42,7 +42,7 @@ class DetailProductListProduct extends Component {
         highest_bid: this.props.highest_bid
     }
 
-    static get propTypes() {
+    static get propTypes(){
         return {
             children: PropTypes.any,
             dispatch: PropTypes.any,

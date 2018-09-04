@@ -86,10 +86,6 @@ class CreateAnAuction1 extends Component {
             auction: PropTypes.object
         }
     }
-
-    // state = {
-        
-    // }
     
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
@@ -263,13 +259,6 @@ class CreateAnAuction1 extends Component {
                                     <option>5000000</option>
                                     <option>10000000</option>
                                 </Input>
-                                {/* <Input
-                                    onChange={this.handleChange}
-                                    type="text"
-                                    name="bids_multiply"
-                                    id="bids_multiply"
-                                    placeholder="Bid Increment"
-                                /> */}
                             </FormGroup>
                             <FormGroup>
                                 <Label for="itemdesc">Item Description</Label>
