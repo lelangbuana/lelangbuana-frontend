@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import Countdown from 'react-countdown-now';
 import { connect } from 'react-redux'
 import {Container, Row, Col, Form, 
     Input, Button} from 'reactstrap'
@@ -36,7 +37,9 @@ const mapStateToProps = (state,props) => {
         max_bid: state.auction.max_bid,
         highest_bid: state.auction.highest_bid,
         login: state.user.login,
-        username: state.user.login.username
+        username: state.user.login.username,
+        start_date: state.auction.start_date,
+        end_date: state.auction.end_date
     }
 }
 class DetailProductBidStatus extends Component{
@@ -59,22 +62,6 @@ class DetailProductBidStatus extends Component{
             user_id: localStorage.getItem('user_id'),
             max_bid: this.state.max_bid
         }
-
-        // request
-        //     .get(`/users/${this.props.username}`)
-        //     .then((response) => {
-        //         const action = {
-        //             type: 'SET_ID',
-        //             payload: {
-        //             user_id: response.data.user.user_id
-        //             }
-        //         }
-        //         this.props.dispatch(action)
-        //         console.log(action);
-        //         console.log("user_id : ", this.props.user_id)
-                
-        //     })
-        //     .catch(error=>{console.log(error)})
         console.log("PAYLOAD",payload);
         
         request
@@ -99,14 +86,18 @@ class DetailProductBidStatus extends Component{
             <div style={styles.text}>
                 <Container >  
                     <Row><Col style={styles.title}><span>Current Price</span></Col></Row>
-                    <Row><Col><span>IDR. </span></Col></Row>
-                    <Row style={styles.contains}><Col ><span>{this.props.openingPrice}</span></Col></Row>
+                    <Row style={styles.contains}><Col ><span> IDR. {this.props.openingPrice}</span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Buyout Price</span></Col></Row>
-                    <Row style={styles.contains}><Col><span>IDR {this.props.buyOutPrice}</span></Col></Row> 
+                    <Row style={styles.contains}><Col><span> IDR. {this.props.buyOutPrice}</span></Col></Row> 
                     <hr/>
-                    <Row><Col style={styles.title}><span>Time Remaining</span></Col></Row>
-                    <Row style={styles.contains}><Col><span></span></Col></Row>
+                    <Row><Col style={styles.title}>
+                    <span>Time Remaining 
+                    </span>
+                    </Col></Row>
+                    <Row style={styles.contains}><Col><span>
+                    <Countdown date={ Date.now() + (Date.parse(this.props.end_date) - Date.parse(this.props.start_date))}/>
+                        </span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Seller</span></Col></Row>
                     <Row style={styles.contains}><Col><span>{this.props.seller}</span></Col></Row>
