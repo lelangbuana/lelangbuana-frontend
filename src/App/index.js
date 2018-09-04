@@ -189,19 +189,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-const AuthButton = withRouter(({ history }) => (
-    localStorage.getItem('token') ? (
-        <p>
-        Welcome! <button onClick={() => {
-                history.push('/')
-                localStorage.removeItem('token')
-                localStorage.removeItem('user_id')
-            }}>Sign out</button>
-        </p>
-    ) : (
-        <p>You are not logged in.</p>
-    )
-))
+
 
 class App extends Component {
     render() {
@@ -213,14 +201,15 @@ class App extends Component {
                     <div className="App" style={styles.body}>
                         <div>
                             <NavBar />
-                            <AuthButton/>
+                            {/* <AuthButton/> */}
                         </div>
                         <div style={styles.main}>
                             <Switch>
                                 <Route exact path="/debug" component={Debug} />
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
-                                <Route path="/reg" component={Register} />
+                                <Route path="/logout" component={Login} />
+                                <Route path="/register" component={Register} />
                                 <Route
                                     path="/auctions/:id"
                                     component={ItemDetail}
