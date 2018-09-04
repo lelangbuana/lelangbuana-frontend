@@ -51,7 +51,21 @@ class CreateAnAuction1 extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            end_date: moment()
+        user_id: 0,
+        title: '',
+        item_condition: '',
+        item_description: '',
+        quantity: 0,
+        start_bid: 0,
+        max_bid: 0,
+        min_bid: 0,
+        bids_multiply: 0,
+        start_date: moment(),
+        item_photo: '',
+        status: 'ongoing',
+        category_id: '1',
+        selectedFile : null,
+        end_date: moment()
         };
         this.handleChangeDate = this.handleChangeDate.bind(this);
       }
@@ -70,23 +84,9 @@ class CreateAnAuction1 extends Component {
         }
     }
 
-    state = {
-        user_id: 0,
-        title: '',
-        item_condition: '',
-        item_description: '',
-        quantity: 0,
-        start_bid: 0,
-        max_bid: 0,
-        min_bid: 0,
-        bids_multiply: 0,
-        start_date: '2018-08-28T03:00:00.000Z',
-        end_date: '',
-        item_photo: '',
-        status: 'ongoing',
-        category_id: '1',
-        selectedFile : null
-    }
+    // state = {
+        
+    // }
     
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
@@ -209,7 +209,7 @@ class CreateAnAuction1 extends Component {
                                 <DatePicker
                                     name="end_date"
                                     id="end_date"
-                                    dateFormat="YYYY/MM/DD"
+                                    // dateFormat="YYYY/MM/DD"
                                     isClearable={true}
                                     selected={this.state.end_date}
                                     onChange={this.handleChangeDate}
