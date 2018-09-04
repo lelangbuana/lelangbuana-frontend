@@ -52,7 +52,7 @@ const mapStateToProps = state => {
         item_condition: state.auction.item_condition,
         item_description: state.auction.item_description,
         quantity: state.auction.quantity,
-        start_bid: state.auction.start_bid,
+        start_bid: state.auction.min_bid,
         max_bid: state.auction.max_bid,
         min_bid: state.auction.min_bid,
         bids_multiply: state.auction.bids_multiply,
@@ -78,7 +78,7 @@ class ItemDetail extends Component {
                         item_condition: response.data.item_condition,
                         item_description: response.data.item_description,
                         quantity: response.data.quantity,
-                        start_bid: response.data.start_bid,
+                        start_bid: response.data.min_bid,
                         max_bid: response.data.max_bid,
                         min_bid: response.data.min_bid,
                         bids_multiply: response.data.bids_multiply,
@@ -201,7 +201,7 @@ class ItemDetail extends Component {
                                 </Col>
                                 <Col xs="4">
                                     <DetailProductBidStatus
-                                        openingPrice={this.state.start_bid}
+                                        openingPrice={this.state.min_bid}
                                         buyOutPrice={this.state.max_bid}
                                         seller={this.state.username}
                                         highestBid={this.state.highestBid}
