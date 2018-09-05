@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Media, ListGroup, ListGroupItem, Button } from 'reactstrap'
+import { ListGroup, ListGroupItem, Button, Row, Col } from 'reactstrap'
 import axios from 'axios'
 
 const request = axios.create({
@@ -7,6 +7,16 @@ const request = axios.create({
     timeout: 10000,
     headers: { Authorization: '' }
 })
+
+const styles = {
+    size: {
+        width:'120px',
+        height: '120px'
+    },
+    text: {
+        textAlign: 'center'
+    }
+}
 
 class Profile extends Component {
 
@@ -40,17 +50,21 @@ class Profile extends Component {
         return (
             <ListGroup>
                 <ListGroupItem>
-                    <Media>
-                        <Media left >
-                            <Media object data-src="holder.js/64x64" alt="image" />
-                        </Media>
-                        <Media body>
-                            <Media heading>
-                                {this.state.username}
-                            </Media>
-                            {this.state.phone_number}
-                        </Media>
-                    </Media>
+                    <Row>
+                        <Col>
+                            <img className="mx-auto d-block" style={styles.size} src={this.state.profile_photo} alt="Profile" ></img>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col></Col>
+                        <Col><span>{this.state.username}</span></Col>
+                        <Col></Col>
+                    </Row>
+                    <Row>
+                        <Col></Col>
+                        <Col><span>{this.state.phone_number}</span></Col>
+                        <Col></Col>
+                    </Row>
                     
                 </ListGroupItem>
                 <Button color="warning"> Create An Auction</Button>
