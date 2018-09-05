@@ -25,28 +25,11 @@ class Profile extends Component {
             .get(`/users/id/${localStorage.getItem('user_id')}`)
             .then((response) => {return response})
             .then(data => {
-                console.log('PROFILE DATA: ',data)
-
                 this.setState({
                     username: data.data.user.username,
                     phone_number: data.data.user.phone_number,
                     profile_photo: data.data.user.profile_photo
                 })
-                
-                // this.setState(prevState => {
-                //     console.log(prevState.myBids)
-                
-                //     return {
-                //         myBids: prevState.myBids.concat({
-                //             bids_nominal: item.bids_nominal,
-                //             created_at: item.created_at,
-                //             auction_id: item.auction_id,
-                //             user_id: item.user_id,
-                //             title: data.title,
-                //             username: username
-                //         })
-                //     }
-                // })
             })
             .catch(error=>{console.log(error)})
                                 

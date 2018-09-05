@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap'
 
 import LelangLogo from '../Assets/lelangbuana.svg'
@@ -9,20 +9,6 @@ const styles = {
         backgroundColor: '#011D55'
     }
 }
-
-// const AuthButton = withRouter(({ history }) => (
-//     localStorage.getItem('token') ? (
-//         <p>
-//         Welcome! <button onClick={() => {
-//                 history.push('/')
-//                 localStorage.removeItem('token')
-//                 localStorage.removeItem('user_id')
-//             }}>Sign out</button>
-//         </p>
-//     ) : (
-//         <p>You are not logged in.</p>
-//     )
-// ))
 
 class NavBar extends React.Component {
     render() {

@@ -100,7 +100,7 @@ class MyAuction extends Component {
                         </Media>
                     </Media>
                 </ListGroupItem>
-                <Collapse isOpen={this.state.collapse}>
+                <Collapse key={index} isOpen={this.state.collapse}>
                     <Table hover>
                         <thead>
                             <tr>
