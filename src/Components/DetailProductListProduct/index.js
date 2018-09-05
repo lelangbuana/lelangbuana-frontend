@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import moment from 'moment'
+import NumberFormat from 'react-number-format';
 
 import { ListGroup, ListGroupItem } from 'reactstrap'
 
@@ -75,11 +76,11 @@ class DetailProductListProduct extends Component {
             <ListGroup flush style={styles.text}>
                 <ListGroupItem>Quantity : {this.props.quantity}</ListGroupItem>
                 <ListGroupItem>
-                    Opening Price : {this.props.openingPrice}
+                    Opening Price : <NumberFormat value={this.props.openingPrice} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
                 </ListGroupItem>
                 <ListGroupItem>Number of Bid : {this.props.bids}</ListGroupItem>
                 <ListGroupItem>
-                    Highest Bidder : {this.props.highest_bid}
+                    Highest Bidder : <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
                 </ListGroupItem>
                 <ListGroupItem>
                     Opening Time : {this.props.openingTime}
