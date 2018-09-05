@@ -31,16 +31,6 @@ const mapStateToProps = state => {
     }
 }
 
-// const categories = [
-//     { name: 'Computers', categories: ['Laptop', 'PC', 'Netbook'] },
-//     {
-//         name: 'Electronic, AV & Camera',
-//         categories: ['DSLR', 'Mirrorless', 'Webcam']
-//     },
-//     { name: 'Music', categories: ['Music Player', 'Speaker'] },
-//     { name: 'Book & Magazine', categories: ['Science-Fiction', 'Non-Fiction'] }
-// ]
-
 const categories = [
     { name: 'Fashion', categories: ['Clothes', 'Watches', 'Bags', 'Accessories', 'Others'] },
     { name: 'Furniture, AV & Camera', categories: ['Tables', 'Chairs', 'Cupboards', 'Kitchen Equipments', 'Others'] },
