@@ -32,7 +32,6 @@ const request = axios.create({
 const currentTime = moment()
 
 let highest_bid = 0
-
 const nowDate = moment().format('ll');
 
 class DetailProductListProduct extends Component {
