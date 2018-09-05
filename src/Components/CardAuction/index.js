@@ -1,41 +1,41 @@
-import React from 'react'
-import { Card, CardImg, CardBody, CardTitle } from 'reactstrap'
+import React,{Component} from 'react'
+import { Card, CardImg, CardBody, CardTitle, CardDeck} from 'reactstrap'
+
 
 const styles = {
     margins: {
-        marginRight: '15px',
+        marginRight: '35px',
         marginBottom: '25px'
     },
     sizes: {
-        width: '240px',
-        height: '290px'
+        width: '220px', 
+        height: '230px'
     }
 }
 
-class CardAuction extends React.Component {
+class CardAuction extends Component {
     render() {
         return (
             <div
-                className="col-xs-3"
                 style={styles.margins}
-                title={this.props.title}
-            >
-                <Card onClick={this.props.onClick}>
-                    <CardImg
-                        top
-                        style={styles.sizes}
-                        src={this.props.src}
-                        alt="Card image cap"
-                    />
-                    <CardBody>
-                        <CardTitle>{this.props.title}</CardTitle>
-                        {/* <CardSubtitle>Description</CardSubtitle> */}
-                        {/* <CardText>{this.props.description}</CardText> */}
-                    </CardBody>
-                </Card>
+                title={this.props.title}>
+                <CardDeck>
+                    <Card body className="text-center" onClick={this.props.onClick}>
+                        <CardImg
+                            top
+                            style={styles.sizes}
+                            src={this.props.src}
+                            alt="Card image cap"
+                        />
+                        <CardBody>
+                            <span>{this.props.title}</span>
+                        </CardBody>
+                    </Card>
+                </CardDeck>
             </div>
         )
     }
 }
+
 
 export default CardAuction
