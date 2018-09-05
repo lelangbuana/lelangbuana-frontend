@@ -27,7 +27,7 @@ class MyBid extends Component {
                     request
                         .get(`/auctions/${item.auction_id}`)
                         .then((response) => { 
-                            
+                            console.log('RESPONSE : ', response)
                             return response.data 
                         })
                         .then(data => {

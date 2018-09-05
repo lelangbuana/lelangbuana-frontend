@@ -30,8 +30,6 @@ const mapStateToProps = state => {
     }
 }
 
-const auctions = []
-
 const categories = [
     { name: 'Computers', categories: ['Laptop', 'PC', 'Netbook'] },
     {
@@ -60,7 +58,6 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        const auctions = []
         request
             .get('/auctions')
             .then(response => {
@@ -105,7 +102,6 @@ class Home extends Component {
                         })
                     
                     this.setState(prevState => {
-                        console.log(prevState.auctions)
                         return {
                             auctions: prevState.auctions.concat({
                                 user: item.auction_id,
@@ -159,8 +155,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log("State  : ", this.state.auctions);
-        
         let listAuction = this.state.auctions.map((item, index) => {
             return (
                 <Link
