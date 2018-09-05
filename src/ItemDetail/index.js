@@ -99,7 +99,8 @@ class ItemDetail extends Component {
                     max_bid: this.state.max_bid,
                     start_bid: response.data.start_bid,
                     bids_multiply: response.data.bids_multiply,
-                    username: response.data.user.username
+                    username: response.data.user.username,
+                    status: response.data.status
                         }
                      })
                     })
@@ -149,6 +150,7 @@ class ItemDetail extends Component {
         )
     }
     render() {
+        console.log("PROPS STATUS: ", this.props.status)
         let listCategories = categories.map(this.createCategories)
         return (
             <div style={styles.space}>
@@ -188,6 +190,7 @@ class ItemDetail extends Component {
                                         seller={this.state.username}
                                         highestBid={this.state.highestBid}
                                         params={this.props.match.params.id}
+                                        status={this.props.status}
                                     />
                                 </Col>
                             </Row>
@@ -196,7 +199,7 @@ class ItemDetail extends Component {
                     <Row>
                         <Col style={styles.tabs}>
                             <DetailProductDetailPages />
-                            <Timer params={this.props.match.params.id}/>
+                            <Timer params={this.props.match.params.id} status={this.props.status}/>
                         </Col>
                     </Row>
                 </Container>
