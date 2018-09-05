@@ -32,7 +32,7 @@ const request = axios.create({
 
 let highest_bid = 0
 
-const currentTime = moment()
+const nowDate = moment().format('ll');
 
 class DetailProductListProduct extends Component {
 
@@ -119,7 +119,7 @@ class DetailProductListProduct extends Component {
                 <ListGroupItem>
                     Closing Time : {this.props.endTime}
                 </ListGroupItem>
-                <ListGroupItem>Current Time : {currentTime.format('ll')}</ListGroupItem>
+                <ListGroupItem>Current Time: {nowDate} </ListGroupItem>
                 <ListGroupItem>Auction ID : {this.props.auctionID}</ListGroupItem>
                 <ListGroupItem>
                     Item Condition : {this.props.condition}
