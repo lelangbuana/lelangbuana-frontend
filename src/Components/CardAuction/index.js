@@ -1,5 +1,7 @@
+
 import React,{Component} from 'react'
-import { Card, CardImg, CardBody} from 'reactstrap'
+import { Card, CardImg, CardBody, CardSubtitle} from 'reactstrap'
+
 
 
 const styles = {
@@ -28,7 +30,11 @@ class CardAuction extends Component {
                         alt="Card image cap"
                     />
                     <CardBody>
+
                         <span>{this.props.title}</span>
+
+                        <CardSubtitle>{this.props.status}</CardSubtitle>
+                        
                     </CardBody>
                 </Card>
             </div>
