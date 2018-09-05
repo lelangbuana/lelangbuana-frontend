@@ -107,7 +107,7 @@ class DetailProductBidStatus extends Component{
         now<=end
         ? enableCountDown = <Countdown  date={ start + (end-start)}><h3>CLOSED</h3></Countdown>
         : enableCountDown = <h3>CLOSED</h3>
-        
+
         console.log("DATE NOW: ", now )
         console.log("DATE OPEN: ", start )
         console.log("DATE END: ", end )
@@ -118,7 +118,7 @@ class DetailProductBidStatus extends Component{
             <div style={styles.text}>
                 <Container >  
                     <Row><Col style={styles.title}><span>Current Price</span></Col></Row>
-                    <Row style={styles.contains}><Col ><span> IDR. {this.props.openingPrice}</span></Col></Row>
+                    <Row style={styles.contains}><Col ><span> IDR. {this.props.highest_bid}</span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Buyout Price</span></Col></Row>
                     <Row style={styles.contains}><Col><span> IDR. {this.props.buyOutPrice}</span></Col></Row> 
