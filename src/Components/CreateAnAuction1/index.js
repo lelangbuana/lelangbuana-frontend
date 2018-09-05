@@ -47,6 +47,9 @@ const keys = {
     filestackKey : 'AQulXUyRXS1GqTZvYuubfz'
 }
 
+const startDate = moment().format('ll')
+const endDate = moment().format('ll')
+
 class CreateAnAuction1 extends Component {
     constructor (props) {
         super(props)
@@ -60,12 +63,12 @@ class CreateAnAuction1 extends Component {
         max_bid: 0,
         min_bid: 0,
         bids_multiply: 0,
-        start_date: moment(),
+        start_date: "",
         item_photo: '',
         status: 'ongoing',
         category_id: '1',
         selectedFile : null,
-        end_date: moment()
+        end_date: ""
         };
         this.handleChangeDate = this.handleChangeDate.bind(this);
       }
@@ -83,10 +86,6 @@ class CreateAnAuction1 extends Component {
             auction: PropTypes.object
         }
     }
-
-    // state = {
-        
-    // }
     
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
@@ -106,7 +105,7 @@ class CreateAnAuction1 extends Component {
             max_bid: this.state.max_bid,
             min_bid: this.state.min_bid,
             bids_multiply: this.state.bids_multiply,
-            start_date: this.state.start_date,
+            start_date: this.state.start_date._d,
             end_date: this.state.end_date._d,
             item_photo: this.state.url,
             status: this.state.status,
@@ -205,11 +204,18 @@ class CreateAnAuction1 extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
+                                <Label for="startdate">Start date</Label>                
+                                <DatePicker 
+                                    name="start_date"
+                                    id="start_date"
+                                    selected={this.state.start_date}
+                                />
+                            </FormGroup>
+                            <FormGroup>
                                 <Label for="closingdate">Closing date</Label>                
                                 <DatePicker
                                     name="end_date"
                                     id="end_date"
-                                    // dateFormat="YYYY/MM/DD"
                                     isClearable={true}
                                     selected={this.state.end_date}
                                     onChange={this.handleChangeDate}
@@ -221,16 +227,16 @@ class CreateAnAuction1 extends Component {
                                 </Label>
                                 <Input
                                 onChange={this.handleChange} 
-                                type="text" 
+                                type="select" 
                                 name="item_condition" 
                                 id="item_condition"
                                 placeholder="Item Condition">
-                                    {/* <option>New</option>
+                                    <option>New</option>
                                     <option>Refurbished</option>
                                     <option>Used - Like New</option>
                                     <option>Used - Very Good</option>
                                     <option>Used - Good</option>
-                                    <option>Unacceptable</option> */}
+                                    <option>Unacceptable</option>
                                 </Input>
                             </FormGroup>
                             <FormGroup>
@@ -238,7 +244,12 @@ class CreateAnAuction1 extends Component {
                                     Bid Increment (IDR.)
                                 </Label>
 
-                                {/* <Input type="select" name="bidincrement" id="bidincrement">
+                                <Input 
+                                onChange={this.handleChange}
+                                type="select" 
+                                name="bids_multiply" 
+                                id="bids_multiply"
+                                placeholder="Bid Increment">
                                     <option>5000</option>
                                     <option>10000</option>
                                     <option>20000</option>
@@ -247,14 +258,7 @@ class CreateAnAuction1 extends Component {
                                     <option>1000000</option>
                                     <option>5000000</option>
                                     <option>10000000</option>
-                                </Input> */}
-                                <Input
-                                    onChange={this.handleChange}
-                                    type="text"
-                                    name="bids_multiply"
-                                    id="bids_multiply"
-                                    placeholder="Bid Increment"
-                                />
+                                </Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="itemdesc">Item Description</Label>
