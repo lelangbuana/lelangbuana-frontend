@@ -31,14 +31,23 @@ const mapStateToProps = state => {
     }
 }
 
+// const categories = [
+//     { name: 'Computers', categories: ['Laptop', 'PC', 'Netbook'] },
+//     {
+//         name: 'Electronic, AV & Camera',
+//         categories: ['DSLR', 'Mirrorless', 'Webcam']
+//     },
+//     { name: 'Music', categories: ['Music Player', 'Speaker'] },
+//     { name: 'Book & Magazine', categories: ['Science-Fiction', 'Non-Fiction'] }
+// ]
+
 const categories = [
-    { name: 'Computers', categories: ['Laptop', 'PC', 'Netbook'] },
-    {
-        name: 'Electronic, AV & Camera',
-        categories: ['DSLR', 'Mirrorless', 'Webcam']
-    },
-    { name: 'Music', categories: ['Music Player', 'Speaker'] },
-    { name: 'Book & Magazine', categories: ['Science-Fiction', 'Non-Fiction'] }
+    { name: 'Fashion', categories: ['Clothes', 'Watches', 'Bags', 'Accessories', 'Others'] },
+    { name: 'Furniture, AV & Camera', categories: ['Tables', 'Chairs', 'Cupboards', 'Kitchen Equipments', 'Others'] },
+    { name: 'Sport', categories: ['Bikes', 'Accessories', 'Rackets', 'Balls', 'Shoes', 'Jerseys', 'Others'] },
+    { name: 'Electronic', categories: ['Handphones & Tablets', 'Cameras & Photography', 'PC & Laptops', 'TV & Monitors', 'Others'] },
+    { name: 'Vehicle', categories: ['Cars', 'Motorcycles', 'Spareparts', 'Wheels', 'Accessories']},
+    { name: 'Collection & Hobby', categories: ['Gem Stone', 'Antiques', 'Musical Instruments', 'Dolls and Toys', 'Tapes, Books & Magazines', 'Handicrafts', 'Artworks', 'Old Money', 'Others']}
 ]
 
 class Home extends Component {
