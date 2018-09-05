@@ -29,9 +29,9 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-const currentTime = moment()
+// const currentTime = moment()
 
-let highest_bid = 0
+// let highest_bid = 0
 const nowDate = moment().format('ll');
 
 class DetailProductListProduct extends Component {
@@ -53,38 +53,6 @@ class DetailProductListProduct extends Component {
     }
 
     componentDidMount() {
-        // request
-        // .get(`/bids/auction_id/${this.props.params}`)
-        // .then(response => {
-        //     bids.push(response.data.bidData)
-            
-        //     response.data.map((item,index) => {
-        //         console.log("BID DATA: ", item);
-        //         if (item.bids_nominal>=highest_bid) 
-        //         {
-        //             highest_bid = item.bids_nominal
-        //         }
-                
-        //         return ( 
-        //             highest_bid
-        //         )
-        //     })
-        //         this.setState(() => {
-        //             return { 
-        //                 bidData: response.data.length,
-        //                 highest_bid: highest_bid
-        //             }
-        //         })
-        //         this.props.dispatch({
-        //             type: 'UPDATE_BID_AUCTION',
-        //             payload: {
-        //               highest_bid: this.state.highest_bid
-        //             }
-        //           })
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
             
         request
         .get(`/auctions/${this.props.params}`)

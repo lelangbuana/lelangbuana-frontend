@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactFilestack from 'filestack-react'
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -46,9 +45,6 @@ const options = {
 const keys = {
     filestackKey : 'AQulXUyRXS1GqTZvYuubfz'
 }
-
-const startDate = moment().format('ll')
-const endDate = moment().format('ll')
 
 class CreateAnAuction1 extends Component {
     constructor (props) {
@@ -112,31 +108,9 @@ class CreateAnAuction1 extends Component {
             category_id : this.state.category_id
         }
 
-        // this.props.dispatch({
-        //     type: 'CREATE_AUCTION',
-        //     payload: {
-        //         user_id: this.state.user_id,
-        //         title: this.state.title,
-        //         item_condition: this.state.item_condition,
-        //         item_description: this.state.item_description,
-        //         quantity: this.state.quantity,
-        //         start_bid: this.state.start_bid,
-        //         max_bid: this.state.max_bid,
-        //         min_bid: this.state.min_bid,
-        //         bids_multiply: this.state.bids_multiply,
-        //         start_date: this.state.start_date,
-        //         end_date: this.state.end_date,
-        //         item_photo: this.state.url,
-        //         status: this.state.status,
-        //         category_id : this.state.category_id
-        //     }
-        // })
-        console.log(payload)
-
         request
             .post('/auctions', payload)
             .then(response => {
-                console.log(response)
             })
             .catch(error => {
                 console.log(error)
@@ -147,7 +121,6 @@ class CreateAnAuction1 extends Component {
         this.setState({
           url: result.filesUploaded[0].url
         })
-        // console.log('result', this.state.url)
       }
       onError = (error) => {
         console.error('error', error);

@@ -107,12 +107,9 @@ class DetailProductBidStatus extends Component{
         now<=end
         ? enableCountDown = <Countdown  date={ start + (end-start)}><h3>CLOSED</h3></Countdown>
         : enableCountDown = <h3>CLOSED</h3>
+        
 
-        console.log("DATE NOW: ", now )
-        console.log("DATE OPEN: ", start )
-        console.log("DATE END: ", end )
-        console.log("COMPARISON : ", start + (end-start)) 
-               
+        console.log("STATUS: ", this.props.status);
         
         return(
             <div style={styles.text}>
