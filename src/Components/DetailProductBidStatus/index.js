@@ -116,8 +116,40 @@ class DetailProductBidStatus extends Component{
         : enableCountDown = <h3>CLOSED</h3>
         
         
-
-        console.log("STATUS: ", this.props.status);
+        let enableBid
+        console.log("STATUS: ", this.props.status)
+        
+        this.props.status === "ongoing"
+        ? enableBid = 
+            <div>
+            <Row style={styles.contains}>
+                    <Col><span>Bid Increment : <NumberFormat value={this.props.bids_multiply} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} /> </span></Col>
+                </Row>
+            <Row style={styles.contains}>
+                <Col >
+                    <Form lg="6">
+                        <Input
+                            onChange={this.handleChange}
+                            type="number"
+                            name="bid_nominal"
+                            id="bid_nominal"
+                            placeholder="IDR."
+                            step={this.props.bids_multiply}
+                            min={startBid}
+                        />
+                    </Form>
+                </Col>
+            </Row>
+            <Row style={styles.contains}> 
+                <Col>
+                    <Button style={styles.button} onClick={this.handleSubmit}> Bid Now</Button>
+                </Col>
+            </Row>
+            <Row>
+                <Col><Button color="warning" style={styles.button}> Win for Buyout Price </Button></Col>
+            </Row>
+            </div>
+        : enableBid = <div></div>
         
         return(
             <div style={styles.text}>
@@ -139,41 +171,10 @@ class DetailProductBidStatus extends Component{
                     <Row><Col style={styles.title}><span>Seller</span></Col></Row>
                     <Row style={styles.contains}><Col><span>{this.props.seller}</span></Col></Row>
                     <hr/>
-                    <Row style={styles.contains}>
-                        <Col><span>Bid Increment : <NumberFormat value={this.props.bids_multiply} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} /> </span></Col>
-                    </Row>
+                    
                     {/* <CurrencyInput className="form-control" value={this.state.amount} onChangeEvent={this.handleChangeCurrencyInput} onClick={this.handleClick}/> */}
-                    <Row style={styles.contains}>
-                        <Col >
-                            <Form lg="6">
-                            {/* <NumberFormat
-                            isNumericString = {true}
-                            onChange={this.handleChange}
-                            type="text"
-                            name="bid_nominal"
-                            id="bid_nominal"
-                            placeholder="IDR."
-                            thousandSeparator={true} prefix={'$'} /> */}
-                                <Input
-                                    onChange={this.handleChange}
-                                    type="number"
-                                    name="bid_nominal"
-                                    id="bid_nominal"
-                                    placeholder="IDR."
-                                    step={this.props.bids_multiply}
-                                    min={startBid}
-                                />
-                            </Form>
-                        </Col>
-                    </Row>
-                    <Row style={styles.contains}> 
-                        <Col>
-                            <Button style={styles.button} onClick={this.handleSubmit}> Bid Now</Button>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col><Button color="warning" style={styles.button}> Win for Buyout Price </Button></Col>
-                    </Row>
+                    
+                    {enableBid}
                 </Container>
             </div>
         )
