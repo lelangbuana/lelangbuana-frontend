@@ -114,13 +114,12 @@ class Home extends Component {
     render() {
         let listAuction = this.state.auctions.map((item, index) => {
 
-            // if (item.status == 'ongoing')
-            {
                 return (
                     <Link
                         key={index}
                         to={`/auctions/${item.user}`}
                         params={{ id: item.user }}
+                        status={item.status}
                     >
                         <CardAuction
                             key={item.title + index}
@@ -132,7 +131,7 @@ class Home extends Component {
                         />
                     </Link>
                 )
-            }
+            
         })
 
         let listCategories = categories.map(this.createCategories)
