@@ -29,14 +29,7 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-<<<<<<< HEAD
 const currentTime = moment()
-=======
-
-let highest_bid = 0
-
-const nowDate = moment().format('ll');
->>>>>>> 293a2cb65f7f25b479796ce6fd5afde8b942496e
 
 let highest_bid = 0
 const nowDate = moment().format('ll');
