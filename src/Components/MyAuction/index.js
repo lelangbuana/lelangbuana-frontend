@@ -15,6 +15,13 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
+const styles = {
+    image : {
+        width : '150px',
+        height : '120px'
+    }
+}
+
 class MyAuction extends Component {
     
     constructor(props) {
@@ -80,7 +87,7 @@ class MyAuction extends Component {
                 <ListGroupItem onClick={this.toggle}>
                     <Media>
                         <Media left href="">
-                            <Media
+                            <Media style={styles.image}
                                 object
                                 src={item.item_photo}
                                 alt="Generic placeholder image"

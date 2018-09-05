@@ -27,27 +27,31 @@ const mapStateToProps = state => {
 
 
 class MakeAuction extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            user_id: '',
+            title: '',
+            item_condition: '',
+            item_description: '',
+            quantity: '',
+            start_bid: '',
+            max_bid: '',
+            min_bid: '',
+            bids_multiply: '',
+            start_date: '',
+            end_date: '',
+            item_photo: '',
+            status: ''
+        }
+      }
+    
     static get propTypes() {
         return {
             children: PropTypes.any,
             dispatch: PropTypes.any,
             auction: PropTypes.object
         }
-    }
-    state = {
-        user_id: '',
-        title: '',
-        item_condition: '',
-        item_description: '',
-        quantity: '',
-        start_bid: '',
-        max_bid: '',
-        min_bid: '',
-        bids_multiply: '',
-        start_date: '',
-        end_date: '',
-        item_photo: '',
-        status: ''
     }
 
     handleChange = event => {

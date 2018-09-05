@@ -33,7 +33,9 @@ const request = axios.create({
 // const currentTime = moment()
 
 // let highest_bid = 0
+
 const nowDate = moment().format('ll');
+
 
 class DetailProductListProduct extends Component {
 
@@ -83,10 +85,10 @@ class DetailProductListProduct extends Component {
                     Highest Bidder : <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
                 </ListGroupItem>
                 <ListGroupItem>
-                    Opening Time : {this.props.openingTime}
+                    Opening Time : {moment(this.props.openingTime).format('lll')}
                 </ListGroupItem>
                 <ListGroupItem>
-                    Closing Time : {this.props.endTime}
+                    Closing Time : {moment(this.props.endTime).format('lll')}
                 </ListGroupItem>
                 <ListGroupItem>Current Time: {nowDate} </ListGroupItem>
                 <ListGroupItem>Auction ID : {this.props.auctionID}</ListGroupItem>

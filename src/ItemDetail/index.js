@@ -100,7 +100,13 @@ class ItemDetail extends Component {
                     start_bid: response.data.start_bid,
                     bids_multiply: response.data.bids_multiply,
                     username: response.data.user.username,
+
+                    item_description : response.data.item_description,
+                    phone_number: response.data.user.phone_number,
+                    address: response.data.user.address,
+
                     status: response.data.status
+
                         }
                      })
                     })
@@ -152,13 +158,23 @@ class ItemDetail extends Component {
     render() {
         console.log("PROPS STATUS: ", this.props.status)
         let listCategories = categories.map(this.createCategories)
+        let profiles
+        if (localStorage.getItem('token')){
+            profiles = <div>
+            <Profile/>
+            <br/>
+            </div>
+        }
+        else {
+            profiles = <div></div>
+        }
+
         return (
             <div style={styles.space}>
                 <Container fluid>
                     <Row>
                         <Col sm="3">
-                            <Profile />
-                            <br />
+                            {profiles}
                             {listCategories}
                         </Col>
 
