@@ -31,7 +31,7 @@ class Categories extends Component {
 
     createCategory(item, index) {
         return (
-            <ListGroupItem key={index} action>
+            <ListGroupItem key={index} >
                 {item}
             </ListGroupItem>
         )
@@ -44,7 +44,7 @@ class Categories extends Component {
         return (
             <div>
                 <ListGroup>
-                    <ListGroupItem onClick={this.toggle} action>
+                    <ListGroupItem onClick={this.toggle} >
                         {this.props.name}
                     </ListGroupItem>
                     <Collapse isOpen={this.state.collapse}>

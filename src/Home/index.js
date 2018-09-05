@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import CardAuction from '../Components/CardAuction'
 import Categories from '../Components/Categories'
+import Profile from '../Components/Profile'
 
 import { Container, Row, Col } from 'reactstrap'
 
@@ -174,12 +175,26 @@ class Home extends Component {
         })
 
         let listCategories = categories.map(this.createCategories)
+
+        let profiles
+        if (localStorage.getItem('token')){
+            profiles = <div>
+            <Profile/>
+            <br/>
+            </div>
+        }
+        else {
+            profiles = <div></div>
+        }
         return (
             <div style={styles.space}>
                 <Container fluid>
                     <Row>
-                        <Col sm="2">{listCategories}</Col>
-                        <Col sm="10">
+                        <Col sm="3">
+                            {profiles}
+                            {listCategories}       
+                        </Col>
+                        <Col sm="9">
                             <Row>{listAuction}</Row>
                         </Col>
                     </Row>

@@ -14,7 +14,6 @@ class NavBar extends React.Component {
     render() {
         let button,register
         if (localStorage.getItem('token')) {
-            
             button = <NavItem>
                 <NavLink className="text-white btn" to="/logout" onClick={() => {
                     localStorage.removeItem('token')
@@ -50,22 +49,6 @@ class NavBar extends React.Component {
                     <Nav className="ml-auto" navbar>
                         {button}
                         {register}
-                        
-                        <NavItem>
-                            <NavLink className="text-white btn" to="/create">
-                                Create Auction
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="text-white btn" to="/myauction">
-                                My Auction
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="text-white btn" to="/mybid">
-                                My Bid
-                            </NavLink>
-                        </NavItem>
                     </Nav>
                 </Navbar>
             </div>

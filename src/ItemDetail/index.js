@@ -153,13 +153,23 @@ class ItemDetail extends Component {
     }
     render() {
         let listCategories = categories.map(this.createCategories)
+        let profiles
+        if (localStorage.getItem('token')){
+            profiles = <div>
+            <Profile/>
+            <br/>
+            </div>
+        }
+        else {
+            profiles = <div></div>
+        }
+
         return (
             <div style={styles.space}>
                 <Container fluid>
                     <Row>
                         <Col sm="3">
-                            <Profile />
-                            <br />
+                            {profiles}
                             {listCategories}
                         </Col>
 

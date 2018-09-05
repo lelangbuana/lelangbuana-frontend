@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Media, ListGroup, ListGroupItem, Button } from 'reactstrap'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 
 const request = axios.create({
     baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
@@ -53,12 +54,13 @@ class Profile extends Component {
                     </Media>
                     
                 </ListGroupItem>
-                <Button color="warning"> Create An Auction</Button>
-                <ListGroupItem tag="a" href="" action>Home</ListGroupItem>
-                <ListGroupItem tag="a" href="" action>My Bid</ListGroupItem>
-                <ListGroupItem tag="a" href="" action>My Auction</ListGroupItem>
-                <ListGroupItem tag="a" href="" action>Setting Profile</ListGroupItem>
-                <ListGroupItem tag="a" href="" action>Logout</ListGroupItem>
+                <Button color="warning" size="lg"><Link 
+                    className="text-white" to="/create">Create Auction
+                </Link></Button>
+                <ListGroupItem><Link className="text-dark" to="/" >Home</Link></ListGroupItem>
+                <ListGroupItem><Link className="text-dark" to="/mybid" > My Bid </Link></ListGroupItem>
+                <ListGroupItem><Link className="text-dark" to="/myauction" > My Auction </Link></ListGroupItem>
+                <ListGroupItem tag="a" href="" >Setting Profile</ListGroupItem>
             </ListGroup>
         )
     }

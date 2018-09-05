@@ -1,15 +1,17 @@
 import React,{Component} from 'react'
-import { Card, CardImg, CardBody,CardDeck} from 'reactstrap'
+import { Card, CardImg, CardBody} from 'reactstrap'
 
 
 const styles = {
     margins: {
         marginRight: '35px',
-        marginBottom: '25px'
+        marginBottom: '25px',
+        width: '250px',
+        height: '350px'
     },
     sizes: {
-        width: '220px', 
-        height: '230px'
+        width: '200px', 
+        height: '200px'
     }
 }
 
@@ -17,21 +19,18 @@ class CardAuction extends Component {
     render() {
         return (
             <div
-                style={styles.margins}
                 title={this.props.title}>
-                <CardDeck>
-                    <Card body className="text-center" onClick={this.props.onClick}>
-                        <CardImg
-                            top
-                            style={styles.sizes}
-                            src={this.props.src}
-                            alt="Card image cap"
-                        />
-                        <CardBody>
-                            <span>{this.props.title}</span>
-                        </CardBody>
-                    </Card>
-                </CardDeck>
+                <Card style={styles.margins} body className="text-center" onClick={this.props.onClick}>
+                    <CardImg
+                        top
+                        style={styles.sizes}
+                        src={this.props.src}
+                        alt="Card image cap"
+                    />
+                    <CardBody>
+                        <span>{this.props.title}</span>
+                    </CardBody>
+                </Card>
             </div>
         )
     }

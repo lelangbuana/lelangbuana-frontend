@@ -47,7 +47,6 @@ const keys = {
     filestackKey : 'AQulXUyRXS1GqTZvYuubfz'
 }
 
-let startDate = moment()
 
 class CreateAnAuction1 extends Component {
     constructor (props) {
@@ -62,13 +61,12 @@ class CreateAnAuction1 extends Component {
         max_bid: 0,
         min_bid: 0,
         bids_multiply: 0,
-        start_date: startDate,
-        end_date: '',
+        start_date: moment(),
+        end_date: moment(),
         item_photo: '',
         status: 'ongoing',
         category_id: '1',
         selectedFile : null
-        
         };
         this.handleChangeDate = this.handleChangeDate.bind(this);
       }
@@ -204,7 +202,7 @@ class CreateAnAuction1 extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="startdate">Start date</Label>                
+                                <Label for="startdate">Start date</Label> 
                                 <DatePicker
                                     name="start_date"
                                     id="start_date"
@@ -222,7 +220,7 @@ class CreateAnAuction1 extends Component {
                                     onChange={this.handleChangeDate}
                                     showTimeSelect
                                     timeFormat="HH:mm"
-                                    timeIntervals={15}
+                                    timeIntervals={30}
                                     dateFormat="lll"
                                     timeCaption="time"
                                 />
