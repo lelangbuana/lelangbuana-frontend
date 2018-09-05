@@ -57,13 +57,16 @@ class Home extends Component {
             })
             .then(data => {
                 data.forEach(item => {
+                    console.log("AUCTION STATUS: ", item.status);
+                    
                     this.setState(prevState => {
                         return {
                             auctions: prevState.auctions.concat({
                                 user: item.auction_id,
                                 title: item.title,
                                 src: item.item_photo,
-                                description: item.item_description
+                                description: item.item_description,
+                                status: item.status
                             })
                         }
                     })
@@ -110,21 +113,26 @@ class Home extends Component {
 
     render() {
         let listAuction = this.state.auctions.map((item, index) => {
-            return (
-                <Link
-                    key={index}
-                    to={`/auctions/${item.user}`}
-                    params={{ id: item.user }}
-                >
-                    <CardAuction
-                        key={item.title + index}
-                        user={item.user}
-                        title={item.title}
-                        src={item.src}
-                        description={item.description}
-                    />
-                </Link>
-            )
+
+            // if (item.status == 'ongoing')
+            {
+                return (
+                    <Link
+                        key={index}
+                        to={`/auctions/${item.user}`}
+                        params={{ id: item.user }}
+                    >
+                        <CardAuction
+                            key={item.title + index}
+                            user={item.user}
+                            title={item.title}
+                            src={item.src}
+                            description={item.description}
+                            status={item.status}
+                        />
+                    </Link>
+                )
+            }
         })
 
         let listCategories = categories.map(this.createCategories)

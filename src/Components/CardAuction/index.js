@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardImg, CardBody, CardTitle } from 'reactstrap'
+import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from 'reactstrap'
 
 const styles = {
     margins: {
@@ -29,7 +29,7 @@ class CardAuction extends React.Component {
                     />
                     <CardBody>
                         <CardTitle>{this.props.title}</CardTitle>
-                        {/* <CardSubtitle>Description</CardSubtitle> */}
+                        <CardSubtitle>{this.props.status}</CardSubtitle>
                         {/* <CardText>{this.props.description}</CardText> */}
                     </CardBody>
                 </Card>
