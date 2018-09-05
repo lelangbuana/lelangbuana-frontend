@@ -43,13 +43,6 @@ const categories = [
 
 class Home extends Component {
 
-    state = {
-        // bidData: 0,
-        // auction_id: this.props.auctionID,
-        // max_bid : 0,
-        highest_bid: this.props.highest_bid
-    }
-
     addItem(item) {
         this.setState(prevState => {
             return {
@@ -67,24 +60,24 @@ class Home extends Component {
             .then(data => {
                 data.forEach(item => {
 
-                    console.log("AUCTION_ID : ", item.auction_id);
+                    console.log('AUCTION_ID : ', item.auction_id)
                     
                     request
-                    .get(`/bids/auction_id/${item.auction_id}`)
-                    .then(response => {
+                        .get(`/bids/auction_id/${item.auction_id}`)
+                        .then(response => {
                         // const bids = []
                         // bids.push(response.data.bidData)
-                        response.data.bidData.map((item,index) => {
-                            if (item.bids_nominal>=this.state.highest_bid) 
-                            {
-                                this.state.highest_bid = item.bids_nominal
-                            }
+                            response.data.bidData.map((item,index) => {
+                                if (item.bids_nominal>=this.state.highest_bid) 
+                                {
+                                    this.state.highest_bid = item.bids_nominal
+                                }
                             
-                            return ( 
-                                this.state.highest_bid
-                            )
-                        })
-                        console.log("HIGHEST BID : ", this.state.highest_bid);
+                                return ( 
+                                    this.state.highest_bid
+                                )
+                            })
+                            console.log('HIGHEST BID : ', this.state.highest_bid)
                         
                             // this.setState(() => {
                             //     return { 
@@ -128,7 +121,11 @@ class Home extends Component {
         super(props)
         this.createCategories = this.createCategories.bind(this)
         this.state = {
-            auctions: []
+            auctions: [],
+            title: this.props.title,
+            src: this.props.src,
+            description: this.props.description,
+            highest_bid: this.props.highest_bid
         }
     }
     static get propTypes() {
@@ -142,11 +139,7 @@ class Home extends Component {
         }
     }
 
-    state = {
-        title: this.props.title,
-        src: this.props.src,
-        description: this.props.description
-    }
+    
 
     createCategories(item, index) {
         return (
@@ -161,23 +154,23 @@ class Home extends Component {
     render() {
         let listAuction = this.state.auctions.map((item, index) => {
 
-                return (
-                    <Link
-                        key={index}
-                        to={`/auctions/${item.user}`}
-                        params={{ id: item.user }}
+            return (
+                <Link
+                    key={index}
+                    to={`/auctions/${item.user}`}
+                    params={{ id: item.user }}
+                    status={item.status}
+                >
+                    <CardAuction
+                        key={item.title + index}
+                        user={item.user}
+                        title={item.title}
+                        src={item.src}
+                        description={item.description}
                         status={item.status}
-                    >
-                        <CardAuction
-                            key={item.title + index}
-                            user={item.user}
-                            title={item.title}
-                            src={item.src}
-                            description={item.description}
-                            status={item.status}
-                        />
-                    </Link>
-                )
+                    />
+                </Link>
+            )
             
         })
 
@@ -186,8 +179,8 @@ class Home extends Component {
         let profiles
         if (localStorage.getItem('token')){
             profiles = <div>
-            <Profile/>
-            <br/>
+                <Profile/>
+                <br/>
             </div>
         }
         else {
