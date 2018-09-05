@@ -162,7 +162,7 @@ class DetailProductBidStatus extends Component{
         let end = Date.parse(this.props.end_date)
         let start = Date.parse(this.props.start_date)
 
-        now<=end
+        now<=end && this.props.status === "ongoing"
         ? enableCountDown = <Countdown  date={ start + (end-start)}><h3>CLOSED</h3></Countdown>
         : enableCountDown = <h3>CLOSED</h3>
         
