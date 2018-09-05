@@ -11,7 +11,8 @@ const mapStateToProps = (state,props) => {
     return {
         bidData: state.auction.bidData,
         max_bid: state.auction.max_bid,
-        highest_bid: state.auction.highest_bid
+        highest_bid: state.auction.highest_bid,
+        bids: state.auction.bids
     }
 }
 
@@ -28,10 +29,10 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-const bids = []
-let highest_bid = 0
-
 const currentTime = moment()
+
+let highest_bid = 0
+const nowDate = moment().format('ll');
 
 class DetailProductListProduct extends Component {
 
@@ -52,37 +53,38 @@ class DetailProductListProduct extends Component {
     }
 
     componentDidMount() {
-        request
-        .get(`/bids/auction_id/${this.props.params}`)
-        .then(response => {
+        // request
+        // .get(`/bids/auction_id/${this.props.params}`)
+        // .then(response => {
+        //     bids.push(response.data.bidData)
             
-            bids.push(response.data.bidData)
-            response.data.bidData.map((item,index) => {
-                if (item.bids_nominal>=highest_bid) 
-                {
-                    highest_bid = item.bids_nominal
-                }
+        //     response.data.map((item,index) => {
+        //         console.log("BID DATA: ", item);
+        //         if (item.bids_nominal>=highest_bid) 
+        //         {
+        //             highest_bid = item.bids_nominal
+        //         }
                 
-                return ( 
-                    highest_bid
-                )
-            })
-                this.setState(() => {
-                    return { 
-                        bidData: response.data.bidData.length,
-                        highest_bid: highest_bid
-                    }
-                })
-                this.props.dispatch({
-                    type: 'UPDATE_BID_AUCTION',
-                    payload: {
-                      highest_bid: this.state.highest_bid
-                    }
-                  })
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        //         return ( 
+        //             highest_bid
+        //         )
+        //     })
+        //         this.setState(() => {
+        //             return { 
+        //                 bidData: response.data.length,
+        //                 highest_bid: highest_bid
+        //             }
+        //         })
+        //         this.props.dispatch({
+        //             type: 'UPDATE_BID_AUCTION',
+        //             payload: {
+        //               highest_bid: this.state.highest_bid
+        //             }
+        //           })
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
             
         request
         .get(`/auctions/${this.props.params}`)
@@ -107,7 +109,7 @@ class DetailProductListProduct extends Component {
                 <ListGroupItem>
                     Opening Price : {this.props.openingPrice}
                 </ListGroupItem>
-                <ListGroupItem>Number of Bid : {this.state.bidData}</ListGroupItem>
+                <ListGroupItem>Number of Bid : {this.props.bids}</ListGroupItem>
                 <ListGroupItem>
                     Highest Bidder : {this.props.highest_bid}
                 </ListGroupItem>
@@ -117,14 +119,12 @@ class DetailProductListProduct extends Component {
                 <ListGroupItem>
                     Closing Time : {this.props.endTime}
                 </ListGroupItem>
-                <ListGroupItem>Current Time : {currentTime.format('ll')}</ListGroupItem>
+                <ListGroupItem>Current Time: {nowDate} </ListGroupItem>
                 <ListGroupItem>Auction ID : {this.props.auctionID}</ListGroupItem>
                 <ListGroupItem>
                     Item Condition : {this.props.condition}
                 </ListGroupItem>
                 <ListGroupItem>Shipping Paid By : Customer</ListGroupItem>
-                {/* <Timer open={this.props.openingTime} close={this.props.endTime}/> */}
-                {/* <Countdown date={ Date.now() + (Date.parse(this.props.endTime) - Date.parse(this.props.openingTime))}/> */}
                 <hr />
             </ListGroup>
         )

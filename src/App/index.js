@@ -65,7 +65,8 @@ const initialState = {
         status: '',
         created_at: '',
         user_id: 0,
-        highest_bid:0
+        highest_bid:0,
+        bids:0
     },
     bidData: {
         bid_id: 0,
@@ -122,7 +123,9 @@ const reducer = (state = initialState, action) => {
                 ...state.auction,
                 auction_id: action.payload.auction_id,
                 user_id: action.payload.user_id,
-                max_bid: action.payload.max_bid
+                max_bid: action.payload.max_bid,
+                start_bid: action.payload.start_bid,
+                bids_multiply: action.payload.bids_multiply
             }
         }
     }
@@ -136,17 +139,6 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
-    // case 'CREATE_AUCTION': {
-    //     return {
-    //         ...state,
-    //         auction:{
-    //             ...state.auction,
-    //             auction_id: action.payload.auction_id,
-    //             user_id: action.payload.user_id,
-    //             max_bid: action.payload.max_bid
-    //         }
-    //     }
-    // }
     case 'UPDATE_BID_AUCTION': {
         return {
             ...state,
@@ -154,6 +146,17 @@ const reducer = (state = initialState, action) => {
                 
                 ...state.auction,
                 highest_bid: action.payload.highest_bid
+            }
+            
+        }
+    }
+    case 'UPDATE_BID_AMOUNT': {
+        return {
+            ...state,
+            auction: {
+                
+                ...state.auction,
+                bids: action.payload.bids
             }
             
         }
