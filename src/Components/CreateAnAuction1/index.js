@@ -3,6 +3,10 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactFilestack from 'filestack-react'
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 import {
     Button,
@@ -44,6 +48,34 @@ const keys = {
 }
 
 class CreateAnAuction1 extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+        user_id: 0,
+        title: '',
+        item_condition: '',
+        item_description: '',
+        quantity: 0,
+        start_bid: 0,
+        max_bid: 0,
+        min_bid: 0,
+        bids_multiply: 0,
+        start_date: moment(),
+        item_photo: '',
+        status: 'ongoing',
+        category_id: '1',
+        selectedFile : null,
+        end_date: moment()
+        };
+        this.handleChangeDate = this.handleChangeDate.bind(this);
+      }
+
+      handleChangeDate(date) {
+        this.setState({
+            end_date: date
+        });
+    }
+    
     static get propTypes() {
         return {
             children: PropTypes.any,
@@ -51,42 +83,31 @@ class CreateAnAuction1 extends Component {
             auction: PropTypes.object
         }
     }
-    state = {
-        user_id: 1,
-        title: '',
-        item_condition: '',
-        item_description: 'BNWB',
-        quantity: 0,
-        start_bid: 5000,
-        max_bid: 0,
-        min_bid: 0,
-        bids_multiply: 0,
-        start_date: "2018-09-01T03:00:00.000Z",
-        end_date: '2018-09-30T03:00:00.000Z',
-        item_photo: '',
-        status: 'ongoing',
-        category_id: "1",
-        selectedFile : null
-    }
+
+    // state = {
+        
+    // }
+    
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
     }
 
+    
     handleSubmit = event => {
         event.preventDefault()
 
         const payload = {
-            user_id: this.state.user_id,
+            user_id: localStorage.getItem("user_id"),
             title: this.state.title,
             item_condition: this.state.item_condition,
             item_description: this.state.item_description,
             quantity: this.state.quantity,
-            start_bid: this.state.start_bid,
+            start_bid: this.state.min_bid,
             max_bid: this.state.max_bid,
             min_bid: this.state.min_bid,
             bids_multiply: this.state.bids_multiply,
             start_date: this.state.start_date,
-            end_date: this.state.end_date,
+            end_date: this.state.end_date._d,
             item_photo: this.state.url,
             status: this.state.status,
             category_id : this.state.category_id
@@ -132,7 +153,7 @@ class CreateAnAuction1 extends Component {
       onError = (error) => {
         console.error('error', error);
     } 
-    
+
     render() {
         return (
             <Container>
@@ -184,39 +205,33 @@ class CreateAnAuction1 extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="closingdate">Closing date</Label>
-                                {/* <Input type="date" name="closingdate" id="closingdate" placeholder="" /> */}
-                                <Input
-                                    onChange={this.handleChange}
-                                    type="date"
+                                <Label for="closingdate">Closing date</Label>                
+                                <DatePicker
                                     name="end_date"
                                     id="end_date"
-                                    placeholder="Closing Date"
+                                    // dateFormat="YYYY/MM/DD"
+                                    isClearable={true}
+                                    selected={this.state.end_date}
+                                    onChange={this.handleChangeDate}
                                 />
                             </FormGroup>
-                            {/* <FormGroup>
-                                <Label for="closingtime">Closing Time</Label>
-                                <Input type="time" name="closingtime" id="closingtime" placeholder="" />
-                            </FormGroup> */}
                             <FormGroup>
                                 <Label for="item_condition">
                                     Item Condition
                                 </Label>
-                                {/* <Input type="select" name="itemcondition" id="itemcondition">
-                                    <option>New</option>
+                                <Input
+                                onChange={this.handleChange} 
+                                type="text" 
+                                name="item_condition" 
+                                id="item_condition"
+                                placeholder="Item Condition">
+                                    {/* <option>New</option>
                                     <option>Refurbished</option>
                                     <option>Used - Like New</option>
                                     <option>Used - Very Good</option>
                                     <option>Used - Good</option>
-                                    <option>Unacceptable</option>
-                                </Input> */}
-                                <Input
-                                    onChange={this.handleChange}
-                                    type="text"
-                                    name="item_condition"
-                                    id="item_condition"
-                                    placeholder="Item Condition"
-                                />
+                                    <option>Unacceptable</option> */}
+                                </Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label for="bidincrement">
@@ -243,7 +258,12 @@ class CreateAnAuction1 extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="itemdesc">Item Description</Label>
-                                <Input type="textarea" name="text" id="exampleText" />
+                                <Input 
+                                onChange={this.handleChange}
+                                type="textarea" 
+                                name="item_description" 
+                                id="item_description"
+                                placeholder="Maximum 300 Character" />
                             </FormGroup>
                         <FormGroup>
                             <Label for="image">

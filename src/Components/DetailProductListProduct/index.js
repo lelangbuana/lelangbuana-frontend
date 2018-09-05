@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import moment from 'moment'
 
 import { ListGroup, ListGroupItem } from 'reactstrap'
 
@@ -30,6 +31,8 @@ const request = axios.create({
 const bids = []
 let highest_bid = 0
 
+const currentTime = moment()
+
 class DetailProductListProduct extends Component {
 
     state = {
@@ -39,7 +42,7 @@ class DetailProductListProduct extends Component {
         highest_bid: this.props.highest_bid
     }
 
-    static get propTypes() {
+    static get propTypes(){
         return {
             children: PropTypes.any,
             dispatch: PropTypes.any,
@@ -80,6 +83,21 @@ class DetailProductListProduct extends Component {
             .catch(error => {
                 console.log(error)
             })
+            
+        request
+        .get(`/auctions/${this.props.params}`)
+        .then(response => {
+            this.props.dispatch({
+                type: 'SET_REMAINING_TIME',
+                payload: {
+                    start_date: response.data.start_date,
+                    end_date: response.data.end_date
+                }
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render() {
@@ -99,12 +117,14 @@ class DetailProductListProduct extends Component {
                 <ListGroupItem>
                     Closing Time : {this.props.endTime}
                 </ListGroupItem>
-                <ListGroupItem>Current Time</ListGroupItem>
+                <ListGroupItem>Current Time : {currentTime.format('ll')}</ListGroupItem>
                 <ListGroupItem>Auction ID : {this.props.auctionID}</ListGroupItem>
                 <ListGroupItem>
                     Item Condition : {this.props.condition}
                 </ListGroupItem>
-                <ListGroupItem>Shipping Paid By</ListGroupItem>
+                <ListGroupItem>Shipping Paid By : Customer</ListGroupItem>
+                {/* <Timer open={this.props.openingTime} close={this.props.endTime}/> */}
+                {/* <Countdown date={ Date.now() + (Date.parse(this.props.endTime) - Date.parse(this.props.openingTime))}/> */}
                 <hr />
             </ListGroup>
         )

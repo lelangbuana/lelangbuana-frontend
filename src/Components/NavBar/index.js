@@ -12,6 +12,30 @@ const styles = {
 
 class NavBar extends React.Component {
     render() {
+        let button,register
+        if (localStorage.getItem('token')) {
+            
+            button = <NavItem>
+                <NavLink className="text-white btn" to="/logout" onClick={() => {
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('user_id')
+                }}>
+            Logout
+                </NavLink>
+            </NavItem>
+        } else {
+            button = <NavItem>
+                <NavLink className="text-white btn" to="/login">
+            Login
+                </NavLink>
+            </NavItem>
+            register = <NavItem>
+                <NavLink className="text-white btn" to="/register">
+                Register
+                </NavLink>
+            </NavItem>
+        }
+      
         return (
             <div>
                 <Navbar style={styles.navbar} expand="md">
@@ -24,16 +48,9 @@ class NavBar extends React.Component {
                     </NavbarBrand>
 
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink className="text-white btn" to="/login">
-                                Login
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink className="text-white btn" to="/reg">
-                                Register
-                            </NavLink>
-                        </NavItem>
+                        {button}
+                        {register}
+                        
                         <NavItem>
                             <NavLink className="text-white btn" to="/create">
                                 Create Auction

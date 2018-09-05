@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route,withRouter } from 'react-router-dom'
-import axios from 'axios'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Home from '../Home'
 import Login from '../Login'
@@ -17,13 +16,6 @@ import PrivateRoute from '../PrivateRoute'
 import NavBar from '../Components/NavBar'
 import Footer from '../Components/Footer'
 
-
-
-const request = axios.create({
-    baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
-    timeout: 10000,
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('token') }
-})
 
 const styles = {
     body: {
@@ -134,6 +126,16 @@ const reducer = (state = initialState, action) => {
             }
         }
     }
+    case 'SET_REMAINING_TIME': {
+        return {
+            ...state,
+            auction:{
+                ...state.auction,
+                start_date: action.payload.start_date,
+                end_date: action.payload.end_date
+            }
+        }
+    }
     // case 'CREATE_AUCTION': {
     //     return {
     //         ...state,
@@ -189,38 +191,25 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-const AuthButton = withRouter(({ history }) => (
-    localStorage.getItem('token') ? (
-        <p>
-        Welcome! <button onClick={() => {
-                history.push('/')
-                localStorage.removeItem('token')
-                localStorage.removeItem('user_id')
-            }}>Sign out</button>
-        </p>
-    ) : (
-        <p>You are not logged in.</p>
-    )
-))
+
 
 class App extends Component {
     render() {
-        const token = localStorage.getItem('token')
-        console.log('TOKEN : ', token)
         return (
             <Provider store={store}>
                 <Router>
                     <div className="App" style={styles.body}>
                         <div>
                             <NavBar />
-                            <AuthButton/>
+                            {/* <AuthButton/> */}
                         </div>
                         <div style={styles.main}>
                             <Switch>
                                 <Route exact path="/debug" component={Debug} />
                                 <Route exact path="/" component={Home} />
                                 <Route path="/login" component={Login} />
-                                <Route path="/reg" component={Register} />
+                                <Route path="/logout" component={Login} />
+                                <Route path="/register" component={Register} />
                                 <Route
                                     path="/auctions/:id"
                                     component={ItemDetail}
@@ -239,7 +228,6 @@ class App extends Component {
                                     path="/myauction"
                                     component={MyAuctionDashboard}
                                 />
-                                {/* <PrivateRoute path='/protected' component={Protected} /> */}
                             </Switch>
                         </div>
                         <div>
