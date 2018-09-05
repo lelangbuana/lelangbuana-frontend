@@ -35,13 +35,16 @@ const mapStateToProps = (state,props) => {
         auction_id: state.auction.auction_id,
         user_id: state.user.user_id,
         max_bid: state.auction.max_bid,
+        start_bid: state.auction.start_bid,
         highest_bid: state.auction.highest_bid,
         login: state.user.login,
         username: state.user.login.username,
         start_date: state.auction.start_date,
-        end_date: state.auction.end_date
+        end_date: state.auction.end_date,
+        bids_multiply: state.auction.bids_multiply
     }
 }
+
 class DetailProductBidStatus extends Component{
 
     handleChange = (event,props) => {
@@ -52,6 +55,10 @@ class DetailProductBidStatus extends Component{
             max_bid: this.props.max_bid
         })
     }
+
+    tick(){
+        
+    }
     
     handleSubmit = event => {
         event.preventDefault()
@@ -60,7 +67,7 @@ class DetailProductBidStatus extends Component{
             bids_nominal: this.state.bid_nominal,
             auction_id: this.props.auction_id,
             user_id: localStorage.getItem('user_id'),
-            max_bid: this.state.max_bid
+            status: ""
         }
         console.log("PAYLOAD",payload);
         
@@ -82,6 +89,17 @@ class DetailProductBidStatus extends Component{
     }
 
     render(){
+
+        let startBid
+        if (this.props.highest_bid>=this.props.start_bid)
+        {
+            startBid = this.props.highest_bid + this.props.bids_multiply
+        } 
+        else 
+        {
+            startBid = this.props.start_bid + this.props.bids_multiply
+        }
+        
         return(
             <div style={styles.text}>
                 <Container >  
@@ -96,14 +114,14 @@ class DetailProductBidStatus extends Component{
                     </span>
                     </Col></Row>
                     <Row style={styles.contains}><Col><span>
-                    <Countdown date={ Date.now() + (Date.parse(this.props.end_date) - Date.parse(this.props.start_date))}/>
+                    <Countdown  date={ Date.now() + (Date.parse(this.props.end_date) - Date.parse(this.props.start_date))}/>
                         </span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Seller</span></Col></Row>
                     <Row style={styles.contains}><Col><span>{this.props.seller}</span></Col></Row>
                     <hr/>
                     <Row style={styles.contains}>
-                        <Col><span>Bid Increment : IDR. </span></Col>
+                        <Col><span>Bid Increment : {this.props.bids_multiply} </span></Col>
                     </Row>
                     <Row style={styles.contains}>
                         <Col >
@@ -114,8 +132,8 @@ class DetailProductBidStatus extends Component{
                                     name="bid_nominal"
                                     id="bid_nominal"
                                     placeholder="IDR."
-                                    step="5000"
-                                    min={this.props.highest_bid+5000}
+                                    step={this.props.bids_multiply}
+                                    min={startBid}
                                 />
                             </Form>
                         </Col>
