@@ -19,45 +19,51 @@ class Timer extends React.Component {
     }
   
     tick() {
-        request
-            .get(`/bids/auction_id/${this.props.params}`)
-            .then(response => {
-            
-            
-                response.data.map((item,index) => {
-                    if (item.bids_nominal>highest_bid) 
-                    {
-                        highest_bid = item.bids_nominal
-                        bids.push(response.data)
-                    }
+
+        if (this.props.status === 'ongoing')
+        {
+            request
+                .get(`/bids/auction_id/${this.props.params}`)
+                .then(response => {
                 
-                    return ( 
-                        highest_bid,
-                        bids
-                    )
+                
+                    response.data.map((item,index) => {
+                        if (item.bids_nominal>highest_bid) 
+                        {
+                            highest_bid = item.bids_nominal
+                            bids.push(response.data)
+                        }
+                    
+                        return ( 
+                            highest_bid,
+                            bids
+                        )
+                    })
+                    this.setState(() => {
+                        return { 
+                            bidData: response.data.length,
+                            highest_bid: highest_bid
+                        }
+                    })
+                    this.props.dispatch({
+                        type: 'UPDATE_BID_AUCTION',
+                        payload: {
+                            highest_bid: this.state.highest_bid,
+                        }
+                    })
+                    this.props.dispatch({
+                        type: 'UPDATE_BID_AMOUNT',
+                        payload: {
+                            bids: bids.length
+                        }
+                    })
                 })
-                this.setState(() => {
-                    return { 
-                        bidData: response.data.length,
-                        highest_bid: highest_bid
-                    }
+                .catch(error => {
+                    // console.log(error)
                 })
-                this.props.dispatch({
-                    type: 'UPDATE_BID_AUCTION',
-                    payload: {
-                        highest_bid: this.state.highest_bid,
-                    }
-                })
-                this.props.dispatch({
-                    type: 'UPDATE_BID_AMOUNT',
-                    payload: {
-                        bids: bids.length
-                    }
-                })
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        }
+
+        
         this.setState(prevState => ({
             seconds: prevState.seconds + 1
         }))
