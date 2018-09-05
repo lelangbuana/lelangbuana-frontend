@@ -99,7 +99,10 @@ class ItemDetail extends Component {
                     max_bid: this.state.max_bid,
                     start_bid: response.data.start_bid,
                     bids_multiply: response.data.bids_multiply,
-                    username: response.data.user.username
+                    username: response.data.user.username,
+                    item_description : response.data.item_description,
+                    phone_number: response.data.user.phone_number,
+                    address: response.data.user.address
                         }
                      })
                     })

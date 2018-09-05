@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactFilestack from 'filestack-react'
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
-
-import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment'
 
 import {
     Button,
@@ -18,6 +16,8 @@ import {
     Row,
     Col
 } from 'reactstrap'
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 const styles = {
     button : {
@@ -47,8 +47,7 @@ const keys = {
     filestackKey : 'AQulXUyRXS1GqTZvYuubfz'
 }
 
-const startDate = moment().format('ll')
-const endDate = moment().format('ll')
+let startDate = moment()
 
 class CreateAnAuction1 extends Component {
     constructor (props) {
@@ -63,12 +62,13 @@ class CreateAnAuction1 extends Component {
         max_bid: 0,
         min_bid: 0,
         bids_multiply: 0,
-        start_date: "",
+        start_date: startDate,
+        end_date: '',
         item_photo: '',
         status: 'ongoing',
         category_id: '1',
-        selectedFile : null,
-        end_date: ""
+        selectedFile : null
+        
         };
         this.handleChangeDate = this.handleChangeDate.bind(this);
       }
@@ -77,8 +77,9 @@ class CreateAnAuction1 extends Component {
         this.setState({
             end_date: date
         });
+
     }
-    
+
     static get propTypes() {
         return {
             children: PropTypes.any,
@@ -91,7 +92,6 @@ class CreateAnAuction1 extends Component {
         this.setState({ [event.target.name]: event.target.value })
     }
 
-    
     handleSubmit = event => {
         event.preventDefault()
 
@@ -105,8 +105,8 @@ class CreateAnAuction1 extends Component {
             max_bid: this.state.max_bid,
             min_bid: this.state.min_bid,
             bids_multiply: this.state.bids_multiply,
-            start_date: this.state.start_date._d,
-            end_date: this.state.end_date._d,
+            start_date: this.state.start_date,
+            end_date: this.state.end_date,
             item_photo: this.state.url,
             status: this.state.status,
             category_id : this.state.category_id
@@ -205,10 +205,11 @@ class CreateAnAuction1 extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="startdate">Start date</Label>                
-                                <DatePicker 
+                                <DatePicker
                                     name="start_date"
                                     id="start_date"
                                     selected={this.state.start_date}
+                                    dateFormat="lll"
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -219,6 +220,11 @@ class CreateAnAuction1 extends Component {
                                     isClearable={true}
                                     selected={this.state.end_date}
                                     onChange={this.handleChangeDate}
+                                    showTimeSelect
+                                    timeFormat="HH:mm"
+                                    timeIntervals={15}
+                                    dateFormat="lll"
+                                    timeCaption="time"
                                 />
                             </FormGroup>
                             <FormGroup>

@@ -30,7 +30,7 @@ const request = axios.create({
 })
 
 
-let highest_bid = 0
+// let highest_bid = 0
 
 const nowDate = moment().format('ll');
 

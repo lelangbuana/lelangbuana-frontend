@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { Card, CardImg, CardBody, CardTitle, CardDeck} from 'reactstrap'
+import { Card, CardImg, CardBody,CardDeck} from 'reactstrap'
 
 
 const styles = {
