@@ -29,9 +29,6 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-
-let highest_bid = 0
-
 const currentTime = moment()
 
 class DetailProductListProduct extends Component {

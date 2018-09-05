@@ -47,6 +47,10 @@ const mapStateToProps = (state,props) => {
 
 class DetailProductBidStatus extends Component{
 
+    componentDidMount(){
+        
+    }
+
     handleChange = (event,props) => {
         this.setState({ 
             [event.target.name]: event.target.value,
@@ -91,14 +95,24 @@ class DetailProductBidStatus extends Component{
     render(){
 
         let startBid
-        if (this.props.highest_bid>=this.props.start_bid)
-        {
-            startBid = this.props.highest_bid + this.props.bids_multiply
-        } 
-        else 
-        {
-            startBid = this.props.start_bid + this.props.bids_multiply
-        }
+        let enableCountDown
+        this.props.highest_bid>=this.props.start_bid
+        ? startBid = this.props.highest_bid + this.props.bids_multiply
+        : startBid = this.props.start_bid + this.props.bids_multiply
+
+        let now = Date.now()
+        let end = Date.parse(this.props.end_date)
+        let start = Date.parse(this.props.start_date)
+
+        now<=end
+        ? enableCountDown = <Countdown  date={ start + (end-start)}><h3>CLOSED</h3></Countdown>
+        : enableCountDown = <h3>CLOSED</h3>
+        
+        console.log("DATE NOW: ", now )
+        console.log("DATE OPEN: ", start )
+        console.log("DATE END: ", end )
+        console.log("COMPARISON : ", start + (end-start)) 
+               
         
         return(
             <div style={styles.text}>
@@ -114,7 +128,7 @@ class DetailProductBidStatus extends Component{
                     </span>
                     </Col></Row>
                     <Row style={styles.contains}><Col><span>
-                    <Countdown  date={ Date.now() + (Date.parse(this.props.end_date) - Date.parse(this.props.start_date))}/>
+                    {enableCountDown}
                         </span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Seller</span></Col></Row>
