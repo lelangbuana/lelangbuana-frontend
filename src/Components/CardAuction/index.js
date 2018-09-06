@@ -10,13 +10,13 @@ const styles = {
         // marginRight: '35px',
         marginBottom: '25px',
 
-        height: '350px'
+        height: '100%'
         
 
     },
     sizes: {
         width: '100%',
-        height: '250px'
+        height: '230px'
     }
 }
 
@@ -50,3 +50,4 @@ class CardAuction extends Component {
 
 
 export default CardAuction
+
