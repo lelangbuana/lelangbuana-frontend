@@ -14,9 +14,11 @@ const styles = {
         margin: '-.75rem -1.25rem',
         padding: '.75rem 1.25rem'
     },
-    size : {
-        width: '120px',
-        height: '120px'
+
+    size: {
+        width : '120px',
+        height : '120px'
+
     },
     text : {
         textAlign : 'center'
@@ -76,7 +78,7 @@ class Profile extends Component {
                 <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/" >Home</Link></ListGroupItem>
                 <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/mybid" > My Bid </Link></ListGroupItem>
                 {/* <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/myauction" > My Auction </Link></ListGroupItem> */}
-                <ListGroupItem tag="a" href="" >Setting Profile</ListGroupItem>
+                {/* <ListGroupItem tag="a" href="" >Setting Profile</ListGroupItem> */}
             </ListGroup>
         )
     }

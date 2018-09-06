@@ -3,7 +3,6 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
-import InfiniteScroll from 'react-infinite-scroller'
 
 import { Container, Row, Col, Button } from 'reactstrap'
 
@@ -64,49 +63,10 @@ class Home extends Component {
             .then(data => {
                 data.forEach(item => {
 
-                    // request
-                    //     .get(`/bids/auction_id/${item.auction_id}`)
-                    //     .then(response => {
-                            
-                            
-                    //         // const bids = []
-                    //         // bids.push(response.data)
-                    //         response.data.map((item,index) => {
-                    //             if (item.bids_nominal>=this.state.highest_bid) 
-                    //             {
-                    //                 // console.log('response: ', item.bids_nominal)
-                    //                 this.setState(() => {
-                    //                     return { 
-                    //                         highest_bid: item.bids_nominal
-                    //                     }
-                    //                 })
-                    //                 // this.state.highest_bid = item.bids_nominal
-                    //             }
-                            
-                    //             return ( 
-                    //                 this.state.highest_bid
-                    //             )
-                    //         })
-                    //         console.log('HIGHEST BID : ', this.state.highest_bid)
-                        
-                    //         this.setState(() => {
-                    //             return { 
-                    //                 bidData: response.data.length,
-                    //                 highest_bid: this.state.highest_bid
-                    //             }
-                    //         })
-                    //         this.props.dispatch({
-                    //             type: 'UPDATE_BID_AUCTION',
-                    //             payload: {
-                    //                 highest_bid: this.state.highest_bid
-                    //             }
-                    //         })
-                    //     })
-                    //     .catch(error => {
-                    //         console.log(error)
-                    //     })
 
-                    
+                    console.log('AUCTION_ID : ', item)
+  
+
                     this.setState(prevState => {
                         return {
                             auctions: prevState.auctions.concat({
@@ -200,6 +160,7 @@ class Home extends Component {
     
 
     render() {
+
         let listAuction
         if (this.state.statusValue) {
 
@@ -271,6 +232,7 @@ class Home extends Component {
                     </Col>
                 )
 
+
             })
         }
 
@@ -297,12 +259,7 @@ class Home extends Component {
                         </Col>
                         <Col sm="9">
                             <Row className="justify-context-center">
-                                {/* <InfiniteScroll>
-                                //     pageStart={0}
-                                //     loader={<div className="loader" key={0}>Loading ...</div>}
-                                // >
-                                    
-                                </InfiniteScroll> */}
+
                                 {listAuction}
                             </Row>
                         </Col>

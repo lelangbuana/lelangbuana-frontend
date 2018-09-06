@@ -32,7 +32,7 @@ const styles = {
     },
 
     tabs: {
-        marginTop: '4rem'
+        marginTop: '1rem'
     }
 }
 
@@ -165,7 +165,6 @@ class ItemDetail extends Component {
         )
     }
     render() {
-        console.log("HIGHEST BID: ", this.props.highest_bid)
         let listCategories = categories.map(this.createCategories)
         let profiles
         if (localStorage.getItem('token')){
@@ -193,10 +192,10 @@ class ItemDetail extends Component {
                             </Label>
 
                             <Row>
-                                <Col xs="4">
+                                <Col xs="12" sm="4">
                                     <ProductImage src={this.state.item_photo} />
                                 </Col>
-                                <Col xs="4">
+                                <Col xs="6" sm="4">
                                     <DetailProductListProduct
                                         quantity={this.state.quantity}
                                         openingPrice={this.state.start_bid}
@@ -208,7 +207,7 @@ class ItemDetail extends Component {
                                         params={this.props.match.params.id}
                                     />
                                 </Col>
-                                <Col xs="4">
+                                <Col xs="6" sm="4">
                                     <DetailProductBidStatus
                                         openingPrice={this.state.min_bid}
                                         buyOutPrice={this.state.max_bid}
