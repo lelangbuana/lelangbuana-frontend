@@ -17,6 +17,9 @@ const styles = {
     size : {
         width: '120px',
         height: '120px'
+    },
+    text : {
+        textAlign : 'center'
     }
 }
 
@@ -57,12 +60,12 @@ class Profile extends Component {
                     </Row>
                     <Row>
                         <Col></Col>
-                        <Col><span>{this.state.username}</span></Col>
+                        <Col style={styles.text}><span>{this.state.username}</span></Col>
                         <Col></Col>
                     </Row>
                     <Row>
                         <Col></Col>
-                        <Col><span>{this.state.phone_number}</span></Col>
+                        <Col style={styles.text}><span>{this.state.phone_number}</span></Col>
                         <Col></Col>
                     </Row>
                     
