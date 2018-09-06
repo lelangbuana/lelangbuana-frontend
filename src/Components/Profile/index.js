@@ -9,6 +9,13 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
+const styles = {
+    select : {
+        margin: '-.75rem -1.25rem',
+        padding: '.75rem 1.25rem'
+    }
+}
+
 class Profile extends Component {
 
     constructor(props) {
@@ -32,9 +39,7 @@ class Profile extends Component {
                     profile_photo: data.data.user.profile_photo
                 })
             })
-            .catch(error=>{console.log(error)})
-                                
-                            
+            .catch(error=>{console.log(error)})                     
     }
 
     render(){
@@ -55,11 +60,11 @@ class Profile extends Component {
                     
                 </ListGroupItem>
                 <Button color="warning" size="lg"><Link 
-                    className="text-white" to="/create">Create Auction
+                    className="text-white d-block" to="/create">Create Auction
                 </Link></Button>
-                <ListGroupItem><Link className="text-dark" to="/" >Home</Link></ListGroupItem>
-                <ListGroupItem><Link className="text-dark" to="/mybid" > My Bid </Link></ListGroupItem>
-                <ListGroupItem><Link className="text-dark" to="/myauction" > My Auction </Link></ListGroupItem>
+                <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/" >Home</Link></ListGroupItem>
+                <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/mybid" > My Bid </Link></ListGroupItem>
+                {/* <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/myauction" > My Auction </Link></ListGroupItem> */}
                 <ListGroupItem tag="a" href="" >Setting Profile</ListGroupItem>
             </ListGroup>
         )

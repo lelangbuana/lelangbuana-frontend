@@ -9,7 +9,7 @@ import Register from '../Register'
 import ItemDetail from '../ItemDetail'
 import MyBidDashboard from '../MyBidDashboard'
 import MakeAuction from '../MakeAuction'
-import MyAuctionDashboard from '../MyAuctionDashboard'
+// import MyAuctionDashboard from '../MyAuctionDashboard'
 import Debug from '../Debug'
 import PrivateRoute from '../PrivateRoute'
 
@@ -236,10 +236,10 @@ class App extends Component {
                                     path="/mybid"
                                     component={MyBidDashboard}
                                 />
-                                <PrivateRoute
+                                {/* <PrivateRoute
                                     path="/myauction"
                                     component={MyAuctionDashboard}
-                                />
+                                /> */}
                             </Switch>
                         </div>
                         <div>

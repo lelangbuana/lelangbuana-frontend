@@ -1,13 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {
-    Container,
-    ListGroup,
-    Collapse,
-    ListGroupItem,
-    Media,
-    Table
-} from 'reactstrap'
+
+import MainItem from './MainItem'
 
 const request = axios.create({
     baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
@@ -15,135 +9,110 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-const styles = {
-    image : {
-        width : '150px',
-        height : '120px'
-    }
-}
-
+let myBids = []
 class MyAuction extends Component {
     
     constructor(props) {
         super(props)
-        this.toggle = this.toggle.bind(this)
+        // this.toggle = this.toggle.bind(this)
         this.createAuctions = this.createAuctions.bind(this)
-        this.state = { collapse: false }
+        // this.state = { collapse: false }
         this.state = {
             max_bid: 0,
             min_bid: 0,
             highest_bid: 0,
-            myAuctions: []
+            myAuctions: [],
+            myBids:[],
+            username: '',
+            end_date:'',
+            already_request: false
 
         }
     }
 
     componentDidMount(){
+        // if (this.state.already_request){
+        //     return false
+        // }
+        //return false
+        // this.state.already_request = true
+        
         request
             .get(`/auctions/user_id/${localStorage.getItem('user_id')}`)
-            .then((response) => {return response})
+            .then((response) => response.data)
             .then(data => {
-                
-                data.data.forEach(item => {
-                    this.setState(prevState => {
-                        console.log(prevState.myAuctions)
-                        return {
-                            myAuctions: prevState.myAuctions.concat({
-                                title: item.title,
-                                max_bid: item.max_bid,
-                                min_bid: item.min_bid,
-                                item_photo: item.item_photo
-                            })
-                        }
-                    })
+                this.setState({
+                    myAuctions: data,
+                    already_request: true
                 })
-                console.log('AUCTIONS DATA: ', this.state.myAuctions)
+                // data.forEach(item => {
 
+                // request
+                //     .get(`/bids/auction_id/${item.auction_id}`)
+                //     .then(response => { 
+                            
+                //         const data = response.data.forEach(item => {
+                //             const { bids_nominal, username } = item
+                //             return {
+                //                 bids_nominal,
+                //                 username
+                //             }
+                //         })
+
+                //         this.setState({
+                //             myBids: data
+                //         })                            
+                //     })
+                //     .catch(error=> {error})
+                        
                 // this.setState(prevState => {
-                //     console.log(prevState.myBids)
-                
                 //     return {
-                //         myBids: prevState.myBids.concat({
-                //             bids_nominal: item.bids_nominal,
-                //             created_at: item.created_at,
-                //             auction_id: item.auction_id,
-                //             user_id: item.user_id,
-                //             title: data.title,
-                //             username: username
+                //         myAuctions: prevState.myAuctions.concat({
+                //             title: item.title,
+                //             max_bid: item.max_bid,
+                //             min_bid: item.min_bid,
+                //             item_photo: item.item_photo,
+                //             end_date : item.end_date,
+                //             bidData: this.state
                 //         })
                 //     }
                 // })
+                // })
+                //console.log('AUCTIONS DATA: ', this.state.myAuctions)
             })
-            .catch(error=>{console.log(error)})
+            .catch(error=>{console.log(error)})        
     }
 
-    toggle() {
-        this.setState({ collapse: !this.state.collapse })
-    }
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if (this.state.already_request){
+    //         console.log('helo')
+    //         return false
+    //     }
+    //     console.log('helo')
+    //     return true
+    // }
+    
 
-    createAuctions(item, index) {
-        return (
-            <ListGroup key={index}>
-                <ListGroupItem onClick={this.toggle}>
-                    <Media>
-                        <Media left href="">
-                            <Media style={styles.image}
-                                object
-                                src={item.item_photo}
-                                alt="Generic placeholder image"
-                            />
-                        </Media>
-                        <Media body>
-                            <Media heading>{item.title}</Media>
-                            <Media>
-                                <span>Expected Price : {item.max_bid} </span>
-                            </Media>
-                            <Media>
-                                <span>Current Price : </span>
-                            </Media>
-                            <Media>
-                                <span>From : {item.min_bid}</span>
-                            </Media>
-                        </Media>
-                    </Media>
-                </ListGroupItem>
-                <Collapse key={index} isOpen={this.state.collapse}>
-                    <Table hover>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Closed Date</th>
-                                <th>Closed Time</th>
-                                <th>User</th>
-                                <th>Bid Price</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Collapse>
-            </ListGroup>
-            
-        )
+    createAuctions(data, index) {
+        return <MainItem key={index} 
+            title={data.title}
+            max_bid={data.max_bid}
+            min_bid={data.min_bid}
+            item_photo={data.item_photo}
+            end_date = {data.end_date}
+            auction_id = { data.auction_id}
+        />
     }
 
     render() {
+        console.log('AUCTIONS DATA: ', this.state.myAuctions)
         let auctions = this.state.myAuctions.map(this.createAuctions)
+        // let bids = this.state.myBids.map(this.createBids)
         return (
-            <Container>
+            <div>
                 {auctions}
-            </Container>
+                {/* {bids} */}
+            </div>
         )
     }
 }

@@ -13,6 +13,7 @@
     "react-countdown-now": "^1.3.0",
     "react-datepicker": "^1.6.0",
     "react-dom": "^16.4.2",
+    "react-infinite-scroller": "^1.2.0",
     "react-localstorage": "^1.0.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
