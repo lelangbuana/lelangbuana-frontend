@@ -5,8 +5,9 @@ import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux'
 import {Row, Col, Form, 
     Input, Button,
-    UncontrolledTooltip} from 'reactstrap'
+    UncontrolledTooltip, Fade} from 'reactstrap'
 import moment from 'moment'
+import Loader from '../Assets/loader.gif'
 
 const styles = {
     text : {
@@ -57,14 +58,17 @@ class DetailProductBidStatus extends Component{
     constructor(props){
         super(props)
         this.state={
-            bids_nominal: 0
+            bids_nominal: 0,
+            loading:true
         }
     }
 
-    componentDidMount(){}
+    componentDidMount(){
+        setTimeout(() => this.setState({ loading: false }), 1500)
+    }
 
     getInitialState(){
-        return ({amount: "0.00"});
+        return ({amount:"0.00"});
     }
 
     handleChange = (event,props) => {
@@ -151,7 +155,12 @@ class DetailProductBidStatus extends Component{
     }
 
     render(){
+        const { loading } = this.state
 
+        if(loading) { // if your component doesn't have to wait for an async action, remove this block 
+            return <div className="text-center"><img src={Loader} alt="loading..." className="mx-auto d-block" /></div>  // render null when app is not ready
+        }
+        
         let startBid
         // let enableCountDown
         this.props.highest_bid>=this.props.start_bid

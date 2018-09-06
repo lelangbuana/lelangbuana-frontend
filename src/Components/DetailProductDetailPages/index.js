@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import axios from 'axios'
+import Loader from '../Assets/loader.gif'
 
 import {
     TabContent,
@@ -44,7 +45,8 @@ class DetailProductDetailPages extends React.Component {
         super(props)
         this.toggle = this.toggle.bind(this)
         this.state = {
-            activeTab: '1'
+            activeTab: '1',
+            loading: true
         }
     }
 
@@ -89,6 +91,11 @@ class DetailProductDetailPages extends React.Component {
     }
 
     render() {
+        const { loading } = this.state
+
+        if(loading) { // if your component doesn't have to wait for an async action, remove this block 
+            return <div className="text-center"><img src={Loader} alt="loading..." className="mx-auto d-block" /></div>  // render null when app is not ready
+        }
 
         let bids_histories= bids.map((item,index)=> {
             return (

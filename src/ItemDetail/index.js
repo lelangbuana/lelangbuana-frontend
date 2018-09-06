@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Timer from '../Components/Timer'
-
+import Loader from '../Components/Assets/loader.gif'
 import { Container, Row, Col, Label } from 'reactstrap'
 
 // import Categories from '../Components/Categories'
@@ -70,6 +70,7 @@ const mapStateToProps = state => {
 
 class ItemDetail extends Component {
     componentDidMount() {
+
         request
             .get(`/auctions/${this.props.match.params.id}`)
             .then(response => {
@@ -121,7 +122,7 @@ class ItemDetail extends Component {
             .catch(error => {
                 console.log(error)
             })
-            
+            setTimeout(() => this.setState({ loading: false }), 1500)
             
     }
 
@@ -152,7 +153,8 @@ class ItemDetail extends Component {
         src: this.props.src,
         description: this.props.description,
         max_bid: this.props.max_bid,
-        highestBid: this.props.highest_bid
+        highestBid: this.props.highest_bid,
+        loading: true
     }
 
     // createCategories(item, index) {
@@ -165,6 +167,11 @@ class ItemDetail extends Component {
     //     )
     // }
     render() {
+        const { loading } = this.state
+
+        if(loading) { // if your component doesn't have to wait for an async action, remove this block 
+            return <div className="text-center"><img src={Loader} alt="loading..." className="mx-auto d-block" /></div>  // render null when app is not ready
+        }
         // let listCategories = categories.map(this.createCategories)
         let profiles
         if (localStorage.getItem('token')){
