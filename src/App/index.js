@@ -9,7 +9,7 @@ import Register from '../Register'
 import ItemDetail from '../ItemDetail'
 import MyBidDashboard from '../MyBidDashboard'
 import MakeAuction from '../MakeAuction'
-import MyAuctionDashboard from '../MyAuctionDashboard'
+// import MyAuctionDashboard from '../MyAuctionDashboard'
 import Debug from '../Debug'
 import PrivateRoute from '../PrivateRoute'
 
@@ -66,7 +66,8 @@ const initialState = {
         created_at: '',
         user_id: 0,
         highest_bid:0,
-        bids:0
+        bids:0,
+        winner: ''
     },
     bidData: {
         bid_id: 0,
@@ -122,10 +123,28 @@ const reducer = (state = initialState, action) => {
             auction:{
                 ...state.auction,
                 auction_id: action.payload.auction_id,
-                user_id: action.payload.user_id,
-                max_bid: action.payload.max_bid,
+                title: action.payload.title,
+                item_condition: action.payload.item_condition,
+                item_description : action.payload.item_description,
+                quantity: action.payload.quantity,
                 start_bid: action.payload.start_bid,
-                bids_multiply: action.payload.bids_multiply
+                max_bid: action.payload.max_bid,
+                min_bid: action.payload.min_bid,
+                bids_multiply: action.payload.bids_multiply,
+                start_date: action.payload.start_date,
+                end_date: action.payload.end_date,
+                item_photo: action.payload.item_photo,
+                status: action.payload.status,
+                user_id: action.payload.user_id
+
+            },
+            user:{
+                ...state.user,
+                username : action.payload.username,
+                phone_number: action.payload.phone_number,
+                address: action.payload.address,
+
+                
             }
         }
     }
@@ -157,6 +176,17 @@ const reducer = (state = initialState, action) => {
                 
                 ...state.auction,
                 bids: action.payload.bids
+            }
+            
+        }
+    }
+    case 'GET_WINNER': {
+        return {
+            ...state,
+            auction: {
+                
+                ...state.auction,
+                winner: action.payload.winner
             }
             
         }
@@ -227,10 +257,10 @@ class App extends Component {
                                     path="/mybid"
                                     component={MyBidDashboard}
                                 />
-                                <PrivateRoute
+                                {/* <PrivateRoute
                                     path="/myauction"
                                     component={MyAuctionDashboard}
-                                />
+                                /> */}
                             </Switch>
                         </div>
                         <div>

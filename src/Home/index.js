@@ -3,10 +3,12 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+
+import { Container, Row, Col, Button } from 'reactstrap'
+
 import CardAuction from '../Components/CardAuction'
 import Categories from '../Components/Categories'
-
-import { Container, Row, Col } from 'reactstrap'
+import Profile from '../Components/Profile'
 
 const styles = {
     space: {
@@ -17,7 +19,7 @@ const styles = {
 
 const request = axios.create({
     baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
-    timeout: 10000,
+    timeout: 50000,
     headers: { Authorization: '' }
 })
 
@@ -31,16 +33,19 @@ const mapStateToProps = state => {
 }
 
 const categories = [
-    { name: 'Computers', categories: ['Laptop', 'PC', 'Netbook'] },
-    {
-        name: 'Electronic, AV & Camera',
-        categories: ['DSLR', 'Mirrorless', 'Webcam']
-    },
-    { name: 'Music', categories: ['Music Player', 'Speaker'] },
-    { name: 'Book & Magazine', categories: ['Science-Fiction', 'Non-Fiction'] }
+    { name: 'Fashion', categories: ['Clothes', 'Watches', 'Bags', 'Accessories', 'Others'] },
+    { name: 'Furniture, AV & Camera', categories: ['Tables', 'Chairs', 'Cupboards', 'Kitchen Equipments', 'Others'] },
+    { name: 'Sport', categories: ['Bikes', 'Accessories', 'Rackets', 'Balls', 'Shoes', 'Jerseys', 'Others'] },
+    { name: 'Electronic', categories: ['Handphones & Tablets', 'Cameras & Photography', 'PC & Laptops', 'TV & Monitors', 'Others'] },
+    { name: 'Vehicle', categories: ['Cars', 'Motorcycles', 'Spareparts', 'Wheels', 'Accessories']},
+    { name: 'Collection & Hobby', categories: ['Gem Stone', 'Antiques', 'Musical Instruments', 'Dolls and Toys', 'Tapes, Books & Magazines', 'Handicrafts', 'Artworks', 'Old Money', 'Others']}
 ]
 
+let newCategories = []
+
+
 class Home extends Component {
+
     addItem(item) {
         this.setState(prevState => {
             return {
@@ -57,8 +62,11 @@ class Home extends Component {
             })
             .then(data => {
                 data.forEach(item => {
-                    console.log("AUCTION STATUS: ", item.status);
-                    
+
+
+                    console.log('AUCTION_ID : ', item)
+  
+
                     this.setState(prevState => {
                         return {
                             auctions: prevState.auctions.concat({
@@ -66,8 +74,12 @@ class Home extends Component {
                                 title: item.title,
                                 src: item.item_photo,
                                 description: item.item_description,
-                                status: item.status
-                            })
+                                status: item.status,
+                                start_bid: item.start_bid,
+                                max_bid: item.max_bid,
+                                start_date: item.start_date,
+                                end_date: item.end_date
+                            })  
                         }
                     })
                 })
@@ -76,12 +88,34 @@ class Home extends Component {
             .catch(error => {
                 console.log(error)
             })
+
+        request
+            .get('/categories')
+            .then(response => {
+                console.log('Categories : ', response.data)
+                // response.data.forEach(
+
+                // )
+                return response.data
+            })
+
     }
     constructor(props) {
         super(props)
         this.createCategories = this.createCategories.bind(this)
+        this.handleClick = this.handleClick.bind(this)
         this.state = {
-            auctions: []
+            auctions: [],
+            title: this.props.title,
+            src: this.props.src,
+            description: this.props.description,
+            highest_bid: this.props.highest_bid,
+            start_bid: 0,
+            max_bid: 0,
+            start_date: 0,
+            end_date: 0,
+            statusValue: false,
+            buttonText : 'On Going Auction'
         }
     }
     static get propTypes() {
@@ -95,11 +129,7 @@ class Home extends Component {
         }
     }
 
-    state = {
-        title: this.props.title,
-        src: this.props.src,
-        description: this.props.description
-    }
+    
 
     createCategories(item, index) {
         return (
@@ -111,38 +141,127 @@ class Home extends Component {
         )
     }
 
-    render() {
-        let listAuction = this.state.auctions.map((item, index) => {
-
-            // if (item.status == 'ongoing')
-            {
-                return (
-                    <Link
-                        key={index}
-                        to={`/auctions/${item.user}`}
-                        params={{ id: item.user }}
-                    >
-                        <CardAuction
-                            key={item.title + index}
-                            user={item.user}
-                            title={item.title}
-                            src={item.src}
-                            description={item.description}
-                            status={item.status}
-                        />
-                    </Link>
-                )
-            }
+    handleClick(){
+        this.setState({ 
+            statusValue: !this.state.statusValue
         })
+        if (this.state.statusValue){
+            this.setState({ 
+                buttonText: 'Finished Auction'
+            })
+        }
+        else {
+            this.setState({ 
+                buttonText: 'On Going Auction'
+            })
+        }
+    }
+
+    
+
+    render() {
+
+        let listAuction
+        if (this.state.statusValue) {
+
+        
+            listAuction = this.state.auctions.map((item, index) => {
+                if (item.status === 'ongoing') {
+                    return <div key={index}></div>
+                }
+                return (
+                    <Col xs="12" sm="6" md="4" key={index}>
+
+                        <Link
+                            key={index}
+                            to={`/auctions/${item.user}`}
+                            params={{ id: item.user }}
+                        >
+                
+                            <CardAuction
+
+                                status={item.status}
+                                startBid={item.start_bid}
+                                maxBid={item.max_bid}
+                                startDate={item.start_date}
+                                endDate={item.end_date}
+                                src={item.src}
+                                title={item.title}
+                                color={{
+                                    backgroundColor: '#333',
+                                    borderColor: '#FFFFFF'
+                                }}
+
+                            />
+                        </Link>
+                    </Col>
+                )
+
+            })
+        }
+        else {
+            listAuction = this.state.auctions.map((item, index) => {
+                if (item.status === 'success') {
+                    return <div key={index}></div>
+                }
+                return (
+                    <Col xs="12" sm="6" md="4" key={index}>
+
+                        <Link
+                            key={index}
+                            to={`/auctions/${item.user}`}
+                            params={{ id: item.user }}
+                        >
+                
+                            <CardAuction
+
+                                status={item.status}
+                                startBid={item.start_bid}
+                                maxBid={item.max_bid}
+                                startDate={item.start_date}
+                                endDate={item.end_date}
+                                src={item.src}
+                                title={item.title}
+                                color={{
+                                    backgroundColor: '#1E2650 ',
+                                    borderColor: '#FFFFFF'
+                                }}
+
+                            />
+                        </Link>
+                    </Col>
+                )
+
+
+            })
+        }
 
         let listCategories = categories.map(this.createCategories)
+
+        let profiles
+        if (localStorage.getItem('token')){
+            profiles = <div>
+                <Profile/>
+                <br/>
+            </div>
+        }
+        else {
+            profiles = <div></div>
+        }
         return (
             <div style={styles.space}>
                 <Container fluid>
                     <Row>
-                        <Col sm="2">{listCategories}</Col>
-                        <Col sm="10">
-                            <Row>{listAuction}</Row>
+                        <Col sm="3">
+                            {profiles}
+                            <Button color="primary" onClick={this.handleClick}value="success" block>{this.state.buttonText}</Button>
+                            {/* {listCategories}        */}
+                        </Col>
+                        <Col sm="9">
+                            <Row className="justify-context-center">
+
+                                {listAuction}
+                            </Row>
                         </Col>
                     </Row>
                 </Container>

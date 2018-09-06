@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'reactstrap'
-import { Link } from 'react-router-dom'
+
 
 const styles = {
     colors: {
@@ -10,7 +10,7 @@ const styles = {
 
     p: {
         color: 'white',
-        fontSize: '0.5em'
+        fontSize: '1em'
     }
 }
 
@@ -20,7 +20,7 @@ class Footer extends React.Component {
             <div>
                 <Container fluid style={styles.colors}>
                     <span style={styles.p}>
-                        <Link to="/debug">© 2018 Lelangbuana</Link>
+                        © 2018 Lelangbuana
                     </span>
                 </Container>
             </div>

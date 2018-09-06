@@ -32,7 +32,7 @@ const styles = {
     },
 
     tabs: {
-        marginTop: '4rem'
+        marginTop: '1rem'
     }
 }
 
@@ -63,7 +63,8 @@ const mapStateToProps = state => {
         status: state.auction.status,
         created_at: state.auction.created_at,
         user_id: state.auction.user_id,
-        username: state.user.username
+        username: state.user.username,
+        highest_bid: state.auction.highest_bid
     }
 }
 
@@ -94,18 +95,33 @@ class ItemDetail extends Component {
                   this.props.dispatch({
                     type: 'SET_AUCTION_STATE',
                     payload: {
+                    address: response.data.user.address,
+                    phone_number: response.data.user.phone_number,
                     auction_id: response.data.auction_id,
-                    user_id: response.data.user.user_id,
-                    max_bid: this.state.max_bid,
+                    title: response.data.title,
+                    item_condition: response.data.item_condition,
+                    item_description : response.data.item_description,
+                    quantity: response.data.quantity,
                     start_bid: response.data.start_bid,
+                    max_bid: this.state.max_bid,
+                    min_bid: response.data.min_bid,
                     bids_multiply: response.data.bids_multiply,
+                    start_date: response.data.start_date,
+                    end_date: response.data.end_date,
+                    item_photo: response.data.item_photo,
+                    status: response.data.status,
+                    user_id: response.data.user.user_id,
                     username: response.data.user.username
+
                         }
                      })
+                     console.log("STATUS FROM ITEM DETAIL : ", response.data.status);
                     })
+                
             .catch(error => {
                 console.log(error)
             })
+            
             
     }
 
@@ -150,13 +166,23 @@ class ItemDetail extends Component {
     }
     render() {
         let listCategories = categories.map(this.createCategories)
+        let profiles
+        if (localStorage.getItem('token')){
+            profiles = <div>
+            <Profile/>
+            <br/>
+            </div>
+        }
+        else {
+            profiles = <div></div>
+        }
+
         return (
             <div style={styles.space}>
                 <Container fluid>
                     <Row>
                         <Col sm="3">
-                            <Profile />
-                            <br />
+                            {profiles}
                             {listCategories}
                         </Col>
 
@@ -166,10 +192,10 @@ class ItemDetail extends Component {
                             </Label>
 
                             <Row>
-                                <Col xs="4">
+                                <Col xs="12" sm="4">
                                     <ProductImage src={this.state.item_photo} />
                                 </Col>
-                                <Col xs="4">
+                                <Col xs="6" sm="4">
                                     <DetailProductListProduct
                                         quantity={this.state.quantity}
                                         openingPrice={this.state.start_bid}
@@ -181,13 +207,14 @@ class ItemDetail extends Component {
                                         params={this.props.match.params.id}
                                     />
                                 </Col>
-                                <Col xs="4">
+                                <Col xs="6" sm="4">
                                     <DetailProductBidStatus
                                         openingPrice={this.state.min_bid}
                                         buyOutPrice={this.state.max_bid}
                                         seller={this.state.username}
                                         highestBid={this.state.highestBid}
                                         params={this.props.match.params.id}
+                                        status={this.props.status}
                                     />
                                 </Col>
                             </Row>
@@ -196,7 +223,7 @@ class ItemDetail extends Component {
                     <Row>
                         <Col style={styles.tabs}>
                             <DetailProductDetailPages />
-                            <Timer params={this.props.match.params.id}/>
+                            <Timer params={this.props.match.params.id} status={this.props.status}/>
                         </Col>
                     </Row>
                 </Container>

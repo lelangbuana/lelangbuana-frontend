@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 import {
     TabContent,
@@ -11,10 +12,28 @@ import {
 } from 'reactstrap'
 import classnames from 'classnames'
 
-export default class DetailProductDetailPages extends React.Component {
+const styles = {
+    p : {
+        fontWeight : 'bold',
+        fontSize : '18px'
+    },
+    span :{
+        fontSize : '14px'
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        item_description: state.auction.item_description,
+        username: state.user.username,
+        phone_number : state.user.phone_number,
+        address : state.user.address
+    }
+}
+
+class DetailProductDetailPages extends React.Component {
     constructor(props) {
         super(props)
-
         this.toggle = this.toggle.bind(this)
         this.state = {
             activeTab: '1'
@@ -28,6 +47,7 @@ export default class DetailProductDetailPages extends React.Component {
             })
         }
     }
+
     render() {
         return (
             <div>
@@ -55,7 +75,7 @@ export default class DetailProductDetailPages extends React.Component {
                                 this.toggle('2')
                             }}
                         >
-                            Payment
+                            Seller Info
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -68,32 +88,6 @@ export default class DetailProductDetailPages extends React.Component {
                                 this.toggle('3')
                             }}
                         >
-                            Shipping
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            to="/"
-                            className={classnames({
-                                active: this.state.activeTab === '4'
-                            })}
-                            onClick={() => {
-                                this.toggle('4')
-                            }}
-                        >
-                            Seller Info
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink
-                            to="/"
-                            className={classnames({
-                                active: this.state.activeTab === '5'
-                            })}
-                            onClick={() => {
-                                this.toggle('5')
-                            }}
-                        >
                             Bid History
                         </NavLink>
                     </NavItem>
@@ -102,36 +96,29 @@ export default class DetailProductDetailPages extends React.Component {
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
                         <Row>
-                            <Col>
-                                <p> This</p>
+                            <Col >
+                                <p style={styles.span}>{this.props.item_description}</p>
                             </Col>
                         </Row>
                     </TabPane>
                     <TabPane tabId="2">
                         <Row>
                             <Col>
-                                <p> Is</p>
+                                <p style={styles.p}>Seller</p>
+                                <span style={styles.span}>{this.props.username}</span>
+                                <hr/>
+                                <p style={styles.p}>Phone</p>
+                                <span style={styles.span}>{this.props.phone_number}</span>
+                                <hr/>
+                                <p style={styles.p}>Address</p>
+                                <span style={styles.span}>{this.props.address}</span>
                             </Col>
                         </Row>
                     </TabPane>
                     <TabPane tabId="3">
                         <Row>
                             <Col>
-                                <p> Super</p>
-                            </Col>
-                        </Row>
-                    </TabPane>
-                    <TabPane tabId="4">
-                        <Row>
-                            <Col>
-                                <p> Show</p>
-                            </Col>
-                        </Row>
-                    </TabPane>
-                    <TabPane tabId="5">
-                        <Row>
-                            <Col>
-                                <p> 5</p>
+                                <p></p>
                             </Col>
                         </Row>
                     </TabPane>
@@ -140,3 +127,5 @@ export default class DetailProductDetailPages extends React.Component {
         )
     }
 }
+
+export default connect (mapStateToProps) (DetailProductDetailPages)

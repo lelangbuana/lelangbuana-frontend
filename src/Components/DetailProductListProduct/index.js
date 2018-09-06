@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import axios from 'axios'
 import moment from 'moment'
+import NumberFormat from 'react-number-format';
 
 import { ListGroup, ListGroupItem } from 'reactstrap'
 
@@ -29,10 +30,12 @@ const request = axios.create({
     headers: { Authorization: '' }
 })
 
-const currentTime = moment()
+// const currentTime = moment()
 
-let highest_bid = 0
+// let highest_bid = 0
+
 const nowDate = moment().format('ll');
+
 
 class DetailProductListProduct extends Component {
 
@@ -53,38 +56,6 @@ class DetailProductListProduct extends Component {
     }
 
     componentDidMount() {
-        // request
-        // .get(`/bids/auction_id/${this.props.params}`)
-        // .then(response => {
-        //     bids.push(response.data.bidData)
-            
-        //     response.data.map((item,index) => {
-        //         console.log("BID DATA: ", item);
-        //         if (item.bids_nominal>=highest_bid) 
-        //         {
-        //             highest_bid = item.bids_nominal
-        //         }
-                
-        //         return ( 
-        //             highest_bid
-        //         )
-        //     })
-        //         this.setState(() => {
-        //             return { 
-        //                 bidData: response.data.length,
-        //                 highest_bid: highest_bid
-        //             }
-        //         })
-        //         this.props.dispatch({
-        //             type: 'UPDATE_BID_AUCTION',
-        //             payload: {
-        //               highest_bid: this.state.highest_bid
-        //             }
-        //           })
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
             
         request
         .get(`/auctions/${this.props.params}`)
@@ -107,17 +78,17 @@ class DetailProductListProduct extends Component {
             <ListGroup flush style={styles.text}>
                 <ListGroupItem>Quantity : {this.props.quantity}</ListGroupItem>
                 <ListGroupItem>
-                    Opening Price : {this.props.openingPrice}
+                    Opening Price : <NumberFormat value={this.props.openingPrice} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
                 </ListGroupItem>
                 <ListGroupItem>Number of Bid : {this.props.bids}</ListGroupItem>
                 <ListGroupItem>
-                    Highest Bidder : {this.props.highest_bid}
+                    Highest Bidder : <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
                 </ListGroupItem>
                 <ListGroupItem>
-                    Opening Time : {this.props.openingTime}
+                    Opening Time : {moment(this.props.openingTime).format('lll')}
                 </ListGroupItem>
                 <ListGroupItem>
-                    Closing Time : {this.props.endTime}
+                    Closing Time : {moment(this.props.endTime).format('lll')}
                 </ListGroupItem>
                 <ListGroupItem>Current Time: {nowDate} </ListGroupItem>
                 <ListGroupItem>Auction ID : {this.props.auctionID}</ListGroupItem>

@@ -1,36 +1,54 @@
-import React from 'react'
-import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from 'reactstrap'
+
+import React,{Component} from 'react'
+import { Card, CardImg, CardBody, CardTitle, Row, Col} from 'reactstrap'
+import Countdown from 'react-countdown-now'
+import NumberFormat from 'react-number-format'
+import InfiniteScroll from 'react-infinite-scroller'
+
+
 
 const styles = {
     margins: {
-        marginRight: '15px',
-        marginBottom: '25px'
+        // marginRight: '35px',
+        marginBottom: '25px',
+        height: '100%'
+
     },
     sizes: {
-        width: '240px',
-        height: '290px'
+        width: '100%',
+        height: '230px'
+    },
+    color: {
+        backgroundColor: '#1E2650',
+        borderColor: '#FFFFFF'
     }
 }
 
-class CardAuction extends React.Component {
+class CardAuction extends Component {
+
     render() {
         return (
+
             <div
-                className="col-xs-3"
-                style={styles.margins}
-                title={this.props.title}
-            >
-                <Card onClick={this.props.onClick}>
+                title={this.props.title}>
+                <Card  style={styles.margins} body className="text-center text-dark" onClick={this.props.onClick}>
+
                     <CardImg
                         top
                         style={styles.sizes}
                         src={this.props.src}
                         alt="Card image cap"
                     />
+
                     <CardBody>
-                        <CardTitle>{this.props.title}</CardTitle>
-                        <CardSubtitle>{this.props.status}</CardSubtitle>
-                        {/* <CardText>{this.props.description}</CardText> */}
+                        <Row><Col><CardTitle><b>{this.props.title}</b></CardTitle></Col></Row>
+                        <Row><Col><span>{this.props.status}</span></Col></Row>
+                        <hr/>
+                        <Row><Col><span>start bid : <b><NumberFormat value={this.props.startBid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '}/></b></span></Col></Row>
+                        <Row><Col><span>time remaining : <span>
+                            <Countdown date={Date.now()+((Date.parse(this.props.endDate)-Date.parse(this.props.startDate)))}/></span>
+                        </span></Col></Row>
+
                     </CardBody>
                 </Card>
             </div>
@@ -38,4 +56,6 @@ class CardAuction extends React.Component {
     }
 }
 
+
 export default CardAuction
+
