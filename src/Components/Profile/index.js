@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 const request = axios.create({
     baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
-    timeout: 10000,
+    timeout: 50000,
     headers: { Authorization: '' }
 })
 
