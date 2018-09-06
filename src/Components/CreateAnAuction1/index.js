@@ -3,7 +3,9 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactFilestack from 'filestack-react'
-import DatePicker from 'react-datepicker';
+import DatePicker from 'react-datepicker'
+import { BrowserRouter as Link } from 'react-router-dom'
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import moment from 'moment'
 
@@ -12,7 +14,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 
 import {
-    Button,
     Form,
     FormGroup,
     Label,
@@ -52,6 +53,7 @@ const keys = {
     filestackKey : 'AQulXUyRXS1GqTZvYuubfz'
 }
 
+
 const CustomInput = props => (
 <Input onClick={props.onClick} value={props.date.format('DD/MM/YYYY HH:mm')} />);
 
@@ -59,6 +61,7 @@ class CreateAnAuction1 extends Component {
     constructor (props) {
         super(props)
         this.state = {
+        modal : false,
         user_id: 0,
         title: '',
         item_condition: '',
@@ -73,9 +76,11 @@ class CreateAnAuction1 extends Component {
         item_photo: '',
         status: 'ongoing',
         category_id: '1',
-        selectedFile : null
+        selectedFile : null,
+        redirectToReferrer : false
         };
         this.handleChangeDate = this.handleChangeDate.bind(this);
+        this.toggle = this.toggle.bind(this)
       }
 
       handleChangeDate(date) {
@@ -93,12 +98,22 @@ class CreateAnAuction1 extends Component {
         }
     }
     
+    toggle(){
+        this.setState({
+            modal: !this.state.modal
+          });
+    }
+
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
     }
 
     handleSubmit = event => {
         event.preventDefault()
+
+        this.setState({
+            modal: !this.state.modal
+          });
 
         const payload = {
             user_id: localStorage.getItem("user_id"),
@@ -120,12 +135,14 @@ class CreateAnAuction1 extends Component {
         request
             .post('/auctions', payload)
             .then(response => {
+                console.log("Message: ", response)
             })
             .catch(error => {
                 console.log(error)
             }) 
                 
     }
+
     onSuccess = (result) => {
         this.setState({
           url: result.filesUploaded[0].url
@@ -137,7 +154,28 @@ class CreateAnAuction1 extends Component {
         console.error('error', error);
     } 
 
+    
+
     render() {
+
+       
+        let  modals = 
+        <div>
+        {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+            <ModalBody>
+                Create Auction Success
+            </ModalBody>
+            <ModalFooter>
+            <Link to="/myauction"><Button color="primary" onClick={this.toggle}>OK</Button>{' '}</Link>
+                {/* <Button color="secondary" onClick={this.toggle}>Cancel</Button> */}
+            </ModalFooter>
+            </Modal>
+        </div>
+
+        
+
         return (
             <Container>
                 <Row>
@@ -293,6 +331,7 @@ class CreateAnAuction1 extends Component {
                             </Col>
                         </FormGroup>
                             <Button style={styles.button} onClick={this.props.handleSubmit} block>Submit</Button>
+                            {modals}
                         </Form>
                     </Col>
                 </Row>

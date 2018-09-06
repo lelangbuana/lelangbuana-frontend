@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import {Collapse, Table, Card, CardText, CardBody} from 'reactstrap'
+import {Collapse, Table, Card, CardBody} from 'reactstrap'
 import moment from 'moment'
 
 const request = axios.create({
@@ -44,7 +44,7 @@ class DetailItem extends React.Component {
                                     <th>Closed Time</th>
                                     <th>Users</th>
                                     <th>Bid Price</th>
-                                    <th>Status</th>
+                                    {/* <th>Status</th> */}
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,11 +52,11 @@ class DetailItem extends React.Component {
                                 <tr >
                                     <td>{moment().format('ll')}</td>
                                     <td>{moment().format('LT')}</td>
-                                    <td>{moment(this.props.end_date).format('ll')}</td>
-                                    <td>{moment(this.props.end_date).format('LT')}</td>
+                                    <td>{moment(this.props.endDate).format('ll')}</td>
+                                    <td>{moment(this.props.endDate).format('LT')}</td>
                                     <td>{this.props.username} </td>
                                     <td>{this.props.bids_nominal}</td>
-                                    <td>Success</td>
+                                    {/* <td>Success</td> */}
                                 </tr>
                             </tbody>
                         </Table>
@@ -99,7 +99,8 @@ class DetailItem extends React.Component {
                     myBids: data || []
                 })                            
             })
-            .catch(error=> {error})
+            .catch(error=> {console.log(error)
+            })
         
         // this.setState(prevState => {
         //     return {

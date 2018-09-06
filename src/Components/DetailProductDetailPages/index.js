@@ -48,11 +48,10 @@ class DetailProductDetailPages extends React.Component {
         }
     }
 
-    componentWillMount(){
+    UNSAFE_componentWillMount(){
         request
             .get(`/auctions/${this.props.params}`)
             .then(response => {
-            // console.log('BIDS HISTORY: ', response.data.bids)
                 response.data.bids.map(item => {
                     return(
                         bids.push({
@@ -62,12 +61,7 @@ class DetailProductDetailPages extends React.Component {
                             status: item.status,
                             user_id: item.user_id })
                     )
-                // return 
                 })
-
-            // return (bids)
-            
-
             })
             .catch(error=>{
                 console.log(error)
@@ -86,7 +80,7 @@ class DetailProductDetailPages extends React.Component {
     }
 
     createBidsHistories(item,index){
-        <Col>
+        <Col key={index}>
             <p>AUCTION : {item.auction_id}</p>
             <p>BIDS : {item.bids_nominal}</p>
             <p>STATUS : {item.status}</p>
@@ -97,7 +91,6 @@ class DetailProductDetailPages extends React.Component {
     render() {
 
         let bids_histories= bids.map((item,index)=> {
-            console.log('BIDDDDD : ', item)
             return (
                 <Col key={index}>
                     <p>AUCTION : {item.auction_id}</p>

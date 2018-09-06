@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import {
     ListGroup,
     ListGroupItem,
@@ -8,12 +7,6 @@ import {
 
 import DetailItem from './DetailItem'
 
-
-const request = axios.create({
-    baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
-    timeout: 10000,
-    headers: { Authorization: '' }
-})
 
 const styles = {
     image : {
@@ -47,25 +40,25 @@ class MainItem extends React.Component{
                         <Media left href="">
                             <Media style={styles.image}
                                 object
-                                src={this.props.item_photo}
+                                src={this.props.itemPhoto}
                                 alt="Generic placeholder image"
                             />
                         </Media>
                         <Media body>
                             <Media heading>{this.props.title}</Media>
                             <Media>
-                                <span>Expected Price : {this.props.max_bid} </span>
+                                <span>Expected Price : {this.props.maxBid} </span>
                             </Media>
                             <Media>
                                 <span>Current Price : </span>
                             </Media>
                             <Media>
-                                <span>From : {this.props.min_bid}</span>
+                                <span>From : {this.props.minBid}</span>
                             </Media>
                         </Media>
                     </Media>
                 </ListGroupItem>
-                <DetailItem username={this.props.username} isOpen={this.state.collapse} auction_id={this.props.auction_id}/>
+                <DetailItem username={this.props.username} isOpen={this.state.collapse} auctionId={this.props.auctionId}/>
             </ListGroup>
         )
     }

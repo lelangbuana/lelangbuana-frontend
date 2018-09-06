@@ -153,18 +153,18 @@ class DetailProductBidStatus extends Component{
     render(){
 
         let startBid
-        let enableCountDown
+        // let enableCountDown
         this.props.highest_bid>=this.props.start_bid
         ? startBid = this.props.highest_bid + this.props.bids_multiply
         : startBid = this.props.start_bid + this.props.bids_multiply
 
-        let now = Date.now()
-        let end = Date.parse(this.props.end_date)
-        let start = Date.parse(this.props.start_date)
+        // let now = Date.now()
+        // let end = Date.parse(this.props.end_date)
+        // let start = Date.parse(this.props.start_date)
 
-        now<=end
-        ? enableCountDown = <span>  date={ now + (end-now)}><h3>CLOSED</h3></span>
-        : enableCountDown = <h3>CLOSED</h3>
+        // now<=end
+        // ? enableCountDown = <span>  date={ now + (end-now)}><h3>CLOSED</h3></span>
+        // : enableCountDown = <h3>CLOSED</h3>
         
         
         let enableBid
@@ -227,7 +227,6 @@ class DetailProductBidStatus extends Component{
                     <Row style={styles.contains}><Col><span>
                     {this.props.end_date && moment(this.props.end_date).fromNow()}
                     <div>
-                    {/* <Countdown onComplete={this.auctionEnd} date={Date.now() + 10000} /> */}
                     </div>
                         </span></Col></Row>
                     <hr/>
