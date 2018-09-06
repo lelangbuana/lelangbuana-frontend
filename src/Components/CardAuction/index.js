@@ -9,13 +9,7 @@ const styles = {
     margins: {
         // marginRight: '35px',
         marginBottom: '25px',
-<<<<<<< HEAD
         height: '100%'
-=======
-
-        height: '350px'
-
->>>>>>> 41ef0b7fc732f5b9182a5835ad79c19147deb36c
     },
     sizes: {
         width: '100%',
