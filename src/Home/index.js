@@ -226,6 +226,10 @@ class Home extends Component {
                                 endDate={item.end_date}
                                 src={item.src}
                                 title={item.title}
+                                color={{
+                                    backgroundColor: '#333',
+                                    borderColor: '#FFFFFF'
+                                }}
 
                             />
                         </Link>
@@ -257,6 +261,10 @@ class Home extends Component {
                                 endDate={item.end_date}
                                 src={item.src}
                                 title={item.title}
+                                color={{
+                                    backgroundColor: '#1E2650 ',
+                                    borderColor: '#FFFFFF'
+                                }}
 
                             />
                         </Link>

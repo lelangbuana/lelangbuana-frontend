@@ -17,6 +17,10 @@ const styles = {
     sizes: {
         width: '100%',
         height: '230px'
+    },
+    color: {
+        backgroundColor: '#1E2650',
+        borderColor: '#FFFFFF'
     }
 }
 
@@ -25,16 +29,16 @@ class CardAuction extends Component {
         return (
             <div
                 title={this.props.title}>
-                <Card style={styles.margins} body className="text-center" onClick={this.props.onClick}>
+                <Card body inverse style={styles.margins, this.props.color} body className="text-center" onClick={this.props.onClick}>
                     <CardImg
                         top
                         style={styles.sizes}
                         src={this.props.src}
                         alt="Card image cap"
                     />
-                    <CardBody>
+                    <CardBody >
 
-                        <span>{this.props.title}</span>
+                        <span><h5>{this.props.title}</h5></span>
 
                         <CardSubtitle>{this.props.status}</CardSubtitle>
                         <p>{this.props.startBid}</p>
