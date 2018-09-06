@@ -12,10 +12,15 @@ const styles = {
         // marginRight: '35px',
         marginBottom: '25px',
         height: '100%'
+
     },
     sizes: {
         width: '100%',
         height: '230px'
+    },
+    color: {
+        backgroundColor: '#1E2650',
+        borderColor: '#FFFFFF'
     }
 }
 
@@ -23,14 +28,18 @@ class CardAuction extends Component {
 
     render() {
         return (
-            <div title={this.props.title}>
-                <Card style={styles.margins} body className="text-center text-dark" onClick={this.props.onClick}>
+
+            <div
+                title={this.props.title}>
+                <Card body inverse style={styles.margins, this.props.color} body className="text-center" onClick={this.props.onClick}>
+
                     <CardImg
                         top
                         style={styles.sizes}
                         src={this.props.src}
                         alt="Card image cap"
                     />
+
                     <CardBody>
                         <Row><Col><CardTitle><b>{this.props.title}</b></CardTitle></Col></Row>
                         <Row><Col><span>{this.props.status}</span></Col></Row>
@@ -39,6 +48,7 @@ class CardAuction extends Component {
                         <Row><Col><span>time remaining : <span>
                             <Countdown date={Date.now()+((Date.parse(this.props.endDate)-Date.parse(this.props.startDate)))}/></span>
                         </span></Col></Row>
+
                     </CardBody>
                 </Card>
             </div>
@@ -48,3 +58,4 @@ class CardAuction extends Component {
 
 
 export default CardAuction
+

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col, Button } from 'reactstrap'
 
 import CardAuction from '../Components/CardAuction'
 import Categories from '../Components/Categories'
@@ -41,6 +41,8 @@ const categories = [
     { name: 'Collection & Hobby', categories: ['Gem Stone', 'Antiques', 'Musical Instruments', 'Dolls and Toys', 'Tapes, Books & Magazines', 'Handicrafts', 'Artworks', 'Old Money', 'Others']}
 ]
 
+let newCategories = []
+
 
 class Home extends Component {
 
@@ -61,8 +63,10 @@ class Home extends Component {
             .then(data => {
                 data.forEach(item => {
 
+
                     console.log('AUCTION_ID : ', item)
   
+
                     this.setState(prevState => {
                         return {
                             auctions: prevState.auctions.concat({
@@ -85,11 +89,21 @@ class Home extends Component {
                 console.log(error)
             })
 
-        
+        request
+            .get('/categories')
+            .then(response => {
+                console.log('Categories : ', response.data)
+                // response.data.forEach(
+
+                // )
+                return response.data
+            })
+
     }
     constructor(props) {
         super(props)
         this.createCategories = this.createCategories.bind(this)
+        this.handleClick = this.handleClick.bind(this)
         this.state = {
             auctions: [],
             title: this.props.title,
@@ -99,7 +113,9 @@ class Home extends Component {
             start_bid: 0,
             max_bid: 0,
             start_date: 0,
-            end_date: 0
+            end_date: 0,
+            statusValue: false,
+            buttonText : 'On Going Auction'
         }
     }
     static get propTypes() {
@@ -125,30 +141,100 @@ class Home extends Component {
         )
     }
 
-    render() {
-        let listAuction = this.state.auctions.map((item, index) => {
-            console.log('helo')
-            return (
-                <Col key={index} xs="12" sm="6" md="4">
-                    <Link
-                        key={index}
-                        to={`/auctions/${item.user}`}
-                        params={{ id: item.user }}
-                    >
-                        <CardAuction
-                            status={item.status}
-                            startBid={item.start_bid}
-                            maxBid={item.max_bid}
-                            startDate={item.start_date}
-                            endDate={item.end_date}
-                            src= {item.src}
-                            title = {item.title}
-                        />
-                    </Link>
-                </Col>
-            )
-
+    handleClick(){
+        this.setState({ 
+            statusValue: !this.state.statusValue
         })
+        if (this.state.statusValue){
+            this.setState({ 
+                buttonText: 'Finished Auction'
+            })
+        }
+        else {
+            this.setState({ 
+                buttonText: 'On Going Auction'
+            })
+        }
+    }
+
+    
+
+    render() {
+
+        let listAuction
+        if (this.state.statusValue) {
+
+        
+            listAuction = this.state.auctions.map((item, index) => {
+                if (item.status === 'ongoing') {
+                    return <div key={index}></div>
+                }
+                return (
+                    <Col xs="12" sm="6" md="4" key={index}>
+
+                        <Link
+                            key={index}
+                            to={`/auctions/${item.user}`}
+                            params={{ id: item.user }}
+                        >
+                
+                            <CardAuction
+
+                                status={item.status}
+                                startBid={item.start_bid}
+                                maxBid={item.max_bid}
+                                startDate={item.start_date}
+                                endDate={item.end_date}
+                                src={item.src}
+                                title={item.title}
+                                color={{
+                                    backgroundColor: '#333',
+                                    borderColor: '#FFFFFF'
+                                }}
+
+                            />
+                        </Link>
+                    </Col>
+                )
+
+            })
+        }
+        else {
+            listAuction = this.state.auctions.map((item, index) => {
+                if (item.status === 'success') {
+                    return <div key={index}></div>
+                }
+                return (
+                    <Col xs="12" sm="6" md="4" key={index}>
+
+                        <Link
+                            key={index}
+                            to={`/auctions/${item.user}`}
+                            params={{ id: item.user }}
+                        >
+                
+                            <CardAuction
+
+                                status={item.status}
+                                startBid={item.start_bid}
+                                maxBid={item.max_bid}
+                                startDate={item.start_date}
+                                endDate={item.end_date}
+                                src={item.src}
+                                title={item.title}
+                                color={{
+                                    backgroundColor: '#1E2650 ',
+                                    borderColor: '#FFFFFF'
+                                }}
+
+                            />
+                        </Link>
+                    </Col>
+                )
+
+
+            })
+        }
 
         let listCategories = categories.map(this.createCategories)
 
@@ -168,10 +254,12 @@ class Home extends Component {
                     <Row>
                         <Col sm="3">
                             {profiles}
-                            {listCategories}       
+                            <Button color="primary" onClick={this.handleClick}value="success" block>{this.state.buttonText}</Button>
+                            {/* {listCategories}        */}
                         </Col>
                         <Col sm="9">
                             <Row className="justify-context-center">
+
                                 {listAuction}
                             </Row>
                         </Col>
