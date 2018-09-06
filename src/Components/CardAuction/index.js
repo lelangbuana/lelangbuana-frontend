@@ -5,7 +5,6 @@ import { Card, CardImg, CardBody, CardTitle, Row, Col} from 'reactstrap'
 import NumberFormat from 'react-number-format'
 import moment from 'moment'
 import Loader from '../Assets/loader.gif'
-// import InfiniteScroll from 'react-infinite-scroller'
 
 
 
@@ -19,10 +18,6 @@ const styles = {
     sizes: {
         width: '100%',
         height: '230px'
-    },
-    color: {
-        backgroundColor: '#1E2650',
-        borderColor: '#FFFFFF'
     }
 }
 
@@ -55,6 +50,7 @@ class CardAuction extends Component {
             <div
                 title={this.props.title}>
                 <Card  style={styles.margins} body className="text-center text-dark" onClick={this.props.onClick}>
+
 
                     <CardImg
                         top

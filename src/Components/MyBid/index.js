@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Table, Card, CardBody, CardText } from 'reactstrap'
+import { Table, Card, CardBody, CardText, CardImg } from 'reactstrap'
 import axios from 'axios'
 import moment from 'moment'
 import NumberFormat from 'react-number-format'
@@ -23,7 +23,8 @@ class MyBid extends Component {
         this.createHistoryMobile = this.createHistoryMobile.bind(this)
         this.state = {
             myBids: [],
-            title: ''
+            title: '',
+            item_photo: ''
         }
     }
 
@@ -32,36 +33,39 @@ class MyBid extends Component {
             .get(`/bids/user_id/${localStorage.getItem('user_id')}`)
             .then(response => response.data)
             .then(data => {
+                console.log(data)
                 data.forEach(item => {
                     request
                         .get(`/auctions/${item.auction_id}`)
                         .then((response) => { 
-                            console.log('RESPONSE : ', response)
+                            //console.log('RESPONSE : ', response)
                             return response.data 
                         })
-                        .then(data => {
+                        .then(dataAuction => {
                             request
-                                .get(`/users/id/${data.user_id}`)
-                                .then((response) => {return response.data.user.username})
-                                .then(username => {
+                                .get(`/users/id/${dataAuction.user_id}`)
+                                .then((response) => {return response.data.user})
+                                .then(dataDetail => {
                                     this.setState(prevState => {
-                                        console.log(prevState.myBids)
-                
+                                        //console.log(prevState.myBids)
+                                        // console.log(dataDetail)
                                         return {
                                             myBids: prevState.myBids.concat({
                                                 bids_nominal: item.bids_nominal,
+                                                status: item.status,
                                                 created_at: item.created_at,
                                                 auction_id: item.auction_id,
                                                 user_id: item.user_id,
-                                                title: data.title,
-                                                username: username
+                                                title: item.auction.title,
+                                                item_photo : item.auction.item_photo,
+                                                username: dataDetail.username
                                             })
                                         }
                                     })
                                 })
                                 
                             
-                            console.log('LOG FROM AUCTION: ', this.state.title)
+                            //console.log('LOG FROM AUCTION: ', this.state.title)
                         })
                         .catch(error=>{console.log(error)})
 
@@ -79,22 +83,28 @@ class MyBid extends Component {
                 <td>{item.title}</td>
                 <td>{item.username}</td>
                 <td><NumberFormat value={item.bids_nominal} displayType={'text'} thousandSeparator={true} prefix={'IDR. '}/></td>
-                <td>Success</td>
+                <td>{item.status}</td>
             </tr>
         )
     }
 
     createHistoryMobile(item, index) {
+        //console.log(item)
         return (
             <div key={index} >
                 <Card className="text-center" style={styles.cards}>
+                    <CardImg 
+                        top
+                        src={item.item_photo}
+                        alt="Image"
+                    />
                     <CardBody>
                         <CardText><b>Date :</b> {moment(item.created_at).format('ll')}</CardText>
                         <CardText><b>Time :</b> {moment(item.created_at).format('LT')}</CardText>
                         <CardText><b>Bids :</b> {item.title}</CardText>
                         <CardText><b>Seller :</b>{item.username}</CardText>
                         <CardText><b>My Bid :</b><NumberFormat value={item.bids_nominal} displayType={'text'} thousandSeparator={true} prefix={'IDR. '}/></CardText>
-                        <CardText><span><b>Status : </b> Success</span></CardText>
+                        <CardText><span><b>Status : </b>{item.status}</span></CardText>
                     </CardBody>
                 </Card>
             </div>

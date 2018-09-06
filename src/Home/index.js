@@ -126,7 +126,6 @@ class Home extends Component {
         }
     }
 
-    
     // createCategories(item, index) {
     //     return (
     //         <Categories
@@ -181,10 +180,6 @@ class Home extends Component {
                                 endDate={item.end_date}
                                 src={item.item_photo}
                                 title={item.title}
-                                color={{
-                                    backgroundColor: '#333',
-                                    borderColor: '#FFFFFF'
-                                }}
 
                             />
                         </Link>
@@ -216,10 +211,6 @@ class Home extends Component {
                                 endDate={item.end_date}
                                 src={item.item_photo}
                                 title={item.title}
-                                color={{
-                                    backgroundColor: '#1E2650 ',
-                                    borderColor: '#FFFFFF'
-                                }}
 
                             />
                         </Link>
@@ -230,6 +221,7 @@ class Home extends Component {
             })
         }
 
+        // let listCategories = categories.map(this.createCategories)
         let profiles
         if (localStorage.getItem('token')){
             profiles = <div>
@@ -249,6 +241,7 @@ class Home extends Component {
                             <Button color="primary" onClick={this.handleClick}value="success" block>{this.state.buttonText}</Button>
                             {/* {listCategories}*/}
                             <br/>
+
                             <Search updateList = {this.updateList}/>
                         </Col>
                         <Col sm="9">
