@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import axios from 'axios'
 
 import {
     TabContent,
@@ -12,6 +13,7 @@ import {
 } from 'reactstrap'
 import classnames from 'classnames'
 
+let bids = []
 const styles = {
     p : {
         fontWeight : 'bold',
@@ -21,6 +23,12 @@ const styles = {
         fontSize : '14px'
     }
 }
+
+const request = axios.create({
+    baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
+    timeout: 10000,
+    headers: { Authorization: '' }
+})
 
 const mapStateToProps = state => {
     return {
@@ -40,6 +48,32 @@ class DetailProductDetailPages extends React.Component {
         }
     }
 
+    componentDidMount(){
+        request
+            .get(`/auctions/${this.props.params}`)
+            .then(response => {
+                // console.log('BIDS HISTORY: ', response.data.bids)
+                response.data.bids.map(item => {
+                    bids.push({
+                        auction_id: item.auction_id,
+                        bid_id: item.bid_id,
+                        bids_nominal: item.bids_nominal,
+                        status: item.status,
+                        user_id: item.user_id })
+                    // return 
+                })
+
+                // return (bids)
+                
+
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+        console.log('BID DATA HISTORIES:  ', bids)
+            
+    }
+
     toggle(tab) {
         if (this.state.activeTab !== tab) {
             this.setState({
@@ -48,7 +82,28 @@ class DetailProductDetailPages extends React.Component {
         }
     }
 
+    createBidsHistories(item,index){
+        <Col>
+            <p>AUCTION : {item.auction_id}</p>
+            <p>BIDS : {item.bids_nominal}</p>
+            <p>STATUS : {item.status}</p>
+        </Col>
+
+    }
+
     render() {
+
+        let bids_histories= bids.map((item,index)=> {
+            return (
+                <Col key={index}>
+                    <p>AUCTION : {item.auction_id}</p>
+                    <p>BIDS : {item.bids_nominal}</p>
+                    <p>STATUS : {item.status}</p>
+                </Col>
+            )
+        })
+        console.log('BIDDDDD : ', bids_histories)
+        
         return (
             <div>
                 <Nav tabs>
@@ -117,9 +172,7 @@ class DetailProductDetailPages extends React.Component {
                     </TabPane>
                     <TabPane tabId="3">
                         <Row>
-                            <Col>
-                                <p></p>
-                            </Col>
+                            {bids_histories}
                         </Row>
                     </TabPane>
                 </TabContent>

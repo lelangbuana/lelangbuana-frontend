@@ -3,7 +3,7 @@ import React,{Component} from 'react'
 import { Card, CardImg, CardBody, CardTitle, Row, Col} from 'reactstrap'
 import Countdown from 'react-countdown-now'
 import NumberFormat from 'react-number-format'
-import InfiniteScroll from 'react-infinite-scroller'
+// import InfiniteScroll from 'react-infinite-scroller'
 
 
 
@@ -27,6 +27,14 @@ const styles = {
 class CardAuction extends Component {
 
     render() {
+        let EnableTimer
+        this.props.status==='success'
+            ? EnableTimer = <p>CLOSED</p>
+            : EnableTimer = 
+            <Row><Col>
+                <span>time remaining : <span>
+                </span><Countdown date={Date.now()+((Date.parse(this.props.endDate)-Date.now()))}/></span>
+            </Col></Row>
         return (
 
             <div
@@ -45,9 +53,10 @@ class CardAuction extends Component {
                         <Row><Col><span>{this.props.status}</span></Col></Row>
                         <hr/>
                         <Row><Col><span>start bid : <b><NumberFormat value={this.props.startBid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '}/></b></span></Col></Row>
-                        <Row><Col><span>time remaining : <span>
-                            <Countdown date={Date.now()+((Date.parse(this.props.endDate)-Date.parse(this.props.startDate)))}/></span>
-                        </span></Col></Row>
+                        
+                        {EnableTimer}   
+                        
+                        
 
                     </CardBody>
                 </Card>
