@@ -13,7 +13,8 @@ const mapStateToProps = (state,props) => {
         bidData: state.auction.bidData,
         max_bid: state.auction.max_bid,
         highest_bid: state.auction.highest_bid,
-        bids: state.auction.bids
+        bids: state.auction.bids,
+        winner: state.auction.winner
     }
 }
 
@@ -83,6 +84,9 @@ class DetailProductListProduct extends Component {
                 <ListGroupItem>Number of Bid : {this.props.bids}</ListGroupItem>
                 <ListGroupItem>
                     Highest Bidder : <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
+                    <div>
+                    <h3>{this.props.winner}</h3>
+                    </div>
                 </ListGroupItem>
                 <ListGroupItem>
                     Opening Time : {moment(this.props.openingTime).format('lll')}

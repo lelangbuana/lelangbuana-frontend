@@ -41,9 +41,6 @@ const categories = [
     { name: 'Collection & Hobby', categories: ['Gem Stone', 'Antiques', 'Musical Instruments', 'Dolls and Toys', 'Tapes, Books & Magazines', 'Handicrafts', 'Artworks', 'Old Money', 'Others']}
 ]
 
-let newCategories = []
-
-
 class Home extends Component {
 
     addItem(item) {
@@ -235,8 +232,6 @@ class Home extends Component {
 
             })
         }
-
-        let listCategories = categories.map(this.createCategories)
 
         let profiles
         if (localStorage.getItem('token')){

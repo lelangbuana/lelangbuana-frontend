@@ -105,6 +105,10 @@ class DetailProductBidStatus extends Component{
       .catch(error=>{console.log(error)})
     }
 
+    auctionEnd(){
+        console.log("CLOSED!!!");
+    }
+
     buyOut = event => {
         event.preventDefault()
         const payload = {
@@ -160,7 +164,7 @@ class DetailProductBidStatus extends Component{
         let start = Date.parse(this.props.start_date)
 
         now<=end && this.props.status === "ongoing"
-        ? enableCountDown = <Countdown  date={ start + (end-start)}><h3>CLOSED</h3></Countdown>
+        ? enableCountDown = <Countdown  date={ now + (end-now)}><h3>CLOSED</h3></Countdown>
         : enableCountDown = <h3>CLOSED</h3>
         
         
@@ -223,6 +227,9 @@ class DetailProductBidStatus extends Component{
                     </Col></Row>
                     <Row style={styles.contains}><Col><span>
                     {enableCountDown}
+                    <div>
+                    {/* <Countdown onComplete={this.auctionEnd} date={Date.now() + 10000} /> */}
+                    </div>
                         </span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Seller</span></Col></Row>
