@@ -3,11 +3,13 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+import InfiniteScroll from 'react-infinite-scroller'
+
+import { Container, Row, Col } from 'reactstrap'
+
 import CardAuction from '../Components/CardAuction'
 import Categories from '../Components/Categories'
 import Profile from '../Components/Profile'
-
-import { Container, Row, Col } from 'reactstrap'
 
 const styles = {
     space: {
@@ -182,28 +184,31 @@ class Home extends Component {
     render() {
         let listAuction = this.state.auctions.map((item, index) => {
 
+            console.log('helo')
             return (
+                <Col xs="12" sm="6" md="4">
+
                 <Link
                     key={index}
                     to={`/auctions/${item.user}`}
                     params={{ id: item.user }}
-                    status={item.status}
+
                 >
+                
+                   
                     <CardAuction
-                        key={item.title + index}
-                        user={item.user}
-                        title={item.title}
-                        src={item.src}
-                        description={item.description}
-                        status={item.status}
+
+                         status={item.status}
                         startBid={item.start_bid}
                         maxBid={item.max_bid}
                         startDate={item.start_date}
                         endDate={item.end_date}
+
                     />
                 </Link>
+                </Col>
             )
-            
+
         })
 
         let listCategories = categories.map(this.createCategories)
@@ -227,7 +232,15 @@ class Home extends Component {
                             {listCategories}       
                         </Col>
                         <Col sm="9">
-                            <Row>{listAuction}</Row>
+                            <Row className="justify-context-center">
+                            {/* <InfiniteScroll>
+                                //     pageStart={0}
+                                //     loader={<div className="loader" key={0}>Loading ...</div>}
+                                // >
+                                    
+                                </InfiniteScroll> */}
+                                {listAuction}
+                            </Row>
                         </Col>
                     </Row>
                 </Container>
