@@ -1,4 +1,5 @@
 import React from 'react'
+import NumberFormat from 'react-number-format'
 import axios from 'axios'
 import {Collapse, Table, Card, CardBody} from 'reactstrap'
 import moment from 'moment'
@@ -15,6 +16,7 @@ const styles = {
     }
 }
 
+const nowDate = moment()
 
 class DetailItem extends React.Component {
 
@@ -24,12 +26,18 @@ class DetailItem extends React.Component {
             myBids: []
         }
     }
-
+    
     render(){
-        const Detail = this.state.myBids.forEach(item => {
-            console.log(item)
-            return <tr><td>helo</td></tr>
+        let highestBid = 0
+        const Detail = this.props.bids.forEach(item => {
+            if (item.bids_nominal>highestBid)
+            {
+                highestBid=item.bids_nominal
+            }
+            return highestBid
+            // return <tr><td>{item}</td></tr>
         })
+        console.log('BID HIGHEST: ',highestBid)
 
         return(
             <div>
@@ -42,7 +50,6 @@ class DetailItem extends React.Component {
                                     <th>Time</th>
                                     <th>Closed Date</th>
                                     <th>Closed Time</th>
-                                    <th>Users</th>
                                     <th>Bid Price</th>
                                     {/* <th>Status</th> */}
                                 </tr>
@@ -50,12 +57,12 @@ class DetailItem extends React.Component {
                             <tbody>
                                 {Detail}
                                 <tr >
-                                    <td>{moment().format('ll')}</td>
-                                    <td>{moment().format('LT')}</td>
+                                    <td>{nowDate.format('ll')}</td>
+                                    <td>{nowDate.format('LT')}</td>
                                     <td>{moment(this.props.endDate).format('ll')}</td>
                                     <td>{moment(this.props.endDate).format('LT')}</td>
-                                    <td>{this.props.username} </td>
-                                    <td>{this.props.bids_nominal}</td>
+                                    {/* <td>{this.props.username} </td> */}
+                                    <td><NumberFormat value={highestBid} displayType={'text'} thousandSeparator={true} prefix={'IDR '}/></td>
                                     {/* <td>Success</td> */}
                                 </tr>
                             </tbody>

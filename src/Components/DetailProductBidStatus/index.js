@@ -193,7 +193,7 @@ class DetailProductBidStatus extends Component{
                             type="number"
                             name="bid_nominal"
                             id="bid_nominal"
-                            placeholder="IDR "
+                            placeholder="IDR"
                             step={this.props.bids_multiply}
                             min={startBid}
                         />

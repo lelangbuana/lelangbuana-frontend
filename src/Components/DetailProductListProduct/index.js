@@ -79,11 +79,11 @@ class DetailProductListProduct extends Component {
             <ListGroup flush style={styles.text}>
                 <ListGroupItem><b>Quantity :</b> {this.props.quantity}</ListGroupItem>
                 <ListGroupItem>
-                    <b>Opening Price :</b> <NumberFormat value={this.props.openingPrice} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
+                    <b>Opening Price :</b> <NumberFormat value={this.props.openingPrice} displayType={'text'} thousandSeparator={true} prefix={'IDR '} />
                 </ListGroupItem>
                 <ListGroupItem><b>Number of Bid</b> : {this.props.bids}</ListGroupItem>
                 <ListGroupItem>
-                    <b>Highest Bidder :</b> <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
+                    <b>Highest Bidder :</b> <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR '} />
                     <div>
                     <h3>{this.props.winner}</h3>
                     </div>

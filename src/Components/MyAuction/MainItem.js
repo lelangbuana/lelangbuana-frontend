@@ -1,4 +1,5 @@
 import React from 'react'
+import NumberFormat from 'react-number-format'
 import {
     ListGroup,
     ListGroupItem,
@@ -47,18 +48,15 @@ class MainItem extends React.Component{
                         <Media body>
                             <Media heading>{this.props.title}</Media>
                             <Media>
-                                <span>Expected Price : {this.props.maxBid} </span>
+                                <span>Expected Price : <NumberFormat value={this.props.maxBid} displayType={'text'} thousandSeparator={true} prefix={'IDR '}/> </span>
                             </Media>
                             <Media>
-                                <span>Current Price : </span>
-                            </Media>
-                            <Media>
-                                <span>From : {this.props.minBid}</span>
+                                <span>From : <NumberFormat value={this.props.minBid} displayType={'text'} thousandSeparator={true} prefix={'IDR '}/></span>
                             </Media>
                         </Media>
                     </Media>
                 </ListGroupItem>
-                <DetailItem username={this.props.username} isOpen={this.state.collapse} auctionId={this.props.auctionId}/>
+                <DetailItem username={this.props.username} isOpen={this.state.collapse} auctionId={this.props.auctionId} bids={this.props.bids} endDate={this.props.endDate}/>
             </ListGroup>
         )
     }

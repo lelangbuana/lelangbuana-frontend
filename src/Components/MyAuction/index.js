@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 
 import MainItem from './MainItem'
-
+import moment from 'moment'
 const request = axios.create({
     baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
     timeout: 10000,
@@ -25,6 +25,7 @@ class MyAuction extends Component {
             myBids:[],
             username: '',
             end_date:'',
+            start_date:'',
             already_request: false
 
         }
@@ -43,19 +44,22 @@ class MyAuction extends Component {
                     myAuctions: data,
                     already_request: true
                 })
+                console.log('DATA : ',this.state.myAuctions)
             })
             .catch(error=>{console.log(error)})        
     }
 
 
     createAuctions(data, index) {
+        console.log('DATA : ', data.bids)
         return (
             <MainItem key={index} 
                 title={data.title}
+                bids={data.bids}
                 maxBid={data.max_bid}
                 minBid={data.min_bid}
                 itemPhoto={data.item_photo}
-                endBate = {data.end_date}
+                endDate = {data.end_date}
                 auctionId = { data.auction_id}
             />)
     }
