@@ -162,7 +162,6 @@ class Home extends Component {
 
     render() {
         let listAuction = this.state.auctions.map((item, index) => {
-<<<<<<< HEAD
             console.log('helo')
             return (
                 <Col xs="12" sm="6" md="4">
@@ -182,27 +181,6 @@ class Home extends Component {
                 </Link>
                 </Col>
             )
-=======
-
-                return (
-                    <Link
-                        key={index}
-                        to={`/auctions/${item.user}`}
-                        params={{ id: item.user }}
-                        status={item.status}
-                    >
-                        <CardAuction
-                            key={item.title + index}
-                            user={item.user}
-                            title={item.title}
-                            src={item.src}
-                            description={item.description}
-                            status={item.status}
-                        />
-                    </Link>
-                )
-            
->>>>>>> d125292bf6f0e32dd9629c204a8e84c74f4af784
         })
 
         let listCategories = categories.map(this.createCategories)

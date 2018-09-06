@@ -10,18 +10,9 @@ const request = axios.create({
 })
 
 const styles = {
-<<<<<<< HEAD
     select : {
         margin: '-.75rem -1.25rem',
         padding: '.75rem 1.25rem'
-=======
-    size: {
-        width:'120px',
-        height: '120px'
-    },
-    text: {
-        textAlign: 'center'
->>>>>>> d125292bf6f0e32dd9629c204a8e84c74f4af784
     }
 }
 
