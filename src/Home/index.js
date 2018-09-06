@@ -68,6 +68,7 @@ class Home extends Component {
             })
             .then(data => {
                 data.forEach(item => {
+
                     console.log("AUCTION_ID : ", item.auction_id);
                     
                     request
@@ -103,6 +104,7 @@ class Home extends Component {
                         .catch(error => {
                             console.log(error)
                         })
+
                     
                     this.setState(prevState => {
                         return {
@@ -110,7 +112,8 @@ class Home extends Component {
                                 user: item.auction_id,
                                 title: item.title,
                                 src: item.item_photo,
-                                description: item.item_description
+                                description: item.item_description,
+                                status: item.status
                             })
                         }
                     })
@@ -159,6 +162,7 @@ class Home extends Component {
 
     render() {
         let listAuction = this.state.auctions.map((item, index) => {
+<<<<<<< HEAD
             console.log('helo')
             return (
                 <Col xs="12" sm="6" md="4">
@@ -178,6 +182,27 @@ class Home extends Component {
                 </Link>
                 </Col>
             )
+=======
+
+                return (
+                    <Link
+                        key={index}
+                        to={`/auctions/${item.user}`}
+                        params={{ id: item.user }}
+                        status={item.status}
+                    >
+                        <CardAuction
+                            key={item.title + index}
+                            user={item.user}
+                            title={item.title}
+                            src={item.src}
+                            description={item.description}
+                            status={item.status}
+                        />
+                    </Link>
+                )
+            
+>>>>>>> d125292bf6f0e32dd9629c204a8e84c74f4af784
         })
 
         let listCategories = categories.map(this.createCategories)

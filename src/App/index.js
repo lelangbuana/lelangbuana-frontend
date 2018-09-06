@@ -126,15 +126,15 @@ const reducer = (state = initialState, action) => {
                 max_bid: action.payload.max_bid,
                 start_bid: action.payload.start_bid,
                 bids_multiply: action.payload.bids_multiply,
-                item_description : action.payload.item_description
-                
-                
+                item_description : action.payload.item_description 
             },
             user:{
                 ...state.user,
                 username : action.payload.username,
                 phone_number: action.payload.phone_number,
-                address: action.payload.address
+                address: action.payload.address,
+
+                status: action.payload.status
             }
         }
     }
