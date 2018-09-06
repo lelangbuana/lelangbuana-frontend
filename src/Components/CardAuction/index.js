@@ -11,10 +11,12 @@ const styles = {
         marginBottom: '25px',
 
         height: '350px'
+        
 
     },
     sizes: {
-        width: '100%'
+        width: '100%',
+        height: '250px'
     }
 }
 

@@ -65,6 +65,7 @@ class Home extends Component {
                 data.forEach(item => {
 
                     console.log('AUCTION_ID : ', item)
+                    console.log('PHOTO : ', item.item_photo)
 
                     
                     // request
@@ -184,28 +185,28 @@ class Home extends Component {
     render() {
         let listAuction = this.state.auctions.map((item, index) => {
 
-            console.log('helo')
+            console.log('Picture :  ', item.src)
             return (
-                <Col xs="12" sm="6" md="4">
+                <Col xs="12" sm="6" md="4" key={index}>
 
-                <Link
-                    key={index}
-                    to={`/auctions/${item.user}`}
-                    params={{ id: item.user }}
-
-                >
+                    <Link
+                        key={index}
+                        to={`/auctions/${item.user}`}
+                        params={{ id: item.user }}
+                    >
                 
-                   
-                    <CardAuction
+                        <CardAuction
 
-                         status={item.status}
-                        startBid={item.start_bid}
-                        maxBid={item.max_bid}
-                        startDate={item.start_date}
-                        endDate={item.end_date}
+                            status={item.status}
+                            startBid={item.start_bid}
+                            maxBid={item.max_bid}
+                            startDate={item.start_date}
+                            endDate={item.end_date}
+                            src={item.src}
+                            title={item.title}
 
-                    />
-                </Link>
+                        />
+                    </Link>
                 </Col>
             )
 
@@ -233,7 +234,7 @@ class Home extends Component {
                         </Col>
                         <Col sm="9">
                             <Row className="justify-context-center">
-                            {/* <InfiniteScroll>
+                                {/* <InfiniteScroll>
                                 //     pageStart={0}
                                 //     loader={<div className="loader" key={0}>Loading ...</div>}
                                 // >
