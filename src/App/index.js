@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Loader from '../Components/Assets/loader.gif'
 
 import Home from '../Home'
 import Login from '../Login'
@@ -15,19 +16,6 @@ import PrivateRoute from '../PrivateRoute'
 
 import NavBar from '../Components/NavBar'
 import Footer from '../Components/Footer'
-
-
-const styles = {
-    body: {
-        display: 'flex',
-        minHeight: '100vh',
-        flexDirection: 'column'
-    },
-
-    main: {
-        flex: '1'
-    }
-}
 
 const initialState = {
     message: '',
@@ -224,17 +212,49 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+const styles = {
+    body:{
+        display: 'flex',
+        minHeight: '100vh',
+        flexDirection: 'column'
+    },
+    main:{
+        flex: '1'
+    }
+}
 
 
 class App extends Component {
+   state = {
+    loading:true
+    }
+
+    componentDidMount(){
+        setTimeout(() => this.setState({ loading: false }), 1500)
+    }
+
     render() {
+        const { loading } = this.state
+        // const styles = {
+        //     imageCenter: {
+        //         display: "flex",
+        //         justifyContent: 'center',
+        //         alignItems: 'center',   
+        //         marginLeft: "auto",
+        //         marginRight: "auto",
+        //         width: "25%",
+        //     }
+        // }
+
+        if(loading) { // if your component doesn't have to wait for an async action, remove this block 
+            return <div className="text-center"><img src={Loader} alt="loading..." className="mx-auto d-block" /></div>  // render null when app is not ready
+        }
         return (
             <Provider store={store}>
                 <Router>
                     <div className="App" style={styles.body}>
                         <div>
                             <NavBar />
-                            {/* <AuthButton/> */}
                         </div>
                         <div style={styles.main}>
                             <Switch>

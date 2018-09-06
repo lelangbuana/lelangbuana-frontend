@@ -77,29 +77,29 @@ class DetailProductListProduct extends Component {
     render() {
         return (
             <ListGroup flush style={styles.text}>
-                <ListGroupItem>Quantity : {this.props.quantity}</ListGroupItem>
+                <ListGroupItem><b>Quantity :</b> {this.props.quantity}</ListGroupItem>
                 <ListGroupItem>
-                    Opening Price : <NumberFormat value={this.props.openingPrice} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
+                    <b>Opening Price :</b> <NumberFormat value={this.props.openingPrice} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
                 </ListGroupItem>
-                <ListGroupItem>Number of Bid : {this.props.bids}</ListGroupItem>
+                <ListGroupItem><b>Number of Bid</b> : {this.props.bids}</ListGroupItem>
                 <ListGroupItem>
-                    Highest Bidder : <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
+                    <b>Highest Bidder :</b> <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} />
                     <div>
                     <h3>{this.props.winner}</h3>
                     </div>
                 </ListGroupItem>
                 <ListGroupItem>
-                    Opening Time : {moment(this.props.openingTime).format('lll')}
+                    <b>Opening Time :</b> {moment(this.props.openingTime).format('lll')}
                 </ListGroupItem>
                 <ListGroupItem>
-                    Closing Time : {moment(this.props.endTime).format('lll')}
+                    <b>Closing Time :</b> {moment(this.props.endTime).format('lll')}
                 </ListGroupItem>
-                <ListGroupItem>Current Time: {nowDate} </ListGroupItem>
-                <ListGroupItem>Auction ID : {this.props.auctionID}</ListGroupItem>
+                <ListGroupItem><b>Current Time:</b> {nowDate} </ListGroupItem>
+                <ListGroupItem><b>Auction ID :</b> {this.props.auctionID}</ListGroupItem>
                 <ListGroupItem>
-                    Item Condition : {this.props.condition}
+                    <b>Item Condition :</b> {this.props.condition}
                 </ListGroupItem>
-                <ListGroupItem>Shipping Paid By : Customer</ListGroupItem>
+                <ListGroupItem><b>Shipping Paid By : Customer</b></ListGroupItem>
                 <hr />
             </ListGroup>
         )

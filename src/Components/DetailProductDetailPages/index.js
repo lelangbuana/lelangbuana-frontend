@@ -48,31 +48,34 @@ class DetailProductDetailPages extends React.Component {
         }
     }
 
-    componentDidMount(){
+    componentWillMount(){
         request
             .get(`/auctions/${this.props.params}`)
             .then(response => {
-                // console.log('BIDS HISTORY: ', response.data.bids)
+            // console.log('BIDS HISTORY: ', response.data.bids)
                 response.data.bids.map(item => {
-                    bids.push({
-                        auction_id: item.auction_id,
-                        bid_id: item.bid_id,
-                        bids_nominal: item.bids_nominal,
-                        status: item.status,
-                        user_id: item.user_id })
-                    // return 
+                    return(
+                        bids.push({
+                            auction_id: item.auction_id,
+                            bid_id: item.bid_id,
+                            bids_nominal: item.bids_nominal,
+                            status: item.status,
+                            user_id: item.user_id })
+                    )
+                // return 
                 })
 
-                // return (bids)
-                
+            // return (bids)
+            
 
             })
             .catch(error=>{
                 console.log(error)
             })
         console.log('BID DATA HISTORIES:  ', bids)
-            
     }
+
+    componentDidMount(){}
 
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -94,6 +97,7 @@ class DetailProductDetailPages extends React.Component {
     render() {
 
         let bids_histories= bids.map((item,index)=> {
+            console.log('BIDDDDD : ', item)
             return (
                 <Col key={index}>
                     <p>AUCTION : {item.auction_id}</p>
@@ -102,7 +106,6 @@ class DetailProductDetailPages extends React.Component {
                 </Col>
             )
         })
-        console.log('BIDDDDD : ', bids_histories)
         
         return (
             <div>

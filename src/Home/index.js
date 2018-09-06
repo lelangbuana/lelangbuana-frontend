@@ -7,8 +7,9 @@ import { Link, withRouter } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'reactstrap'
 
 import CardAuction from '../Components/CardAuction'
-import Categories from '../Components/Categories'
+// import Categories from '../Components/Categories'
 import Profile from '../Components/Profile'
+import Search from '../Components/Search'
 
 const styles = {
     space: {
@@ -32,14 +33,14 @@ const mapStateToProps = state => {
     }
 }
 
-const categories = [
-    { name: 'Fashion', categories: ['Clothes', 'Watches', 'Bags', 'Accessories', 'Others'] },
-    { name: 'Furniture, AV & Camera', categories: ['Tables', 'Chairs', 'Cupboards', 'Kitchen Equipments', 'Others'] },
-    { name: 'Sport', categories: ['Bikes', 'Accessories', 'Rackets', 'Balls', 'Shoes', 'Jerseys', 'Others'] },
-    { name: 'Electronic', categories: ['Handphones & Tablets', 'Cameras & Photography', 'PC & Laptops', 'TV & Monitors', 'Others'] },
-    { name: 'Vehicle', categories: ['Cars', 'Motorcycles', 'Spareparts', 'Wheels', 'Accessories']},
-    { name: 'Collection & Hobby', categories: ['Gem Stone', 'Antiques', 'Musical Instruments', 'Dolls and Toys', 'Tapes, Books & Magazines', 'Handicrafts', 'Artworks', 'Old Money', 'Others']}
-]
+// const categories = [
+//     { name: 'Fashion', categories: ['Clothes', 'Watches', 'Bags', 'Accessories', 'Others'] },
+//     { name: 'Furniture, AV & Camera', categories: ['Tables', 'Chairs', 'Cupboards', 'Kitchen Equipments', 'Others'] },
+//     { name: 'Sport', categories: ['Bikes', 'Accessories', 'Rackets', 'Balls', 'Shoes', 'Jerseys', 'Others'] },
+//     { name: 'Electronic', categories: ['Handphones & Tablets', 'Cameras & Photography', 'PC & Laptops', 'TV & Monitors', 'Others'] },
+//     { name: 'Vehicle', categories: ['Cars', 'Motorcycles', 'Spareparts', 'Wheels', 'Accessories']},
+//     { name: 'Collection & Hobby', categories: ['Gem Stone', 'Antiques', 'Musical Instruments', 'Dolls and Toys', 'Tapes, Books & Magazines', 'Handicrafts', 'Artworks', 'Old Money', 'Others']}
+// ]
 
 class Home extends Component {
 
@@ -51,7 +52,7 @@ class Home extends Component {
         })
     }
 
-    componentDidMount() {
+    UNSAFE_componentWillMount() {
         request
             .get('/auctions')
             .then(response => {
@@ -61,7 +62,7 @@ class Home extends Component {
                 data.forEach(item => {
 
 
-                    console.log('AUCTION_ID : ', item)
+                    // console.log('AUCTION_ID : ', item)
   
 
                     this.setState(prevState => {
@@ -69,7 +70,7 @@ class Home extends Component {
                             auctions: prevState.auctions.concat({
                                 user: item.auction_id,
                                 title: item.title,
-                                src: item.item_photo,
+                                item_photo: item.item_photo,
                                 description: item.item_description,
                                 status: item.status,
                                 start_bid: item.start_bid,
@@ -86,25 +87,24 @@ class Home extends Component {
                 console.log(error)
             })
 
-        request
-            .get('/categories')
-            .then(response => {
-                console.log('Categories : ', response.data)
-                // response.data.forEach(
-
-                // )
-                return response.data
-            })
+        // request
+        //     .get('/categories')
+        //     .then(response => {
+        //         console.log('Categories : ', response.data)
+        //         return response.data
+        //     })
 
     }
+
+    componentDidMount() {}
     constructor(props) {
         super(props)
-        this.createCategories = this.createCategories.bind(this)
+        // this.createCategories = this.createCategories.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.state = {
             auctions: [],
             title: this.props.title,
-            src: this.props.src,
+            src: this.props.item_photo,
             description: this.props.description,
             highest_bid: this.props.highest_bid,
             start_bid: 0,
@@ -127,16 +127,15 @@ class Home extends Component {
     }
 
     
-
-    createCategories(item, index) {
-        return (
-            <Categories
-                key={item.name + index}
-                name={item.name}
-                categories={item.categories}
-            />
-        )
-    }
+    // createCategories(item, index) {
+    //     return (
+    //         <Categories
+    //             key={item.name + index}
+    //             name={item.name}
+    //             // categories={item.categories}
+    //         />
+    //     )
+    // }
 
     handleClick(){
         this.setState({ 
@@ -157,11 +156,9 @@ class Home extends Component {
     
 
     render() {
-
         let listAuction
+        console.log (this.state.auctions)
         if (this.state.statusValue) {
-
-        
             listAuction = this.state.auctions.map((item, index) => {
                 if (item.status === 'ongoing') {
                     return <div key={index}></div>
@@ -182,7 +179,7 @@ class Home extends Component {
                                 maxBid={item.max_bid}
                                 startDate={item.start_date}
                                 endDate={item.end_date}
-                                src={item.src}
+                                src={item.item_photo}
                                 title={item.title}
                                 color={{
                                     backgroundColor: '#333',
@@ -217,7 +214,7 @@ class Home extends Component {
                                 maxBid={item.max_bid}
                                 startDate={item.start_date}
                                 endDate={item.end_date}
-                                src={item.src}
+                                src={item.item_photo}
                                 title={item.title}
                                 color={{
                                     backgroundColor: '#1E2650 ',
@@ -250,7 +247,9 @@ class Home extends Component {
                         <Col sm="3">
                             {profiles}
                             <Button color="primary" onClick={this.handleClick}value="success" block>{this.state.buttonText}</Button>
-                            {/* {listCategories}        */}
+                            {/* {listCategories}*/}
+                            <br/>
+                            <Search updateList = {this.updateList}/>
                         </Col>
                         <Col sm="9">
                             <Row className="justify-context-center">
@@ -262,6 +261,13 @@ class Home extends Component {
                 </Container>
             </div>
         )
+    }
+
+    updateList = (data) => {
+        this.setState({
+            auctions: data
+        })
+        console.log(data)
     }
 }
 
