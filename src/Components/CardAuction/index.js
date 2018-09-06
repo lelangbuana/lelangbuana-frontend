@@ -8,10 +8,11 @@ const styles = {
     margins: {
         // marginRight: '35px',
         marginBottom: '25px',
-        height: '350px'
+        height: '100%'
     },
     sizes: {
-        width: '100%'
+        width: '100%',
+        height: '230px'
     }
 }
 
