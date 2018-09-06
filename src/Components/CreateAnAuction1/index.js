@@ -157,7 +157,7 @@ class CreateAnAuction1 extends Component {
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={3} for="quantity">Quantity</Label>
-                                <Col sm={9}>
+                                <Col sm={5}>
                                 <Input
                                     onChange={this.handleChange}
                                     type="number"
@@ -170,7 +170,7 @@ class CreateAnAuction1 extends Component {
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={3} for="minbid">Min. Bid Price</Label>
-                                <Col sm={9}>
+                                <Col sm={5}>
                                 <Input
                                     onChange={this.handleChange}
                                     type="number"
@@ -183,7 +183,7 @@ class CreateAnAuction1 extends Component {
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={3} for="maxbid">Max. Bid Price</Label>
-                                <Col sm={9}>
+                                <Col sm={5}>
                                 <Input
                                     onChange={this.handleChange}
                                     type="number"
@@ -196,7 +196,7 @@ class CreateAnAuction1 extends Component {
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={3} for="startdate">Start date</Label> 
-                                <Col sm={9}>
+                                <Col sm={5}>
                                 <DatePicker
                                     name="start_date"
                                     id="start_date"
@@ -208,11 +208,10 @@ class CreateAnAuction1 extends Component {
                             </FormGroup>
                             <FormGroup row>
                                 <Label sm={3} for="closingdate">Closing date</Label>                
-                                <Col sm={9}>
+                                <Col sm={5}>
                                 <DatePicker
                                     name="end_date"
                                     id="end_date"
-                                    isClearable={true}
                                     selected={this.state.end_date}
                                     onChange={this.handleChangeDate}
                                     showTimeSelect
@@ -228,7 +227,7 @@ class CreateAnAuction1 extends Component {
                                 <Label sm={3} for="item_condition">
                                     Item Condition
                                 </Label>
-                                <Col sm={9}>
+                                <Col sm={5}>
                                 <Input
                                 onChange={this.handleChange} 
                                 type="select" 
@@ -248,7 +247,7 @@ class CreateAnAuction1 extends Component {
                                 <Label sm={3} for="bidincrement">
                                     Bid Increment (IDR )
                                 </Label>
-                                <Col sm={9}>
+                                <Col sm={5}>
                                 <Input 
                                 onChange={this.handleChange}
                                 type="select" 

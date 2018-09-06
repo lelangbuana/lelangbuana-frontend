@@ -68,7 +68,7 @@ class MakeAuction extends Component {
                         </Col>
                         <Col sm="9">
                             <Label style={styles.label}>
-                                Create An Auction - Lelangbuana.com
+                                Create Auction - Lelangbuana.com
                             </Label>
                             <Row>
                                 <Col>
