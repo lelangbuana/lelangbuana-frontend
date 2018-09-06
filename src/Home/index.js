@@ -20,7 +20,7 @@ const styles = {
 
 const request = axios.create({
     baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
-    timeout: 10000,
+    timeout: 50000,
     headers: { Authorization: '' }
 })
 
@@ -34,23 +34,16 @@ const mapStateToProps = state => {
 }
 
 const categories = [
-    { name: 'Computers', categories: ['Laptop', 'PC', 'Netbook'] },
-    {
-        name: 'Electronic, AV & Camera',
-        categories: ['DSLR', 'Mirrorless', 'Webcam']
-    },
-    { name: 'Music', categories: ['Music Player', 'Speaker'] },
-    { name: 'Book & Magazine', categories: ['Science-Fiction', 'Non-Fiction'] }
+    { name: 'Fashion', categories: ['Clothes', 'Watches', 'Bags', 'Accessories', 'Others'] },
+    { name: 'Furniture, AV & Camera', categories: ['Tables', 'Chairs', 'Cupboards', 'Kitchen Equipments', 'Others'] },
+    { name: 'Sport', categories: ['Bikes', 'Accessories', 'Rackets', 'Balls', 'Shoes', 'Jerseys', 'Others'] },
+    { name: 'Electronic', categories: ['Handphones & Tablets', 'Cameras & Photography', 'PC & Laptops', 'TV & Monitors', 'Others'] },
+    { name: 'Vehicle', categories: ['Cars', 'Motorcycles', 'Spareparts', 'Wheels', 'Accessories']},
+    { name: 'Collection & Hobby', categories: ['Gem Stone', 'Antiques', 'Musical Instruments', 'Dolls and Toys', 'Tapes, Books & Magazines', 'Handicrafts', 'Artworks', 'Old Money', 'Others']}
 ]
 
-class Home extends Component {
 
-    state = {
-        // bidData: 0,
-        // auction_id: this.props.auctionID,
-        // max_bid : 0,
-        highest_bid: this.props.highest_bid
-    }
+class Home extends Component {
 
     addItem(item) {
         this.setState(prevState => {
@@ -69,41 +62,50 @@ class Home extends Component {
             .then(data => {
                 data.forEach(item => {
 
-                    console.log("AUCTION_ID : ", item.auction_id);
+                    console.log('AUCTION_ID : ', item)
+
                     
-                    request
-                    .get(`/bids/auction_id/${item.auction_id}`)
-                    .then(response => {
-                        // const bids = []
-                        // bids.push(response.data.bidData)
-                        response.data.bidData.map((item,index) => {
-                            if (item.bids_nominal>=this.state.highest_bid) 
-                            {
-                                this.state.highest_bid = item.bids_nominal
-                            }
+                    // request
+                    //     .get(`/bids/auction_id/${item.auction_id}`)
+                    //     .then(response => {
                             
-                            return ( 
-                                this.state.highest_bid
-                            )
-                        })
-                        console.log("HIGHEST BID : ", this.state.highest_bid);
+                            
+                    //         // const bids = []
+                    //         // bids.push(response.data)
+                    //         response.data.map((item,index) => {
+                    //             if (item.bids_nominal>=this.state.highest_bid) 
+                    //             {
+                    //                 // console.log('response: ', item.bids_nominal)
+                    //                 this.setState(() => {
+                    //                     return { 
+                    //                         highest_bid: item.bids_nominal
+                    //                     }
+                    //                 })
+                    //                 // this.state.highest_bid = item.bids_nominal
+                    //             }
+                            
+                    //             return ( 
+                    //                 this.state.highest_bid
+                    //             )
+                    //         })
+                    //         console.log('HIGHEST BID : ', this.state.highest_bid)
                         
-                            // this.setState(() => {
-                            //     return { 
-                            //         bidData: response.data.bidData.length,
-                            //         highest_bid: highest_bid
-                            //     }
-                            // })
-                            // this.props.dispatch({
-                            //     type: 'UPDATE_BID_AUCTION',
-                            //     payload: {
-                            //       highest_bid: this.state.highest_bid
-                            //     }
-                            //   })
-                        })
-                        .catch(error => {
-                            console.log(error)
-                        })
+                    //         this.setState(() => {
+                    //             return { 
+                    //                 bidData: response.data.length,
+                    //                 highest_bid: this.state.highest_bid
+                    //             }
+                    //         })
+                    //         this.props.dispatch({
+                    //             type: 'UPDATE_BID_AUCTION',
+                    //             payload: {
+                    //                 highest_bid: this.state.highest_bid
+                    //             }
+                    //         })
+                    //     })
+                    //     .catch(error => {
+                    //         console.log(error)
+                    //     })
 
                     
                     this.setState(prevState => {
@@ -113,8 +115,12 @@ class Home extends Component {
                                 title: item.title,
                                 src: item.item_photo,
                                 description: item.item_description,
-                                status: item.status
-                            })
+                                status: item.status,
+                                start_bid: item.start_bid,
+                                max_bid: item.max_bid,
+                                start_date: item.start_date,
+                                end_date: item.end_date
+                            })  
                         }
                     })
                 })
@@ -130,7 +136,15 @@ class Home extends Component {
         super(props)
         this.createCategories = this.createCategories.bind(this)
         this.state = {
-            auctions: []
+            auctions: [],
+            title: this.props.title,
+            src: this.props.src,
+            description: this.props.description,
+            highest_bid: this.props.highest_bid,
+            start_bid: 0,
+            max_bid: 0,
+            start_date: 0,
+            end_date: 0
         }
     }
     static get propTypes() {
@@ -144,11 +158,7 @@ class Home extends Component {
         }
     }
 
-    state = {
-        title: this.props.title,
-        src: this.props.src,
-        description: this.props.description
-    }
+    
 
     createCategories(item, index) {
         return (
@@ -162,25 +172,32 @@ class Home extends Component {
 
     render() {
         let listAuction = this.state.auctions.map((item, index) => {
+
             console.log('helo')
             return (
                 <Col xs="12" sm="6" md="4">
+
                 <Link
                     key={index}
                     to={`/auctions/${item.user}`}
                     params={{ id: item.user }}
+
                 >
                 
-                    <CardAuction 
-                        key={item.title + index}
-                        user={item.user}
-                        title={item.title}
-                        src={item.src}
-                        description={item.description}
+                   
+                    <CardAuction
+
+                         status={item.status}
+                        startBid={item.start_bid}
+                        maxBid={item.max_bid}
+                        startDate={item.start_date}
+                        endDate={item.end_date}
+
                     />
                 </Link>
                 </Col>
             )
+
         })
 
         let listCategories = categories.map(this.createCategories)
@@ -188,8 +205,8 @@ class Home extends Component {
         let profiles
         if (localStorage.getItem('token')){
             profiles = <div>
-            <Profile/>
-            <br/>
+                <Profile/>
+                <br/>
             </div>
         }
         else {

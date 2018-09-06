@@ -63,7 +63,8 @@ const mapStateToProps = state => {
         status: state.auction.status,
         created_at: state.auction.created_at,
         user_id: state.auction.user_id,
-        username: state.user.username
+        username: state.user.username,
+        highest_bid: state.auction.highest_bid
     }
 }
 
@@ -94,25 +95,33 @@ class ItemDetail extends Component {
                   this.props.dispatch({
                     type: 'SET_AUCTION_STATE',
                     payload: {
-                    auction_id: response.data.auction_id,
-                    user_id: response.data.user.user_id,
-                    max_bid: this.state.max_bid,
-                    start_bid: response.data.start_bid,
-                    bids_multiply: response.data.bids_multiply,
-                    username: response.data.user.username,
-
-                    item_description : response.data.item_description,
-                    phone_number: response.data.user.phone_number,
                     address: response.data.user.address,
-
-                    status: response.data.status
+                    phone_number: response.data.user.phone_number,
+                    auction_id: response.data.auction_id,
+                    title: response.data.title,
+                    item_condition: response.data.item_condition,
+                    item_description : response.data.item_description,
+                    quantity: response.data.quantity,
+                    start_bid: response.data.start_bid,
+                    max_bid: this.state.max_bid,
+                    min_bid: response.data.min_bid,
+                    bids_multiply: response.data.bids_multiply,
+                    start_date: response.data.start_date,
+                    end_date: response.data.end_date,
+                    item_photo: response.data.item_photo,
+                    status: response.data.status,
+                    user_id: response.data.user.user_id,
+                    username: response.data.user.username
 
                         }
                      })
+                     console.log("STATUS FROM ITEM DETAIL : ", response.data.status);
                     })
+                
             .catch(error => {
                 console.log(error)
             })
+            
             
     }
 
@@ -156,7 +165,7 @@ class ItemDetail extends Component {
         )
     }
     render() {
-        console.log("PROPS STATUS: ", this.props.status)
+        console.log("HIGHEST BID: ", this.props.highest_bid)
         let listCategories = categories.map(this.createCategories)
         let profiles
         if (localStorage.getItem('token')){

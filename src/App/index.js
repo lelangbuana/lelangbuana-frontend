@@ -66,7 +66,8 @@ const initialState = {
         created_at: '',
         user_id: 0,
         highest_bid:0,
-        bids:0
+        bids:0,
+        winner: ''
     },
     bidData: {
         bid_id: 0,
@@ -122,11 +123,20 @@ const reducer = (state = initialState, action) => {
             auction:{
                 ...state.auction,
                 auction_id: action.payload.auction_id,
-                user_id: action.payload.user_id,
-                max_bid: action.payload.max_bid,
+                title: action.payload.title,
+                item_condition: action.payload.item_condition,
+                item_description : action.payload.item_description,
+                quantity: action.payload.quantity,
                 start_bid: action.payload.start_bid,
+                max_bid: action.payload.max_bid,
+                min_bid: action.payload.min_bid,
                 bids_multiply: action.payload.bids_multiply,
-                item_description : action.payload.item_description 
+                start_date: action.payload.start_date,
+                end_date: action.payload.end_date,
+                item_photo: action.payload.item_photo,
+                status: action.payload.status,
+                user_id: action.payload.user_id
+
             },
             user:{
                 ...state.user,
@@ -134,7 +144,7 @@ const reducer = (state = initialState, action) => {
                 phone_number: action.payload.phone_number,
                 address: action.payload.address,
 
-                status: action.payload.status
+                
             }
         }
     }
@@ -166,6 +176,17 @@ const reducer = (state = initialState, action) => {
                 
                 ...state.auction,
                 bids: action.payload.bids
+            }
+            
+        }
+    }
+    case 'GET_WINNER': {
+        return {
+            ...state,
+            auction: {
+                
+                ...state.auction,
+                winner: action.payload.winner
             }
             
         }
