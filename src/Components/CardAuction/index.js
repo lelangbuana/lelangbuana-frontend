@@ -3,8 +3,6 @@ import React,{Component} from 'react'
 import { Card, CardImg, CardBody, CardTitle, Row, Col} from 'reactstrap'
 import Countdown from 'react-countdown-now'
 import NumberFormat from 'react-number-format'
-import InfiniteScroll from 'react-infinite-scroller'
-
 
 
 const styles = {
@@ -17,10 +15,6 @@ const styles = {
     sizes: {
         width: '100%',
         height: '230px'
-    },
-    color: {
-        backgroundColor: '#1E2650',
-        borderColor: '#FFFFFF'
     }
 }
 
@@ -31,7 +25,7 @@ class CardAuction extends Component {
 
             <div
                 title={this.props.title}>
-                <Card body inverse style={styles.margins, this.props.color} body className="text-center" onClick={this.props.onClick}>
+                <Card body inverse body className="text-center text-dark" onClick={this.props.onClick}>
 
                     <CardImg
                         top
