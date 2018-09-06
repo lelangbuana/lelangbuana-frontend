@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import Countdown from 'react-countdown-now'
+// import Countdown from 'react-countdown-now'
 import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux'
 import {Row, Col, Form, 
     Input, Button,
     UncontrolledTooltip} from 'reactstrap'
+import moment from 'moment'
 
 const styles = {
     text : {
@@ -60,9 +61,7 @@ class DetailProductBidStatus extends Component{
         }
     }
 
-    componentDidMount(){
-        
-    }
+    componentDidMount(){}
 
     getInitialState(){
         return ({amount: "0.00"});
@@ -103,6 +102,10 @@ class DetailProductBidStatus extends Component{
             console.log("BID STATE", response)
       })
       .catch(error=>{console.log(error)})
+    }
+
+    auctionEnd(){
+        console.log("CLOSED!!!");
     }
 
     buyOut = event => {
@@ -159,8 +162,8 @@ class DetailProductBidStatus extends Component{
         let end = Date.parse(this.props.end_date)
         let start = Date.parse(this.props.start_date)
 
-        now<=end && this.props.status === "ongoing"
-        ? enableCountDown = <Countdown  date={ start + (end-start)}><h3>CLOSED</h3></Countdown>
+        now<=end
+        ? enableCountDown = <span>  date={ now + (end-now)}><h3>CLOSED</h3></span>
         : enableCountDown = <h3>CLOSED</h3>
         
         
@@ -171,7 +174,7 @@ class DetailProductBidStatus extends Component{
         ? enableBid = 
             <div>
             <Row style={styles.contains}>
-                    <Col><span>Bid Increment : <NumberFormat value={this.props.bids_multiply} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} /> </span></Col>
+                    <Col><span>Bid Increment : <NumberFormat value={this.props.bids_multiply} displayType={'text'} thousandSeparator={true} prefix={'IDR '} /> </span></Col>
                 </Row>
             <Row style={styles.contains}>
                 <Col >
@@ -181,7 +184,7 @@ class DetailProductBidStatus extends Component{
                             type="number"
                             name="bid_nominal"
                             id="bid_nominal"
-                            placeholder="IDR."
+                            placeholder="IDR "
                             step={this.props.bids_multiply}
                             min={startBid}
                         />
@@ -212,17 +215,20 @@ class DetailProductBidStatus extends Component{
             <div style={styles.text}>
                  
                     <Row><Col style={styles.title}><span>Current Price</span></Col></Row>
-                    <Row style={styles.contains}><Col ><span> <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '}/> </span></Col></Row>
+                    <Row style={styles.contains}><Col ><span> <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR '}/> </span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Maximum Price</span></Col></Row>
-                    <Row style={styles.contains}><Col><span> <NumberFormat value={this.props.buyOutPrice} displayType={'text'} thousandSeparator={true} prefix={'IDR. '} /> </span></Col></Row> 
+                    <Row style={styles.contains}><Col><span> <NumberFormat value={this.props.buyOutPrice} displayType={'text'} thousandSeparator={true} prefix={'IDR '} /> </span></Col></Row> 
                     <hr/>
                     <Row><Col style={styles.title}>
                     <span>Time Remaining 
                     </span>
                     </Col></Row>
                     <Row style={styles.contains}><Col><span>
-                    {enableCountDown}
+                    {this.props.end_date && moment(this.props.end_date).fromNow()}
+                    <div>
+                    {/* <Countdown onComplete={this.auctionEnd} date={Date.now() + 10000} /> */}
+                    </div>
                         </span></Col></Row>
                     <hr/>
                     <Row><Col style={styles.title}><span>Seller</span></Col></Row>

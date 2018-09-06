@@ -52,6 +52,9 @@ const keys = {
     filestackKey : 'AQulXUyRXS1GqTZvYuubfz'
 }
 
+const CustomInput = props => (
+<Input onClick={props.onClick} value={props.date.format('DD/MM/YYYY HH:mm')} />);
+
 class CreateAnAuction1 extends Component {
     constructor (props) {
         super(props)
@@ -127,8 +130,10 @@ class CreateAnAuction1 extends Component {
         this.setState({
           url: result.filesUploaded[0].url
         })
+        console.log(result)
       }
-      onError = (error) => {
+
+    onError = (error) => {
         console.error('error', error);
     } 
 
@@ -138,9 +143,9 @@ class CreateAnAuction1 extends Component {
                 <Row>
                     <Col lg="8">
                         <Form onSubmit={this.handleSubmit}>
-                            <FormGroup>
-                                <Label for="title">Title</Label>
-                                {/* <Input type="text" name="itemname" id="itemname" placeholder="" /> */}
+                            <FormGroup row>
+                                <Label sm={3} for="title">Title</Label>
+                                <Col sm={9}>
                                 <Input
                                     onChange={this.handleChange}
                                     type="text"
@@ -148,51 +153,62 @@ class CreateAnAuction1 extends Component {
                                     id="title"
                                     placeholder="Auction Title"
                                 />
+                                </Col>
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="quantity">Quantity</Label>
-                                {/* <Input type="number" name="quantity" id="quantity" placeholder="" min="1" /> */}
+                            <FormGroup row>
+                                <Label sm={3} for="quantity">Quantity</Label>
+                                <Col sm={9}>
                                 <Input
                                     onChange={this.handleChange}
                                     type="number"
                                     name="quantity"
                                     id="quantity"
-                                    placeholder="quantity"
+                                    placeholder="Quantity"
+                                    min = '1'
                                 />
+                                </Col>
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="minbid">Min. Bid Price</Label>
-                                {/* <Input type="number" name="minbid" id="minbid" placeholder="" min="0"/> */}
+                            <FormGroup row>
+                                <Label sm={3} for="minbid">Min. Bid Price</Label>
+                                <Col sm={9}>
                                 <Input
                                     onChange={this.handleChange}
                                     type="number"
                                     name="min_bid"
                                     id="min_bid"
                                     placeholder="Min Bid"
+                                    min = '1'
                                 />
+                                </Col>
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="maxbid">Max. Bid Price</Label>
-                                {/* <Input type="number" name="maxbid" id="maxbid" placeholder="" min="0"/> */}
+                            <FormGroup row>
+                                <Label sm={3} for="maxbid">Max. Bid Price</Label>
+                                <Col sm={9}>
                                 <Input
                                     onChange={this.handleChange}
                                     type="number"
                                     name="max_bid"
                                     id="max_bid"
                                     placeholder="Max Bid"
+                                    min = '1'
                                 />
+                                </Col>
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="startdate">Start date</Label> 
+                            <FormGroup row>
+                                <Label sm={3} for="startdate">Start date</Label> 
+                                <Col sm={9}>
                                 <DatePicker
                                     name="start_date"
                                     id="start_date"
                                     selected={this.state.start_date}
-                                    dateFormat="lll"
+                                    dateFormat="ll"
+                                    customInput={<Form ><CustomInput date={this.state.start_date}/></Form>}
                                 />
+                                </Col>
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="closingdate">Closing date</Label>                
+                            <FormGroup row>
+                                <Label sm={3} for="closingdate">Closing date</Label>                
+                                <Col sm={9}>
                                 <DatePicker
                                     name="end_date"
                                     id="end_date"
@@ -204,12 +220,15 @@ class CreateAnAuction1 extends Component {
                                     timeIntervals={30}
                                     dateFormat="lll"
                                     timeCaption="time"
+                                    customInput={<Form ><CustomInput date={this.state.end_date}/></Form>}
                                 />
+                                </Col>
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="item_condition">
+                            <FormGroup row>
+                                <Label sm={3} for="item_condition">
                                     Item Condition
                                 </Label>
+                                <Col sm={9}>
                                 <Input
                                 onChange={this.handleChange} 
                                 type="select" 
@@ -223,12 +242,13 @@ class CreateAnAuction1 extends Component {
                                     <option>Used - Good</option>
                                     <option>Unacceptable</option>
                                 </Input>
+                                </Col>
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="bidincrement">
-                                    Bid Increment (IDR.)
+                            <FormGroup row>
+                                <Label sm={3} for="bidincrement">
+                                    Bid Increment (IDR )
                                 </Label>
-
+                                <Col sm={9}>
                                 <Input 
                                 onChange={this.handleChange}
                                 type="select" 
@@ -244,20 +264,24 @@ class CreateAnAuction1 extends Component {
                                     <option>5000000</option>
                                     <option>10000000</option>
                                 </Input>
+                                </Col>
                             </FormGroup>
-                            <FormGroup>
-                                <Label for="itemdesc">Item Description</Label>
+                            <FormGroup row>
+                                <Label sm={3} for="itemdesc">Item Description</Label>
+                                <Col sm={9}>
                                 <Input 
                                 onChange={this.handleChange}
                                 type="textarea" 
                                 name="item_description" 
                                 id="item_description"
-                                placeholder="Maximum 300 Character" />
+                                placeholder="Maximum 300 Character"/>
+                                </Col>
                             </FormGroup>
-                        <FormGroup>
-                            <Label for="image">
+                        <FormGroup row>
+                            <Label sm={3} for="image">
                             Image : 
                             </Label>
+                            <Col sm={9}>
                             <ReactFilestack
                                 apikey= {keys.filestackKey}
                                 buttonText="Upload"
@@ -266,8 +290,9 @@ class CreateAnAuction1 extends Component {
                                 onSuccess={this.onSuccess}
                                 onError={this.onError}
                                 />
+                            </Col>
                         </FormGroup>
-                            <Button style={styles.button} onClick={this.props.handleSubmit}>Submit</Button>
+                            <Button style={styles.button} onClick={this.props.handleSubmit} block>Submit</Button>
                         </Form>
                     </Col>
                 </Row>

@@ -42,9 +42,6 @@ const mapStateToProps = state => {
 //     { name: 'Collection & Hobby', categories: ['Gem Stone', 'Antiques', 'Musical Instruments', 'Dolls and Toys', 'Tapes, Books & Magazines', 'Handicrafts', 'Artworks', 'Old Money', 'Others']}
 // ]
 
-// let newCategories = []
-
-
 class Home extends Component {
 
     addItem(item) {
@@ -55,7 +52,7 @@ class Home extends Component {
         })
     }
 
-    componentDidMount() {
+    UNSAFE_componentWillMount() {
         request
             .get('/auctions')
             .then(response => {
@@ -73,7 +70,7 @@ class Home extends Component {
                             auctions: prevState.auctions.concat({
                                 user: item.auction_id,
                                 title: item.title,
-                                src: item.item_photo,
+                                item_photo: item.item_photo,
                                 description: item.item_description,
                                 status: item.status,
                                 start_bid: item.start_bid,
@@ -94,13 +91,12 @@ class Home extends Component {
         //     .get('/categories')
         //     .then(response => {
         //         console.log('Categories : ', response.data)
-        //         // response.data.forEach(
-
-        //         // )
         //         return response.data
         //     })
 
     }
+
+    componentDidMount() {}
     constructor(props) {
         super(props)
         // this.createCategories = this.createCategories.bind(this)
@@ -108,7 +104,7 @@ class Home extends Component {
         this.state = {
             auctions: [],
             title: this.props.title,
-            src: this.props.src,
+            src: this.props.item_photo,
             description: this.props.description,
             highest_bid: this.props.highest_bid,
             start_bid: 0,
@@ -130,14 +126,12 @@ class Home extends Component {
         }
     }
 
-    
-
     // createCategories(item, index) {
     //     return (
     //         <Categories
     //             key={item.name + index}
     //             name={item.name}
-    //             categories={item.categories}
+    //             // categories={item.categories}
     //         />
     //     )
     // }
@@ -161,11 +155,9 @@ class Home extends Component {
     
 
     render() {
-
         let listAuction
+        console.log (this.state.auctions)
         if (this.state.statusValue) {
-
-        
             listAuction = this.state.auctions.map((item, index) => {
                 if (item.status === 'ongoing') {
                     return <div key={index}></div>
@@ -186,7 +178,7 @@ class Home extends Component {
                                 maxBid={item.max_bid}
                                 startDate={item.start_date}
                                 endDate={item.end_date}
-                                src={item.src}
+                                src={item.item_photo}
                                 title={item.title}
 
                             />
@@ -217,7 +209,7 @@ class Home extends Component {
                                 maxBid={item.max_bid}
                                 startDate={item.start_date}
                                 endDate={item.end_date}
-                                src={item.src}
+                                src={item.item_photo}
                                 title={item.title}
 
                             />
@@ -230,7 +222,6 @@ class Home extends Component {
         }
 
         // let listCategories = categories.map(this.createCategories)
-
         let profiles
         if (localStorage.getItem('token')){
             profiles = <div>
@@ -248,7 +239,9 @@ class Home extends Component {
                         <Col sm="3">
                             {profiles}
                             <Button color="primary" onClick={this.handleClick}value="success" block>{this.state.buttonText}</Button>
-                            {/* {listCategories}        */}
+                            {/* {listCategories}*/}
+                            <br/>
+
                             <Search updateList = {this.updateList}/>
                         </Col>
                         <Col sm="9">
@@ -262,7 +255,7 @@ class Home extends Component {
             </div>
         )
     }
-    
+
     updateList = (data) => {
         this.setState({
             auctions: data

@@ -222,7 +222,7 @@ class ItemDetail extends Component {
                     </Row>
                     <Row>
                         <Col style={styles.tabs}>
-                            <DetailProductDetailPages />
+                            <DetailProductDetailPages params={this.props.match.params.id}/>
                             <Timer params={this.props.match.params.id} status={this.props.status}/>
                         </Col>
                     </Row>
