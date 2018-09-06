@@ -22,59 +22,64 @@ class Timer extends React.Component {
     tick() {
 
         // if (this.props.status === 'ongoing')
-        {
-            request
-                .get(`/bids/auction_id/${this.props.params}`)
-                .then(response => {
+        
+        request
+            .get(`/bids/auction_id/${this.props.params}`)
+            .then(response => {
                 
                 
-                    response.data.map((item,index) => {
-                        if (item.bids_nominal>highest_bid) 
-                        {
+                response.data.map((item,index) => {
+                    if (item.bids_nominal>highest_bid) 
+                    {
                             
-                            winner = item.user.username
-                            highest_bid = item.bids_nominal
-                            bids.push(response.data)
-                            return ( 
-                                highest_bid,
-                                bids,
-                                winner
-                            )
-                        }
+                        winner = item.user.username
+                        highest_bid = item.bids_nominal
+                        bids.push(response.data)
+                        return ( 
+                            highest_bid,
+                            bids,
+                            winner
+                        )
+                    }
+                    return ( 
+                        highest_bid,
+                        bids,
+                        winner
+                    )
                     
-                    })
-                    this.setState(() => {
-                        return { 
-                            bidData: response.data.length,
-                            highest_bid: highest_bid,
-                            winner: winner
-                        }
-                    })
-                    this.props.dispatch({
-                        type: 'UPDATE_BID_AUCTION',
-                        payload: {
-                            highest_bid: this.state.highest_bid,
-                        }
-                    })
-                    this.props.dispatch({
-                        type: 'GET_WINNER',
-                        payload: {
-                            winner: this.state.winner
-                        }
-                    })
-                    console.log('WINNER: ', this.state.winner)
+                })
+                this.setState(() => {
+                    return { 
+                        bidData: response.data.length,
+                        highest_bid: highest_bid,
+                        winner: winner
+                    }
+                })
+                this.props.dispatch({
+                    type: 'UPDATE_BID_AUCTION',
+                    payload: {
+                        highest_bid: this.state.highest_bid,
+                    }
+                })
+                this.props.dispatch({
+                    type: 'GET_WINNER',
+                    payload: {
+                        winner: this.state.winner
+                    }
+                })
+                console.log('WINNER: ', this.state.winner)
                     
-                    this.props.dispatch({
-                        type: 'UPDATE_BID_AMOUNT',
-                        payload: {
-                            bids: bids.length
-                        }
-                    })
+                this.props.dispatch({
+                    type: 'UPDATE_BID_AMOUNT',
+                    payload: {
+                        bids: bids.length
+                    }
                 })
-                .catch(error => {
-                    // console.log(error)
-                })
-        }
+            })
+            .catch(error => {
+                // console.log(error)
+            })
+        
 
         
         this.setState(prevState => ({
