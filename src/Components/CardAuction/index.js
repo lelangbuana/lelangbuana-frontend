@@ -31,7 +31,7 @@ class CardAuction extends Component {
 
             <div
                 title={this.props.title}>
-                <Card body inverse style={styles.margins, this.props.color} body className="text-center" onClick={this.props.onClick}>
+                <Card  style={styles.margins} body className="text-center text-dark" onClick={this.props.onClick}>
 
                     <CardImg
                         top
