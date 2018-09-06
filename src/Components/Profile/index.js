@@ -13,6 +13,10 @@ const styles = {
     select : {
         margin: '-.75rem -1.25rem',
         padding: '.75rem 1.25rem'
+    },
+    size: {
+        width : '120px',
+        height : '120px'
     }
 }
 
