@@ -3,7 +3,7 @@ import axios from 'axios'
 import Countdown from 'react-countdown-now'
 import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux'
-import {Container, Row, Col, Form, 
+import {Row, Col, Form, 
     Input, Button,
     UncontrolledTooltip} from 'reactstrap'
 
@@ -14,9 +14,6 @@ const styles = {
     title : {
         fontSize : '18px',
         fontWeight : 'bold'
-    },
-    button : {
-        width : '200px'
     },
     contains : {
         marginBottom : '10px'
@@ -193,11 +190,11 @@ class DetailProductBidStatus extends Component{
             </Row>
             <Row style={styles.contains}> 
                 <Col>
-                    <Button style={styles.button} onClick={this.handleSubmit}> Bid Now</Button>
+                    <Button onClick={this.handleSubmit} block> Bid Now</Button>
                 </Col>
             </Row>
             <Row>
-                <Col><Button color="warning" style={styles.button} onClick={this.buyOut}> <span id="UncontrolledTooltipExample"> Win for Buyout Price </span></Button>
+                <Col><Button color="warning" onClick={this.buyOut} block> <span id="UncontrolledTooltipExample"> Bid Max Price </span></Button>
                 <UncontrolledTooltip placement="bottom" target="UncontrolledTooltipExample">
                     Buy This Product Instantly
                 </UncontrolledTooltip>
@@ -213,7 +210,7 @@ class DetailProductBidStatus extends Component{
         
         return(
             <div style={styles.text}>
-                <Container >  
+                 
                     <Row><Col style={styles.title}><span>Current Price</span></Col></Row>
                     <Row style={styles.contains}><Col ><span> <NumberFormat value={this.props.highest_bid} displayType={'text'} thousandSeparator={true} prefix={'IDR. '}/> </span></Col></Row>
                     <hr/>
@@ -232,7 +229,7 @@ class DetailProductBidStatus extends Component{
                     <Row style={styles.contains}><Col><span>{this.props.seller}</span></Col></Row>
                     <hr/>
                     {enableBid}
-                </Container>
+               
             </div>
         )
     }

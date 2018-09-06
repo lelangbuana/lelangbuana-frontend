@@ -76,7 +76,7 @@ class Profile extends Component {
                 <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/" >Home</Link></ListGroupItem>
                 <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/mybid" > My Bid </Link></ListGroupItem>
                 {/* <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/myauction" > My Auction </Link></ListGroupItem> */}
-                <ListGroupItem tag="a" href="" >Setting Profile</ListGroupItem>
+                {/* <ListGroupItem tag="a" href="" >Setting Profile</ListGroupItem> */}
             </ListGroup>
         )
     }
