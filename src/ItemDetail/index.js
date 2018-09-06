@@ -7,7 +7,7 @@ import Timer from '../Components/Timer'
 
 import { Container, Row, Col, Label } from 'reactstrap'
 
-import Categories from '../Components/Categories'
+// import Categories from '../Components/Categories'
 import ProductImage from '../Components/DetailProductCarousel'
 import DetailProductListProduct from '../Components/DetailProductListProduct'
 import DetailProductBidStatus from '../Components/DetailProductBidStatus'
@@ -36,15 +36,15 @@ const styles = {
     }
 }
 
-const categories = [
-    { name: 'Computers', categories: ['Laptop', 'PC', 'Netbook'] },
-    {
-        name: 'Electronic, AV & Camera',
-        categories: ['DSLR', 'Mirrorless', 'Webcam']
-    },
-    { name: 'Music', categories: ['Music Player', 'Speaker'] },
-    { name: 'Book & Magazine', categories: ['Science-Fiction', 'Non-Fiction'] }
-]
+// const categories = [
+//     { name: 'Computers', categories: ['Laptop', 'PC', 'Netbook'] },
+//     {
+//         name: 'Electronic, AV & Camera',
+//         categories: ['DSLR', 'Mirrorless', 'Webcam']
+//     },
+//     { name: 'Music', categories: ['Music Player', 'Speaker'] },
+//     { name: 'Book & Magazine', categories: ['Science-Fiction', 'Non-Fiction'] }
+// ]
 
 const mapStateToProps = state => {
     return {
@@ -155,17 +155,17 @@ class ItemDetail extends Component {
         highestBid: this.props.highest_bid
     }
 
-    createCategories(item, index) {
-        return (
-            <Categories
-                key={item.name + index}
-                name={item.name}
-                categories={item.categories}
-            />
-        )
-    }
+    // createCategories(item, index) {
+    //     return (
+    //         <Categories
+    //             key={item.name + index}
+    //             name={item.name}
+    //             categories={item.categories}
+    //         />
+    //     )
+    // }
     render() {
-        let listCategories = categories.map(this.createCategories)
+        // let listCategories = categories.map(this.createCategories)
         let profiles
         if (localStorage.getItem('token')){
             profiles = <div>
@@ -183,7 +183,7 @@ class ItemDetail extends Component {
                     <Row>
                         <Col sm="3">
                             {profiles}
-                            {listCategories}
+                            {/* {listCategories} */}
                         </Col>
 
                         <Col sm="9">

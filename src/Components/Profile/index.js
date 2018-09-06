@@ -73,7 +73,7 @@ class Profile extends Component {
                     
                 </ListGroupItem>
                 <Button color="warning" size="lg"><Link 
-                    className="text-white d-block" to="/create">Create Auction
+                    className="text-dark d-block" to="/create">Create Auction
                 </Link></Button>
                 <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/" >Home</Link></ListGroupItem>
                 <ListGroupItem><Link style={styles.select} className="text-dark d-block" to="/mybid" > My Bid </Link></ListGroupItem>
