@@ -7,14 +7,14 @@ import Countdown from 'react-countdown-now'
 
 const styles = {
     margins: {
-        marginRight: '35px',
+        // marginRight: '35px',
         marginBottom: '25px',
-        width: '250px',
-        height: '400px'
+
+        height: '350px'
+
     },
     sizes: {
-        width: '200px', 
-        height: '200px'
+        width: '100%'
     }
 }
 
