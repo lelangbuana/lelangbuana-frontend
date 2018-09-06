@@ -156,7 +156,6 @@ class Home extends Component {
 
     render() {
         let listAuction
-        console.log (this.state.auctions)
         if (this.state.statusValue) {
             listAuction = this.state.auctions.map((item, index) => {
                 if (item.status === 'ongoing') {
@@ -170,9 +169,7 @@ class Home extends Component {
                             to={`/auctions/${item.user}`}
                             params={{ id: item.user }}
                         >
-                
                             <CardAuction
-
                                 status={item.status}
                                 startBid={item.start_bid}
                                 maxBid={item.max_bid}
@@ -180,12 +177,10 @@ class Home extends Component {
                                 endDate={item.end_date}
                                 src={item.item_photo}
                                 title={item.title}
-
                             />
                         </Link>
                     </Col>
                 )
-
             })
         }
         else {
@@ -245,7 +240,7 @@ class Home extends Component {
                             <Search updateList = {this.updateList}/>
                         </Col>
                         <Col sm="9">
-                            <Row className="justify-context-center">
+                            <Row className="justify-context-center row-eq-height">
 
                                 {listAuction}
                             </Row>

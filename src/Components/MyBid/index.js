@@ -33,44 +33,22 @@ class MyBid extends Component {
             .get(`/bids/user_id/${localStorage.getItem('user_id')}`)
             .then(response => response.data)
             .then(data => {
-                console.log(data)
-                data.forEach(item => {
-                    request
-                        .get(`/auctions/${item.auction_id}`)
-                        .then((response) => { 
-                            //console.log('RESPONSE : ', response)
-                            return response.data 
-                        })
-                        .then(dataAuction => {
-                            request
-                                .get(`/users/id/${dataAuction.user_id}`)
-                                .then((response) => {return response.data.user})
-                                .then(dataDetail => {
-                                    this.setState(prevState => {
-                                        //console.log(prevState.myBids)
-                                        // console.log(dataDetail)
-                                        return {
-                                            myBids: prevState.myBids.concat({
-                                                bids_nominal: item.bids_nominal,
-                                                status: item.status,
-                                                created_at: item.created_at,
-                                                auction_id: item.auction_id,
-                                                user_id: item.user_id,
-                                                title: item.auction.title,
-                                                item_photo : item.auction.item_photo,
-                                                username: dataDetail.username
-                                            })
-                                        }
-                                    })
-                                })
-                                
-                            
-                            //console.log('LOG FROM AUCTION: ', this.state.title)
-                        })
-                        .catch(error=>{console.log(error)})
-
-                    
+                const myBids = data.map(item => {
+                    return {
+                        bids_nominal: item.bids_nominal,
+                        status: item.status,
+                        created_at: item.created_at,
+                        auction_id: item.auction_id,
+                        user_id: item.user_id,
+                        title: item.auction.title,
+                        item_photo : item.auction.item_photo,
+                        username: item.user.username
+                    }
                 })
+                this.setState({
+                    myBids
+                })
+                console.log(data)
             })
             .catch(error=>{console.log(error)})
     }
