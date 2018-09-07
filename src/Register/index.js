@@ -12,6 +12,8 @@ import {
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { BrowserRouter as Link } from 'react-router-dom'
+import {  Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 const styles ={
@@ -61,7 +63,8 @@ class Register extends Component{
         country: '',
         zip_code: '',
         id_card: '',
-        status: 'active'
+        status: 'active',
+        modal: false
     }
 
     handleChange = event => {
@@ -70,6 +73,9 @@ class Register extends Component{
 
     handleSubmit = event => {
         event.preventDefault()
+        this.setState({
+            modal: !this.state.modal
+          })
         const payload = {
             username: this.state.username,
             password: this.state.password,
@@ -118,6 +124,19 @@ class Register extends Component{
     }
 
     render() {
+        let  modals = 
+        <div>
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+            <ModalBody>
+                Create Auction Success
+            </ModalBody>
+            <ModalFooter>
+            <Link to="/myauction"><Button color="primary" onClick={this.toggle}>OK</Button>{' '}</Link>
+                {/* <Button color="secondary" onClick={this.toggle}>Cancel</Button> */}
+            </ModalFooter>
+            </Modal>
+        </div>
         return (
             <div style={styles.space}>
                 <Form onSubmit={this.handleSubmit}>

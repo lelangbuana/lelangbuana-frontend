@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ListGroup, ListGroupItem, Button, Row, Col } from 'reactstrap'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import Loader from '../Assets/loader.gif'
 
 const request = axios.create({
     baseURL: 'https://lelangbuana.herokuapp.com' || 'http://localhost:3000',
@@ -32,7 +33,8 @@ class Profile extends Component {
         this.state = {
             username: '',
             phone_number: '',
-            profile_photo: ''
+            profile_photo: '',
+            loading: true
 
         }
     }
@@ -48,10 +50,17 @@ class Profile extends Component {
                     profile_photo: data.data.user.profile_photo
                 })
             })
-            .catch(error=>{console.log(error)})                     
+            .catch(error=>{console.log(error)})  
+            
+        setTimeout(() => this.setState({ loading: false }), 1500)
     }
 
     render(){
+        const { loading } = this.state
+    
+        if(loading) { // if your component doesn't have to wait for an async action, remove this block 
+            return <img src={Loader} alt="loading..." />   // render null when app is not ready
+        }  
         return (
             <ListGroup>
                 <ListGroupItem>

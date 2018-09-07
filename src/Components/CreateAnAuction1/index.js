@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactFilestack from 'filestack-react'
 import DatePicker from 'react-datepicker'
-import { BrowserRouter as Link } from 'react-router-dom'
+import { BrowserRouter as Link, Redirect } from 'react-router-dom'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 import moment from 'moment'
@@ -61,7 +61,7 @@ class CreateAnAuction1 extends Component {
     constructor (props) {
         super(props)
         this.state = {
-        modal : false,
+        success : false,
         user_id: 0,
         title: '',
         item_condition: '',
@@ -80,7 +80,6 @@ class CreateAnAuction1 extends Component {
         redirectToReferrer : false
         };
         this.handleChangeDate = this.handleChangeDate.bind(this);
-        this.toggle = this.toggle.bind(this)
       }
 
       handleChangeDate(date) {
@@ -98,11 +97,11 @@ class CreateAnAuction1 extends Component {
         }
     }
     
-    toggle(){
-        this.setState({
-            modal: !this.state.modal
-          });
-    }
+    // toggle(){
+    //     this.setState({
+    //         modal: !this.state.modal
+    //       });
+    // }
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value })
@@ -111,9 +110,9 @@ class CreateAnAuction1 extends Component {
     handleSubmit = event => {
         event.preventDefault()
 
-        this.setState({
-            modal: !this.state.modal
-          });
+        // this.setState({
+        //     modal: !this.state.modal
+        //   })
 
         const payload = {
             user_id: localStorage.getItem("user_id"),
@@ -135,9 +134,13 @@ class CreateAnAuction1 extends Component {
         request
             .post('/auctions', payload)
             .then(response => {
+                window.alert('Success Create Auction');
+                this.setState({success: true})
                 console.log("Message: ", response)
             })
             .catch(error => {
+                window.alert(`${error.response.data.message}`);
+                
                 console.log(error)
             }) 
                 
@@ -159,23 +162,26 @@ class CreateAnAuction1 extends Component {
     render() {
 
        
-        let  modals = 
-        <div>
-        {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
-            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-            <ModalBody>
-                Create Auction Success
-            </ModalBody>
-            <ModalFooter>
-            <Link to="/myauction"><Button color="primary" onClick={this.toggle}>OK</Button>{' '}</Link>
-                {/* <Button color="secondary" onClick={this.toggle}>Cancel</Button> */}
-            </ModalFooter>
-            </Modal>
-        </div>
+        // let  modals = (
+        // <div>
+        // {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
+        //     <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        //         <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+        //         <ModalBody>
+        //             Create Auction Success
+        //         </ModalBody>
+        //         <ModalFooter>
+        //         <Link to="/myauction"><Button color="primary" onClick={this.toggle}>OK</Button>{' '}</Link>
+        //             {/* <Button color="secondary" onClick={this.toggle}>Cancel</Button> */}
+        //         </ModalFooter>
+        //     </Modal>
+        // </div>)
 
-        
-
+        if (this.state.success){
+            return (
+                <Redirect to={'/'}/>
+            )
+        } else {
         return (
             <Container>
                 <Row>
@@ -330,12 +336,13 @@ class CreateAnAuction1 extends Component {
                             </Col>
                         </FormGroup>
                             <Button style={styles.button} onClick={this.props.handleSubmit} block>Submit</Button>
-                            {modals}
+                            
                         </Form>
                     </Col>
                 </Row>
             </Container>
         )
+        }
     }
 }
 

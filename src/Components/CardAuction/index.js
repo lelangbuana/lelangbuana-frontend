@@ -12,7 +12,7 @@ const styles = {
     margins: {
         // marginRight: '35px',
         marginBottom: '25px',
-        height: '100%'
+        height: '30em'
 
     },
     sizes: {
