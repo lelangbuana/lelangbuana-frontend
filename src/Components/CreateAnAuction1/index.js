@@ -134,7 +134,7 @@ class CreateAnAuction1 extends Component {
         request
             .post('/auctions', payload)
             .then(response => {
-                window.alert('Success Create Auction');
+                window.alert('Create Auction Success');
                 this.setState({success: true})
                 console.log("Message: ", response)
             })

@@ -17,25 +17,53 @@ const styles = {
 }
 
 const nowDate = moment()
-
+let user_id
+// let username
 class DetailItem extends React.Component {
 
     constructor(props){
         super(props)
         this.state={
-            myBids: []
+            myBids: [],
+            username:'',
+            bids: this.props.bids,
+            highest_bid: 0,
+            user_id: 0
         }
     }
     
+    createDetail(item, index){
+        if(item.bids_nominal>this.state.bids_nominal)
+        {
+            this.setState({
+                highest_bid:item.bids_nominal,
+
+            })
+        }
+    }
     render(){
+        
         let highestBid = 0
+        
         const Detail = this.props.bids.forEach(item => {
             if (item.bids_nominal>highestBid)
             {
                 highestBid=item.bids_nominal
+                user_id=item.user_id
             }
+            // request
+            //     .get(`/users/id/${user_id}`)
+            //     .then(response => {
+            //         console.log('Response : ', response.data.user.username)
+            //         this.setState(
+            //             {
+            //                 username:response.data.user.username
+
+            //             }
+            //         )
+                    
+            //     })
             return highestBid
-            // return <tr><td>{item}</td></tr>
         })
         console.log('BID HIGHEST: ',highestBid)
 
@@ -50,6 +78,7 @@ class DetailItem extends React.Component {
                                     <th>Time</th>
                                     <th>Closed Date</th>
                                     <th>Closed Time</th>
+                                    <th>Highest Bidder</th>
                                     <th>Bid Price</th>
                                     {/* <th>Status</th> */}
                                 </tr>
@@ -61,7 +90,7 @@ class DetailItem extends React.Component {
                                     <td>{nowDate.format('LT')}</td>
                                     <td>{moment(this.props.endDate).format('ll')}</td>
                                     <td>{moment(this.props.endDate).format('LT')}</td>
-                                    {/* <td>{this.props.username} </td> */}
+                                    <td>{this.state.username} </td>
                                     <td><NumberFormat value={highestBid} displayType={'text'} thousandSeparator={true} prefix={'IDR '}/></td>
                                     {/* <td>Success</td> */}
                                 </tr>

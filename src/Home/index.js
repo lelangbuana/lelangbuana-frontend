@@ -237,7 +237,7 @@ class Home extends Component {
                             {/* {listCategories}*/}
                             <br/>
 
-                            <Search updateList = {this.updateList}/>
+                            {/* <Search updateList = {this.updateList}/> */}
                         </Col>
                         <Col sm="9">
                             <Row className="justify-context-center row-eq-height">

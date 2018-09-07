@@ -180,9 +180,9 @@ class DetailProductBidStatus extends Component{
         console.log("USER: ", this.props.user_id)
         
         
-        this.props.user_id == localStorage.getItem("user_id")
-        ? enableBid = <div></div>
-        : this.props.status === "ongoing" 
+        // this.props.user_id == localStorage.getItem("user_id")
+        // ? enableBid = <div></div>
+         this.props.status === "ongoing" 
         ? enableBid = 
             <div>
             <Row style={styles.contains}>
@@ -209,11 +209,11 @@ class DetailProductBidStatus extends Component{
                 </Col>
             </Row>
             <Row>
-                <Col><Button color="warning" onClick={this.buyOut} block> <span id="UncontrolledTooltipExample"> Bid Max Price </span></Button>
+                {/* <Col><Button color="warning" onClick={this.buyOut} block> <span id="UncontrolledTooltipExample"> Bid Max Price </span></Button>
                 <UncontrolledTooltip placement="bottom" target="UncontrolledTooltipExample">
                     Buy This Product Instantly
                 </UncontrolledTooltip>
-                </Col>
+                </Col> */}
             </Row>
             </div>
         : enableBid = 
