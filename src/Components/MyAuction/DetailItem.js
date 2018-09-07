@@ -18,7 +18,8 @@ const styles = {
 
 const nowDate = moment()
 let user_id
-// let username
+let username
+let phone
 class DetailItem extends React.Component {
 
     constructor(props){
@@ -50,6 +51,26 @@ class DetailItem extends React.Component {
             {
                 highestBid=item.bids_nominal
                 user_id=item.user_id
+                if(user_id===1)
+                {
+                    username='guntur'
+                    phone='+628117777547'
+                }
+                else if(user_id===2)
+                {
+                    username='fadillah'
+                    phone='+6281268338419'
+                }
+                else if(user_id===3)
+                {
+                    username='maya'
+                    phone='=6281947677203'
+                }
+                else if(user_id===4)
+                {
+                    username='alif'
+                    phone='+6285760552600'
+                }
             }
             // request
             //     .get(`/users/id/${user_id}`)
@@ -79,6 +100,7 @@ class DetailItem extends React.Component {
                                     <th>Closed Date</th>
                                     <th>Closed Time</th>
                                     <th>Highest Bidder</th>
+                                    <th>Phone Number</th>
                                     <th>Bid Price</th>
                                     {/* <th>Status</th> */}
                                 </tr>
@@ -90,7 +112,8 @@ class DetailItem extends React.Component {
                                     <td>{nowDate.format('LT')}</td>
                                     <td>{moment(this.props.endDate).format('ll')}</td>
                                     <td>{moment(this.props.endDate).format('LT')}</td>
-                                    <td>{this.state.username} </td>
+                                    <td>{username} </td>
+                                    <td>{phone}</td>
                                     <td><NumberFormat value={highestBid} displayType={'text'} thousandSeparator={true} prefix={'IDR '}/></td>
                                     {/* <td>Success</td> */}
                                 </tr>
