@@ -18,8 +18,7 @@ const styles = {
 
 const nowDate = moment()
 let user_id
-let username
-let phone
+
 class DetailItem extends React.Component {
 
     constructor(props){
@@ -45,32 +44,40 @@ class DetailItem extends React.Component {
     render(){
         
         let highestBid = 0
-        
+        let username
+        let phone
         const Detail = this.props.bids.forEach(item => {
             if (item.bids_nominal>highestBid)
             {
                 highestBid=item.bids_nominal
                 user_id=item.user_id
-                if(user_id===1)
-                {
-                    username='guntur'
-                    phone='+628117777547'
-                }
-                else if(user_id===2)
-                {
-                    username='fadillah'
-                    phone='+6281268338419'
-                }
-                else if(user_id===3)
-                {
-                    username='maya'
-                    phone='=6281947677203'
-                }
-                else if(user_id===4)
-                {
-                    username='alif'
-                    phone='+6285760552600'
-                }
+                    
+                
+            }
+            if(user_id===1)
+            {
+                username='guntur'
+                phone='+628117777547'
+            }
+            else if(user_id===2)
+            {
+                username='fadillah'
+                phone='+6281268338419'
+            }
+            else if(user_id===3)
+            {
+                username='maya'
+                phone='=6281947677203'
+            }
+            else if(user_id===4)
+            {
+                username='alif'
+                phone='+6285760552600'
+            }
+            else 
+            {
+                username=user_id
+                phone=''
             }
             // request
             //     .get(`/users/id/${user_id}`)
@@ -84,7 +91,7 @@ class DetailItem extends React.Component {
             //         )
                     
             //     })
-            return highestBid
+            return (highestBid, username, phone)
         })
         console.log('BID HIGHEST: ',highestBid)
 
