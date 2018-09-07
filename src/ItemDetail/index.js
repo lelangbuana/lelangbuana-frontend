@@ -68,8 +68,19 @@ const mapStateToProps = state => {
     }
 }
 
+
 class ItemDetail extends Component {
-    componentDidMount() {
+    state = {
+        auction_id: this.props.auction_id,
+        title: this.props.title,
+        src: this.props.src,
+        description: this.props.description,
+        max_bid: this.props.max_bid,
+        highestBid: this.props.highest_bid,
+        loading: true
+    }
+
+    UNSAFE_componentWillMount(){
 
         request
             .get(`/auctions/${this.props.match.params.id}`)
@@ -93,36 +104,39 @@ class ItemDetail extends Component {
                         username: response.data.user.username
                     }
                 })
-                  this.props.dispatch({
+                this.props.dispatch({
                     type: 'SET_AUCTION_STATE',
                     payload: {
-                    address: response.data.user.address,
-                    phone_number: response.data.user.phone_number,
-                    auction_id: response.data.auction_id,
-                    title: response.data.title,
-                    item_condition: response.data.item_condition,
-                    item_description : response.data.item_description,
-                    quantity: response.data.quantity,
-                    start_bid: response.data.start_bid,
-                    max_bid: this.state.max_bid,
-                    min_bid: response.data.min_bid,
-                    bids_multiply: response.data.bids_multiply,
-                    start_date: response.data.start_date,
-                    end_date: response.data.end_date,
-                    item_photo: response.data.item_photo,
-                    status: response.data.status,
-                    user_id: response.data.user.user_id,
-                    username: response.data.user.username
+                        address: response.data.user.address,
+                        phone_number: response.data.user.phone_number,
+                        auction_id: response.data.auction_id,
+                        title: response.data.title,
+                        item_condition: response.data.item_condition,
+                        item_description : response.data.item_description,
+                        quantity: response.data.quantity,
+                        start_bid: response.data.start_bid,
+                        max_bid: this.state.max_bid,
+                        min_bid: response.data.min_bid,
+                        bids_multiply: response.data.bids_multiply,
+                        start_date: response.data.start_date,
+                        end_date: response.data.end_date,
+                        item_photo: response.data.item_photo,
+                        status: response.data.status,
+                        user_id: response.data.user.user_id,
+                        username: response.data.user.username
 
-                        }
-                     })
-                     console.log("STATUS FROM ITEM DETAIL : ", response.data.status);
+                    }
+                })
+                console.log('STATUS FROM ITEM DETAIL : ', response.data.user_id)
                     })
                 
             .catch(error => {
                 console.log(error)
             })
-            setTimeout(() => this.setState({ loading: false }), 1500)
+    }
+    componentDidMount() {
+
+        setTimeout(() => this.setState({ loading: false }), 1500)
             
     }
 
@@ -147,15 +161,7 @@ class ItemDetail extends Component {
             auction_id : PropTypes.number
         }
     }
-    state = {
-        auction_id: this.props.auction_id,
-        title: this.props.title,
-        src: this.props.src,
-        description: this.props.description,
-        max_bid: this.props.max_bid,
-        highestBid: this.props.highest_bid,
-        loading: true
-    }
+    
 
     // createCategories(item, index) {
     //     return (
@@ -176,8 +182,8 @@ class ItemDetail extends Component {
         let profiles
         if (localStorage.getItem('token')){
             profiles = <div>
-            <Profile/>
-            <br/>
+                <Profile/>
+                <br/>
             </div>
         }
         else {

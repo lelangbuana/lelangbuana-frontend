@@ -71,7 +71,9 @@ class DetailProductDetailPages extends React.Component {
         console.log('BID DATA HISTORIES:  ', bids)
     }
 
-    componentDidMount(){}
+    componentDidMount(){
+        setTimeout(() => this.setState({ loading: false }), 1500)
+    }
 
     toggle(tab) {
         if (this.state.activeTab !== tab) {
@@ -136,7 +138,7 @@ class DetailProductDetailPages extends React.Component {
                             Seller Info
                         </NavLink>
                     </NavItem>
-                    <NavItem>
+                    {/* <NavItem>
                         <NavLink
                             to="/"
                             className={classnames({
@@ -148,7 +150,7 @@ class DetailProductDetailPages extends React.Component {
                         >
                             Bid History
                         </NavLink>
-                    </NavItem>
+                    </NavItem> */}
                 </Nav>
 
                 <TabContent activeTab={this.state.activeTab}>
@@ -173,11 +175,11 @@ class DetailProductDetailPages extends React.Component {
                             </Col>
                         </Row>
                     </TabPane>
-                    <TabPane tabId="3">
+                    {/* <TabPane tabId="3">
                         <Row>
                             {bids_histories}
                         </Row>
-                    </TabPane>
+                    </TabPane> */}
                 </TabContent>
             </div>
         )

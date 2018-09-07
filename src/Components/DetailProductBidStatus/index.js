@@ -38,7 +38,6 @@ const mapStateToProps = (state,props) => {
         quantity: state.auction.quantity,
         bids_nominal: state.bidData.bids_nominal,
         auction_id: state.auction.auction_id,
-        user_id: state.user.user_id,
         max_bid: state.auction.max_bid,
         min_bid: state.auction.min_bid,
         item_photo: state.auction.item_photo,
@@ -50,7 +49,8 @@ const mapStateToProps = (state,props) => {
         start_date: state.auction.start_date,
         end_date: state.auction.end_date,
         bids_multiply: state.auction.bids_multiply,
-        winner: state.auction.winner
+        winner: state.auction.winner,
+        user_id: state.auction.user_id
     }
 }
 
@@ -177,9 +177,12 @@ class DetailProductBidStatus extends Component{
         
         
         let enableBid
-        console.log("STATUS: ", this.props.status)
+        console.log("USER: ", this.props.user_id)
         
-        this.props.status === "ongoing"
+        
+        this.props.user_id == localStorage.getItem("user_id")
+        ? enableBid = <div></div>
+        : this.props.status === "ongoing" 
         ? enableBid = 
             <div>
             <Row style={styles.contains}>

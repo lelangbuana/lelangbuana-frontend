@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import {
     Container,
     Row,
@@ -24,7 +23,9 @@ const styles ={
 }
 
 class MyBidDashboard extends Component {
+
     render(){
+       
         return(
             <div style={styles.space}>
                 <Container fluid>
